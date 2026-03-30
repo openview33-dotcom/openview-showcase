@@ -2,9 +2,9 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 const metrics = [
-  { value: 30, prefix: "+", suffix: "", label: "Marcas atendidas", barColor: "bg-teal", delay: 0.6 },
-  { value: 9, prefix: "+", suffix: " anos", label: "Anos de experiência", barColor: "bg-yellow", delay: 0.78 },
-  { value: 10, prefix: "+R$", suffix: "M", label: "Investidos em anúncios", barColor: "bg-primary", delay: 0.96 },
+  { value: 30, prefix: "+", suffix: "", label: "Marcas atendidas", barColor: "#4ECFB0", delay: 0.87 },
+  { value: 9, prefix: "+", suffix: " anos", label: "Anos de experiência", barColor: "#F5C842", delay: 1.05 },
+  { value: 10, prefix: "+R$", suffix: "M", label: "Investidos em anúncios", barColor: "#9B6FD4", delay: 1.23 },
 ];
 
 function AnimatedNumber({ value, prefix, suffix, delay }: { value: number; prefix: string; suffix: string; delay: number }) {
