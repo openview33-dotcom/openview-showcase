@@ -2,9 +2,9 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 const metrics = [
-  { value: 30, prefix: "+", suffix: "", label: "Marcas atendidas", barColor: "bg-teal", delay: 0.6 },
-  { value: 9, prefix: "+", suffix: " anos", label: "Anos de experiência", barColor: "bg-yellow", delay: 0.78 },
-  { value: 10, prefix: "+R$", suffix: "M", label: "Investidos em anúncios", barColor: "bg-primary", delay: 0.96 },
+  { value: 30, prefix: "+", suffix: "", label: "Marcas atendidas", barColor: "#4ECFB0", delay: 0.87 },
+  { value: 9, prefix: "+", suffix: " anos", label: "Anos de experiência", barColor: "#F5C842", delay: 1.05 },
+  { value: 10, prefix: "+R$", suffix: "M", label: "Investidos em anúncios", barColor: "#9B6FD4", delay: 1.23 },
 ];
 
 function AnimatedNumber({ value, prefix, suffix, delay }: { value: number; prefix: string; suffix: string; delay: number }) {
@@ -22,7 +22,7 @@ function AnimatedNumber({ value, prefix, suffix, delay }: { value: number; prefi
     return () => { clearTimeout(timeout); unsub(); };
   }, []);
 
-  return <span ref={ref} className="font-display text-3xl md:text-4xl font-bold text-foreground">{prefix}0{suffix}</span>;
+  return <span ref={ref} className="font-display font-bold text-foreground" style={{ fontSize: "1.5rem" }}>{prefix}0{suffix}</span>;
 }
 
 const HeroSection = () => {
@@ -102,24 +102,25 @@ const HeroSection = () => {
           </div>
 
           {/* Right — 3 metric cards stacked */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {metrics.map((m) => (
               <motion.div
                 key={m.label}
                 initial={{ opacity: 0, x: 24 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: m.delay }}
-                className="bg-card rounded-2xl p-6 flex items-center gap-5 shadow-sm"
+                className="flex items-center gap-3"
+                style={{ backgroundColor: "#F2F0ED", borderRadius: 12, padding: "14px 16px" }}
               >
                 <motion.div
-                  className={`${m.barColor} w-2 rounded-full`}
+                  style={{ width: 4, borderRadius: 2, backgroundColor: m.barColor }}
                   initial={{ height: 0 }}
                   animate={{ height: 36 }}
                   transition={{ duration: 0.5, delay: m.delay + 0.15, ease: "easeOut" }}
                 />
                 <div>
                   <AnimatedNumber value={m.value} prefix={m.prefix} suffix={m.suffix} delay={m.delay} />
-                  <p className="font-body text-xs tracking-wider uppercase text-muted-foreground mt-1">{m.label}</p>
+                  <p className="font-body uppercase text-muted-foreground mt-0.5" style={{ fontSize: "0.62rem", letterSpacing: "0.08em" }}>{m.label}</p>
                 </div>
               </motion.div>
             ))}
