@@ -16,7 +16,7 @@ const HeroSection = () => {
         width={1920}
         height={1080}
       />
-      <div className="absolute inset-0 bg-background/40" />
+      <div className="absolute inset-0 bg-background/70" />
       
       <div className="relative z-10 section-padding max-w-5xl mx-auto text-center">
         <motion.p
