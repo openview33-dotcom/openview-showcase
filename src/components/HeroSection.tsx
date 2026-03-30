@@ -22,7 +22,7 @@ function AnimatedNumber({ value, prefix, suffix, delay }: { value: number; prefi
     return () => { clearTimeout(timeout); unsub(); };
   }, []);
 
-  return <span ref={ref} className="font-display text-3xl md:text-4xl font-bold text-foreground">{prefix}0{suffix}</span>;
+  return <span ref={ref} className="font-display font-bold text-foreground" style={{ fontSize: "1.5rem" }}>{prefix}0{suffix}</span>;
 }
 
 const HeroSection = () => {
