@@ -7,7 +7,7 @@ const FooterSection = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <img
-              src="https://openviewdigital.com.br/wp-content/uploads/2025/03/Logotipo-OpenView.png.webp"
+              src="/c3b1e247-fdbb-412f-991f-20d2defcddb8.png"
               alt="OpenView"
               className="h-8 mb-4 object-contain invert"
               loading="lazy"
