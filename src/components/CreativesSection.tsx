@@ -15,7 +15,7 @@ const clientLogos = [
 
 const CreativesSection = () => {
   return (
-    <section id="criativos" className="py-32 section-padding bg-secondary/30">
+    <section id="criativos" className="py-32 section-padding section-light">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -24,8 +24,8 @@ const CreativesSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="font-body text-sm tracking-[0.3em] uppercase text-accent mb-4">
-            Criativos
+          <p className="font-body text-sm tracking-[0.3em] uppercase text-teal mb-4">
+            ◆ Criativos
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-medium mb-6">
             Variedade e <span className="italic font-normal">qualidade</span>
@@ -35,44 +35,15 @@ const CreativesSection = () => {
           </p>
         </motion.div>
 
-        {/* Showcase image */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-xl overflow-hidden mb-20"
-        >
-          <img
-            src={creativesShowcase}
-            alt="Showcase de criativos OpenView"
-            className="w-full h-auto object-cover"
-            loading="lazy"
-            width={1200}
-            height={600}
-          />
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="rounded-2xl overflow-hidden mb-20">
+          <img src={creativesShowcase} alt="Showcase de criativos OpenView" className="w-full h-auto object-cover" loading="lazy" width={1200} height={600} />
         </motion.div>
 
-        {/* Client logos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center"
-        >
-          <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-10">
-            Marcas que confiam na OpenView
-          </p>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="text-center">
+          <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-10">Marcas que confiam na OpenView</p>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {clientLogos.map((logo) => (
-              <img
-                key={logo.name}
-                src={logo.url}
-                alt={logo.name}
-                className="h-8 md:h-10 object-contain opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
-                loading="lazy"
-              />
+              <img key={logo.name} src={logo.url} alt={logo.name} className="h-8 md:h-10 object-contain opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" loading="lazy" />
             ))}
           </div>
         </motion.div>
