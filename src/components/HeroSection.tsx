@@ -36,7 +36,7 @@ const HeroSection = () => {
         >
           Marcas que
           <br />
-          <span className="italic font-normal text-accent">se destacam</span>
+          <span className="italic font-normal text-[#a166d1]">se destacam</span>
         </motion.h1>
         
         <motion.p

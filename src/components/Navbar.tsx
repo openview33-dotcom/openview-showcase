@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,9 +29,9 @@ const Navbar = () => {
     >
       <div className="section-padding flex items-center justify-between h-20">
         <img
-          src="https://openviewdigital.com.br/wp-content/uploads/2025/03/Logotipo-OpenView.png.webp"
+          src={logo}
           alt="OpenView"
-          className="h-8 md:h-10 object-contain invert"
+          className="h-8 md:h-10 object-contain"
           width={160}
           height={40}
         />
