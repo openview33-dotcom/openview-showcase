@@ -102,24 +102,25 @@ const HeroSection = () => {
           </div>
 
           {/* Right — 3 metric cards stacked */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {metrics.map((m) => (
               <motion.div
                 key={m.label}
                 initial={{ opacity: 0, x: 24 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: m.delay }}
-                className="bg-card rounded-2xl p-6 flex items-center gap-5 shadow-sm"
+                className="flex items-center gap-3"
+                style={{ backgroundColor: "#F2F0ED", borderRadius: 12, padding: "14px 16px" }}
               >
                 <motion.div
-                  className={`${m.barColor} w-2 rounded-full`}
+                  style={{ width: 4, borderRadius: 2, backgroundColor: m.barColor }}
                   initial={{ height: 0 }}
                   animate={{ height: 36 }}
                   transition={{ duration: 0.5, delay: m.delay + 0.15, ease: "easeOut" }}
                 />
                 <div>
                   <AnimatedNumber value={m.value} prefix={m.prefix} suffix={m.suffix} delay={m.delay} />
-                  <p className="font-body text-xs tracking-wider uppercase text-muted-foreground mt-1">{m.label}</p>
+                  <p className="font-body uppercase text-muted-foreground mt-0.5" style={{ fontSize: "0.62rem", letterSpacing: "0.08em" }}>{m.label}</p>
                 </div>
               </motion.div>
             ))}
