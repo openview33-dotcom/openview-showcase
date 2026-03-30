@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const PositioningSection = () => {
   return (
-    <section className="py-32 section-padding">
+    <section className="py-32 section-padding section-dark">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -10,17 +10,17 @@ const PositioningSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="font-body text-sm tracking-[0.3em] uppercase text-accent mb-6">
-            Sobre a OpenView
+          <p className="font-body text-sm tracking-[0.3em] uppercase text-teal mb-6">
+            ◆ Sobre a OpenView
           </p>
-          <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight mb-8">
+          <h2 className="font-display text-3xl md:text-5xl font-medium leading-tight mb-8 text-white">
             Não somos uma agência comum.
             <br />
-            <span className="italic font-normal text-muted-foreground">
+            <span className="italic font-normal text-white/60">
               Somos parceiros de marca.
             </span>
           </h2>
-          <p className="font-body text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="font-body text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
             Da estratégia à execução, cada entrega é pensada para posicionar sua marca
             com consistência, estética e resultado. Planejamento de conteúdo, branding,
             audiovisual e páginas — tudo sob o mesmo olhar criativo.

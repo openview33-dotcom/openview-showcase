@@ -28,13 +28,7 @@ const Navbar = () => {
       }`}
     >
       <div className="section-padding flex items-center justify-between h-20">
-        <img
-          src={logo}
-          alt="OpenView"
-          className="h-8 md:h-10 object-contain"
-          width={160}
-          height={40}
-        />
+        <img src={logo} alt="OpenView" className="h-8 md:h-10 object-contain" width={160} height={40} />
         <div className="hidden md:flex items-center gap-8">
           {[
             { label: "Cases", id: "cases" },
@@ -53,7 +47,7 @@ const Navbar = () => {
         </div>
         <button
           onClick={() => scrollTo("contato")}
-          className="px-6 py-2.5 bg-accent text-accent-foreground font-body text-xs tracking-wider uppercase rounded-sm hover:opacity-90 transition-opacity"
+          className="px-6 py-2.5 bg-primary text-primary-foreground font-body text-xs tracking-wider uppercase rounded-full hover:opacity-90 transition-opacity"
         >
           Contato
         </button>
