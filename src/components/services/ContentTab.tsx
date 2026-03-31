@@ -2,6 +2,31 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
+// CS01 - Imobiliário (6 slides, PNG)
+import CS01_01 from "@/assets/CS01.01.png";
+import CS01_02 from "@/assets/CS01.02.png";
+import CS01_03 from "@/assets/CS01.03.png";
+import CS01_04 from "@/assets/CS01.04.png";
+import CS01_05 from "@/assets/CS01.05.png";
+import CS01_06 from "@/assets/CS01.06.png";
+
+// CS02 - Dia Pet (6 slides)
+import CS02_01 from "@/assets/CS02.01.jpg";
+import CS02_02 from "@/assets/CS02.02.jpg";
+import CS02_03 from "@/assets/CS02.03.jpg";
+import CS02_04 from "@/assets/CS02.04.jpg";
+import CS02_05 from "@/assets/CS02.05.jpg";
+import CS02_06 from "@/assets/CS02.06.jpg";
+
+// CS04 - Formiguinhas POA (6 slides)
+import CS04_01 from "@/assets/CS04.01.jpg";
+import CS04_02 from "@/assets/CS04.02.jpg";
+import CS04_03 from "@/assets/CS04.03.jpg";
+import CS04_04 from "@/assets/CS04.04.jpg";
+import CS04_05 from "@/assets/CS04.05.jpg";
+import CS04_06 from "@/assets/CS04.06.jpg";
+
+// CS05 - POLO Instaladora (6 slides)
 import CS05_01 from "@/assets/CS05.01.jpg";
 import CS05_02 from "@/assets/CS05.02.jpg";
 import CS05_03 from "@/assets/CS05.03.jpg";
@@ -9,6 +34,32 @@ import CS05_04 from "@/assets/CS05.04.jpg";
 import CS05_05 from "@/assets/CS05.05.jpg";
 import CS05_06 from "@/assets/CS05.06.jpg";
 
+// CS06 - SCH Advogados (5 slides)
+import CS06_01 from "@/assets/CS06.01.jpg";
+import CS06_02 from "@/assets/CS06.02.jpg";
+import CS06_03 from "@/assets/CS06.03.jpg";
+import CS06_04 from "@/assets/CS06.04.jpg";
+import CS06_05 from "@/assets/CS06.05.jpg";
+
+// CS07 - TW Aviation English (7 slides)
+import CS07_01 from "@/assets/CS07.01.jpg";
+import CS07_02 from "@/assets/CS07.02.jpg";
+import CS07_03 from "@/assets/CS07.03.jpg";
+import CS07_04 from "@/assets/CS07.04.jpg";
+import CS07_05 from "@/assets/CS07.05.jpg";
+import CS07_06 from "@/assets/CS07.06.jpg";
+import CS07_07 from "@/assets/CS07.07.jpg";
+
+// CS08 - Dia Pet (7 slides)
+import CS08_01 from "@/assets/CS08.01.jpg";
+import CS08_02 from "@/assets/CS08.02.jpg";
+import CS08_03 from "@/assets/CS08.03.jpg";
+import CS08_04 from "@/assets/CS08.04.jpg";
+import CS08_05 from "@/assets/CS08.05.jpg";
+import CS08_06 from "@/assets/CS08.06.jpg";
+import CS08_07 from "@/assets/CS08.07.jpg";
+
+// CS11 - SCH Advogados (7 slides)
 import CS11_01 from "@/assets/CS11.01.jpg";
 import CS11_02 from "@/assets/CS11.02.jpg";
 import CS11_03 from "@/assets/CS11.03.jpg";
@@ -17,6 +68,21 @@ import CS11_05 from "@/assets/CS11.05.jpg";
 import CS11_06 from "@/assets/CS11.06.jpg";
 import CS11_07 from "@/assets/CS11.07.jpg";
 
+// CS12 - Voe Winglets (5 slides)
+import CS12_01 from "@/assets/CS12.01.jpg";
+import CS12_02 from "@/assets/CS12.02.jpg";
+import CS12_03 from "@/assets/CS12.03.jpg";
+import CS12_04 from "@/assets/CS12.04.jpg";
+import CS12_05 from "@/assets/CS12.05.jpg";
+
+// CS13 - Dasle Coberturas (7 slides)
+import CS13_01 from "@/assets/CS13.01.jpg";
+import CS13_02 from "@/assets/CS13.02.jpg";
+import CS13_03 from "@/assets/CS13.03.jpg";
+import CS13_04 from "@/assets/CS13.04.jpg";
+import CS13_05 from "@/assets/CS13.05.jpg";
+import CS13_06 from "@/assets/CS13.06.jpg";
+import CS13_07 from "@/assets/CS13.07.jpg";
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
@@ -31,8 +97,16 @@ import imgDiaPet3Cuidados from "@/assets/diadepet_petshop_post_20_03_2026_10_00_
 import imgFonoIA from "@/assets/fonomichelleborges_post_09_03_2026_16_00_363849197535789977397.jpg";
 import imgFormiguinhasBolos from "@/assets/formiguinhaspoa_post_23_01_2026_13_17_433816522946663461519.jpg";
 
+const CS1_SLIDES = [CS01_01, CS01_02, CS01_03, CS01_04, CS01_05, CS01_06];
+const CS2_SLIDES = [CS02_01, CS02_02, CS02_03, CS02_04, CS02_05, CS02_06];
+const CS4_SLIDES = [CS04_01, CS04_02, CS04_03, CS04_04, CS04_05, CS04_06];
 const CS5_SLIDES = [CS05_01, CS05_02, CS05_03, CS05_04, CS05_05, CS05_06];
+const CS6_SLIDES = [CS06_01, CS06_02, CS06_03, CS06_04, CS06_05];
+const CS7_SLIDES = [CS07_01, CS07_02, CS07_03, CS07_04, CS07_05, CS07_06, CS07_07];
+const CS8_SLIDES = [CS08_01, CS08_02, CS08_03, CS08_04, CS08_05, CS08_06, CS08_07];
 const CS11_SLIDES = [CS11_01, CS11_02, CS11_03, CS11_04, CS11_05, CS11_06, CS11_07];
+const CS12_SLIDES = [CS12_01, CS12_02, CS12_03, CS12_04, CS12_05];
+const CS13_SLIDES = [CS13_01, CS13_02, CS13_03, CS13_04, CS13_05, CS13_06, CS13_07];
 
 // Map static card clients to real images
 const staticImages: Record<string, string> = {
@@ -128,8 +202,16 @@ function placeholderUrl(client: string, size: Size) {
 }
 
 const realSlides: Record<string, string[]> = {
+  CS1: CS1_SLIDES,
+  CS2: CS2_SLIDES,
+  CS4: CS4_SLIDES,
   CS5: CS5_SLIDES,
+  CS6: CS6_SLIDES,
+  CS7: CS7_SLIDES,
+  CS8: CS8_SLIDES,
   CS11: CS11_SLIDES,
+  CS12: CS12_SLIDES,
+  CS13: CS13_SLIDES,
 };
 
 function carouselSlides(id: string, client: string, size: Size) {
