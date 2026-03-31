@@ -97,8 +97,16 @@ import imgDiaPet3Cuidados from "@/assets/diadepet_petshop_post_20_03_2026_10_00_
 import imgFonoIA from "@/assets/fonomichelleborges_post_09_03_2026_16_00_363849197535789977397.jpg";
 import imgFormiguinhasBolos from "@/assets/formiguinhaspoa_post_23_01_2026_13_17_433816522946663461519.jpg";
 
+const CS1_SLIDES = [CS01_01, CS01_02, CS01_03, CS01_04, CS01_05, CS01_06];
+const CS2_SLIDES = [CS02_01, CS02_02, CS02_03, CS02_04, CS02_05, CS02_06];
+const CS4_SLIDES = [CS04_01, CS04_02, CS04_03, CS04_04, CS04_05, CS04_06];
 const CS5_SLIDES = [CS05_01, CS05_02, CS05_03, CS05_04, CS05_05, CS05_06];
+const CS6_SLIDES = [CS06_01, CS06_02, CS06_03, CS06_04, CS06_05];
+const CS7_SLIDES = [CS07_01, CS07_02, CS07_03, CS07_04, CS07_05, CS07_06, CS07_07];
+const CS8_SLIDES = [CS08_01, CS08_02, CS08_03, CS08_04, CS08_05, CS08_06, CS08_07];
 const CS11_SLIDES = [CS11_01, CS11_02, CS11_03, CS11_04, CS11_05, CS11_06, CS11_07];
+const CS12_SLIDES = [CS12_01, CS12_02, CS12_03, CS12_04, CS12_05];
+const CS13_SLIDES = [CS13_01, CS13_02, CS13_03, CS13_04, CS13_05, CS13_06, CS13_07];
 
 // Map static card clients to real images
 const staticImages: Record<string, string> = {
