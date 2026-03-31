@@ -202,8 +202,16 @@ function placeholderUrl(client: string, size: Size) {
 }
 
 const realSlides: Record<string, string[]> = {
+  CS1: CS1_SLIDES,
+  CS2: CS2_SLIDES,
+  CS4: CS4_SLIDES,
   CS5: CS5_SLIDES,
+  CS6: CS6_SLIDES,
+  CS7: CS7_SLIDES,
+  CS8: CS8_SLIDES,
   CS11: CS11_SLIDES,
+  CS12: CS12_SLIDES,
+  CS13: CS13_SLIDES,
 };
 
 function carouselSlides(id: string, client: string, size: Size) {
