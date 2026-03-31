@@ -89,7 +89,12 @@ function placeholderUrl(client: string, size: Size) {
   return `https://placehold.co/${dim}/1a1a2e/ffffff?text=${encodeURIComponent(client)}`;
 }
 
+const realSlides: Record<string, string[]> = {
+  CS5: CS5_SLIDES,
+};
+
 function carouselSlides(id: string, client: string, size: Size) {
+  if (realSlides[id]) return realSlides[id];
   const count = carousels[id]?.slides ?? 1;
   const dim = sizeToPlaceholder[size];
   return Array.from({ length: count }, (_, i) =>
