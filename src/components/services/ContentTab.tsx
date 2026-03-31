@@ -17,8 +17,37 @@ import CS11_05 from "@/assets/CS11.05.jpg";
 import CS11_06 from "@/assets/CS11.06.jpg";
 import CS11_07 from "@/assets/CS11.07.jpg";
 
+// Static card images
+import imgTWAviation from "@/assets/twaviationenglish_card.png";
+import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
+import imgFonoMichelle from "@/assets/fonomichelleborges_post_04_12_2025_17_00_343780374306803492589.jpg";
+import imgDiaPet from "@/assets/diadepet_petshop_post_09_12_2025_12_00_423783847009691046453.jpg";
+import imgPoloInstCard from "@/assets/polo.instaladora_post_02_10_2025_14_00_023734622564632200586.jpg";
+import imgFormiguinhas from "@/assets/formiguinhaspoa_post_06_02_2026_13_53_083826682167916785955.jpg";
+import imgTKA from "@/assets/tka_advogados_post_08_10_2025_12_00_193738912333550118392.jpg";
+import imgVoeWinglets from "@/assets/voewinglets_post_28_10_2025_17_00_033753557299403170483.jpg";
+import imgPoloDiaMulher from "@/assets/Criativo-04---Dia-da-Mulher-(Feed).png";
+import imgDiaPet3Cuidados from "@/assets/diadepet_petshop_post_20_03_2026_10_00_373856992144410815685.jpg";
+import imgFonoIA from "@/assets/fonomichelleborges_post_09_03_2026_16_00_363849197535789977397.jpg";
+import imgFormiguinhasBolos from "@/assets/formiguinhaspoa_post_23_01_2026_13_17_433816522946663461519.jpg";
+
 const CS5_SLIDES = [CS05_01, CS05_02, CS05_03, CS05_04, CS05_05, CS05_06];
 const CS11_SLIDES = [CS11_01, CS11_02, CS11_03, CS11_04, CS11_05, CS11_06, CS11_07];
+
+// Map static card clients to real images
+const staticImages: Record<string, string> = {
+  "TW Aviation English": imgTWAviation,
+  "Fono Michelle Borges": imgFonoMichelle,
+  "Dia Pet": imgDiaPet,
+  "POLO Instaladora": imgPoloInstCard,
+  "Formiguinhas POA": imgFormiguinhas,
+  "TKA Advogados": imgTKA,
+  "Voe Winglets": imgVoeWinglets,
+  "POLO · Dia da Mulher": imgPoloDiaMulher,
+  "Dia Pet · 3 cuidados": imgDiaPet3Cuidados,
+  "Fono Michelle · IA e CAA": imgFonoIA,
+  "Formiguinhas · Bolos": imgFormiguinhasBolos,
+};
 
 /* ── Carousel metadata ── */
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -81,16 +110,16 @@ const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS7",  client: "TW Aviation English",   size: "featured" },
   { type: "carousel", carouselId: "CS8",  client: "Dia Pet",               size: "tall" },
   { type: "static",                        client: "Voe Winglets",          size: "card" },
-  { type: "static",                        client: "POLO Dia da Mulher",    size: "card" },
-  { type: "static",                        client: "Dia Pet 3 cuidados",    size: "card" },
+  { type: "static",                        client: "POLO · Dia da Mulher",    size: "card" },
+  { type: "static",                        client: "Dia Pet · 3 cuidados",    size: "card" },
   // Row 4
   { type: "carousel", carouselId: "CS13", client: "Dasle Coberturas",      size: "wide" },
   { type: "carousel", carouselId: "CS4",  client: "Formiguinhas POA",      size: "card" },
   { type: "carousel", carouselId: "CS6",  client: "SCH Advogados",         size: "card" },
   { type: "carousel", carouselId: "CS12", client: "Voe Winglets",          size: "wide" },
   { type: "carousel", carouselId: "CS2",  client: "Dia Pet",               size: "card" },
-  { type: "static",                        client: "Fono Michelle IA CAA",  size: "card" },
-  { type: "static",                        client: "Formiguinhas Bolos",    size: "card" },
+  { type: "static",                        client: "Fono Michelle · IA e CAA",  size: "card" },
+  { type: "static",                        client: "Formiguinhas · Bolos",    size: "card" },
 ];
 
 function placeholderUrl(client: string, size: Size) {
@@ -199,10 +228,9 @@ const ContentTab = () => {
           const slides = isCarousel
             ? carouselSlides(item.carouselId!, item.client, item.size)
             : [];
-          // TODO: substituir pela imagem real
           const coverImg = isCarousel
             ? slides[0]
-            : placeholderUrl(item.client, item.size);
+            : (staticImages[item.client] || placeholderUrl(item.client, item.size));
 
           return (
             <motion.div
