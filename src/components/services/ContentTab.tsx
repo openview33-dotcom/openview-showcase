@@ -228,10 +228,9 @@ const ContentTab = () => {
           const slides = isCarousel
             ? carouselSlides(item.carouselId!, item.client, item.size)
             : [];
-          // TODO: substituir pela imagem real
           const coverImg = isCarousel
             ? slides[0]
-            : placeholderUrl(item.client, item.size);
+            : (staticImages[item.client] || placeholderUrl(item.client, item.size));
 
           return (
             <motion.div
