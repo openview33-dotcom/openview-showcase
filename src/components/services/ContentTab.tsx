@@ -2,6 +2,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
+import CS05_01 from "@/assets/CS05.01.jpg";
+import CS05_02 from "@/assets/CS05.02.jpg";
+import CS05_03 from "@/assets/CS05.03.jpg";
+import CS05_04 from "@/assets/CS05.04.jpg";
+import CS05_05 from "@/assets/CS05.05.jpg";
+import CS05_06 from "@/assets/CS05.06.jpg";
+
+const CS5_SLIDES = [CS05_01, CS05_02, CS05_03, CS05_04, CS05_05, CS05_06];
+
 /* ── Carousel metadata ── */
 const carousels: Record<string, { slides: number; client: string }> = {
   CS1:  { slides: 6, client: "Imobiliário" },
