@@ -110,8 +110,8 @@ const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS7",  client: "TW Aviation English",   size: "featured" },
   { type: "carousel", carouselId: "CS8",  client: "Dia Pet",               size: "tall" },
   { type: "static",                        client: "Voe Winglets",          size: "card" },
-  { type: "static",                        client: "POLO Dia da Mulher",    size: "card" },
-  { type: "static",                        client: "Dia Pet 3 cuidados",    size: "card" },
+  { type: "static",                        client: "POLO · Dia da Mulher",    size: "card" },
+  { type: "static",                        client: "Dia Pet · 3 cuidados",    size: "card" },
   // Row 4
   { type: "carousel", carouselId: "CS13", client: "Dasle Coberturas",      size: "wide" },
   { type: "carousel", carouselId: "CS4",  client: "Formiguinhas POA",      size: "card" },
