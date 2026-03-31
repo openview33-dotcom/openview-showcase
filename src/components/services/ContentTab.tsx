@@ -100,6 +100,7 @@ function placeholderUrl(client: string, size: Size) {
 
 const realSlides: Record<string, string[]> = {
   CS5: CS5_SLIDES,
+  CS11: CS11_SLIDES,
 };
 
 function carouselSlides(id: string, client: string, size: Size) {
