@@ -118,8 +118,8 @@ const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS6",  client: "SCH Advogados",         size: "card" },
   { type: "carousel", carouselId: "CS12", client: "Voe Winglets",          size: "wide" },
   { type: "carousel", carouselId: "CS2",  client: "Dia Pet",               size: "card" },
-  { type: "static",                        client: "Fono Michelle IA CAA",  size: "card" },
-  { type: "static",                        client: "Formiguinhas Bolos",    size: "card" },
+  { type: "static",                        client: "Fono Michelle · IA e CAA",  size: "card" },
+  { type: "static",                        client: "Formiguinhas · Bolos",    size: "card" },
 ];
 
 function placeholderUrl(client: string, size: Size) {
