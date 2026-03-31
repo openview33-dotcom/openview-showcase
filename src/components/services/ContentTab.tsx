@@ -9,7 +9,16 @@ import CS05_04 from "@/assets/CS05.04.jpg";
 import CS05_05 from "@/assets/CS05.05.jpg";
 import CS05_06 from "@/assets/CS05.06.jpg";
 
+import CS11_01 from "@/assets/CS11.01.jpg";
+import CS11_02 from "@/assets/CS11.02.jpg";
+import CS11_03 from "@/assets/CS11.03.jpg";
+import CS11_04 from "@/assets/CS11.04.jpg";
+import CS11_05 from "@/assets/CS11.05.jpg";
+import CS11_06 from "@/assets/CS11.06.jpg";
+import CS11_07 from "@/assets/CS11.07.jpg";
+
 const CS5_SLIDES = [CS05_01, CS05_02, CS05_03, CS05_04, CS05_05, CS05_06];
+const CS11_SLIDES = [CS11_01, CS11_02, CS11_03, CS11_04, CS11_05, CS11_06, CS11_07];
 
 /* ── Carousel metadata ── */
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -91,6 +100,7 @@ function placeholderUrl(client: string, size: Size) {
 
 const realSlides: Record<string, string[]> = {
   CS5: CS5_SLIDES,
+  CS11: CS11_SLIDES,
 };
 
 function carouselSlides(id: string, client: string, size: Size) {
