@@ -2,6 +2,31 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
+// CS01 - Imobiliário (6 slides, PNG)
+import CS01_01 from "@/assets/CS01.01.png";
+import CS01_02 from "@/assets/CS01.02.png";
+import CS01_03 from "@/assets/CS01.03.png";
+import CS01_04 from "@/assets/CS01.04.png";
+import CS01_05 from "@/assets/CS01.05.png";
+import CS01_06 from "@/assets/CS01.06.png";
+
+// CS02 - Dia Pet (6 slides)
+import CS02_01 from "@/assets/CS02.01.jpg";
+import CS02_02 from "@/assets/CS02.02.jpg";
+import CS02_03 from "@/assets/CS02.03.jpg";
+import CS02_04 from "@/assets/CS02.04.jpg";
+import CS02_05 from "@/assets/CS02.05.jpg";
+import CS02_06 from "@/assets/CS02.06.jpg";
+
+// CS04 - Formiguinhas POA (6 slides)
+import CS04_01 from "@/assets/CS04.01.jpg";
+import CS04_02 from "@/assets/CS04.02.jpg";
+import CS04_03 from "@/assets/CS04.03.jpg";
+import CS04_04 from "@/assets/CS04.04.jpg";
+import CS04_05 from "@/assets/CS04.05.jpg";
+import CS04_06 from "@/assets/CS04.06.jpg";
+
+// CS05 - POLO Instaladora (6 slides)
 import CS05_01 from "@/assets/CS05.01.jpg";
 import CS05_02 from "@/assets/CS05.02.jpg";
 import CS05_03 from "@/assets/CS05.03.jpg";
@@ -9,6 +34,32 @@ import CS05_04 from "@/assets/CS05.04.jpg";
 import CS05_05 from "@/assets/CS05.05.jpg";
 import CS05_06 from "@/assets/CS05.06.jpg";
 
+// CS06 - SCH Advogados (5 slides)
+import CS06_01 from "@/assets/CS06.01.jpg";
+import CS06_02 from "@/assets/CS06.02.jpg";
+import CS06_03 from "@/assets/CS06.03.jpg";
+import CS06_04 from "@/assets/CS06.04.jpg";
+import CS06_05 from "@/assets/CS06.05.jpg";
+
+// CS07 - TW Aviation English (7 slides)
+import CS07_01 from "@/assets/CS07.01.jpg";
+import CS07_02 from "@/assets/CS07.02.jpg";
+import CS07_03 from "@/assets/CS07.03.jpg";
+import CS07_04 from "@/assets/CS07.04.jpg";
+import CS07_05 from "@/assets/CS07.05.jpg";
+import CS07_06 from "@/assets/CS07.06.jpg";
+import CS07_07 from "@/assets/CS07.07.jpg";
+
+// CS08 - Dia Pet (7 slides)
+import CS08_01 from "@/assets/CS08.01.jpg";
+import CS08_02 from "@/assets/CS08.02.jpg";
+import CS08_03 from "@/assets/CS08.03.jpg";
+import CS08_04 from "@/assets/CS08.04.jpg";
+import CS08_05 from "@/assets/CS08.05.jpg";
+import CS08_06 from "@/assets/CS08.06.jpg";
+import CS08_07 from "@/assets/CS08.07.jpg";
+
+// CS11 - SCH Advogados (7 slides)
 import CS11_01 from "@/assets/CS11.01.jpg";
 import CS11_02 from "@/assets/CS11.02.jpg";
 import CS11_03 from "@/assets/CS11.03.jpg";
@@ -17,6 +68,21 @@ import CS11_05 from "@/assets/CS11.05.jpg";
 import CS11_06 from "@/assets/CS11.06.jpg";
 import CS11_07 from "@/assets/CS11.07.jpg";
 
+// CS12 - Voe Winglets (5 slides)
+import CS12_01 from "@/assets/CS12.01.jpg";
+import CS12_02 from "@/assets/CS12.02.jpg";
+import CS12_03 from "@/assets/CS12.03.jpg";
+import CS12_04 from "@/assets/CS12.04.jpg";
+import CS12_05 from "@/assets/CS12.05.jpg";
+
+// CS13 - Dasle Coberturas (7 slides)
+import CS13_01 from "@/assets/CS13.01.jpg";
+import CS13_02 from "@/assets/CS13.02.jpg";
+import CS13_03 from "@/assets/CS13.03.jpg";
+import CS13_04 from "@/assets/CS13.04.jpg";
+import CS13_05 from "@/assets/CS13.05.jpg";
+import CS13_06 from "@/assets/CS13.06.jpg";
+import CS13_07 from "@/assets/CS13.07.jpg";
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
