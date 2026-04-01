@@ -427,17 +427,6 @@ function Lightbox({
         </div>
       </div>
 
-      {/* Hidden sizer for initial measurement */}
-      {!imgDims && (
-        <img
-          src={currentSrc}
-          alt=""
-          ref={mainImgRef}
-          className="absolute invisible"
-          style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
-          onLoad={measureImg}
-        />
-      )}
 
       {showSpinner && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
