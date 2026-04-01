@@ -223,11 +223,9 @@ function Lightbox({
   const [showSpinner, setShowSpinner] = useState(false);
   const spinnerTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  // Tape transition state
-  const [nextSrc, setNextSrc] = useState<string | null>(null);
-  const [tapeDir, setTapeDir] = useState<1 | -1>(1);
-  const [animating, setAnimating] = useState(false);
-  const [sliding, setSliding] = useState(false);
+  // Tape state
+  const [tape, setTape] = useState<{ nextSrc: string; dir: 1 | -1; phase: "ready" | "sliding"; targetGrid: number; targetSlide: number } | null>(null);
+  const tapeRef = useRef<HTMLDivElement>(null);
   const mainImgRef = useRef<HTMLImageElement>(null);
   const [imgDims, setImgDims] = useState<{ w: number; h: number } | null>(null);
 
@@ -236,7 +234,6 @@ function Lightbox({
   const isCarousel = currentImages.length > 1;
   const currentSrc = currentImages[currentSlide];
 
-  // Measure rendered image size
   const measureImg = useCallback(() => {
     if (mainImgRef.current && mainImgRef.current.complete) {
       const { clientWidth: w, clientHeight: h } = mainImgRef.current;
@@ -244,7 +241,6 @@ function Lightbox({
     }
   }, []);
 
-  // Re-measure on slide change or resize
   useEffect(() => {
     measureImg();
     window.addEventListener("resize", measureImg);
@@ -282,7 +278,7 @@ function Lightbox({
   }, [isCarousel, currentSlide, currentImages.length, currentGridIndex]);
 
   const navigate = useCallback((dir: 1 | -1) => {
-    if (animating || isNavigating) return;
+    if (tape || isNavigating) return;
 
     const { gridIdx, slide } = resolveNext(dir);
     const targetImages = getItemImages(gridItems[gridIdx]);
@@ -301,26 +297,9 @@ function Lightbox({
       clearTimeout(spinnerTimer.current);
       setShowSpinner(false);
       setIsNavigating(false);
-      setTapeDir(dir);
-      setNextSrc(targetSrc);
-      setAnimating(true);
-      setSliding(false);
 
-      // Next frame: trigger the slide
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setSliding(true);
-        });
-      });
-
-      // After transition completes
-      setTimeout(() => {
-        setAnimating(false);
-        setSliding(false);
-        setNextSrc(null);
-        setCurrentGridIndex(gridIdx);
-        setCurrentSlide(slide);
-      }, 310);
+      // Phase 1: place images side by side, no transition yet
+      setTape({ nextSrc: targetSrc, dir, phase: "ready", targetGrid: gridIdx, targetSlide: slide });
     };
 
     if (testImg.complete) {
@@ -332,7 +311,34 @@ function Lightbox({
       testImg.onload = startTape;
       testImg.onerror = startTape;
     }
-  }, [animating, isNavigating, resolveNext]);
+  }, [tape, isNavigating, resolveNext]);
+
+  // When tape phase is "ready", trigger the slide on next frame
+  useEffect(() => {
+    if (!tape || tape.phase !== "ready") return;
+    // Force layout read, then start sliding
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTape((t) => t ? { ...t, phase: "sliding" } : null);
+      });
+    });
+  }, [tape]);
+
+  // When sliding completes (transitionend or timeout fallback)
+  const commitTransition = useCallback(() => {
+    if (!tape) return;
+    const { targetGrid, targetSlide } = tape;
+    setTape(null);
+    setCurrentGridIndex(targetGrid);
+    setCurrentSlide(targetSlide);
+  }, [tape]);
+
+  // Timeout fallback for transition end
+  useEffect(() => {
+    if (!tape || tape.phase !== "sliding") return;
+    const t = setTimeout(commitTransition, 320);
+    return () => clearTimeout(t);
+  }, [tape, commitTransition]);
 
   const goNext = useCallback(() => navigate(1), [navigate]);
   const goPrev = useCallback(() => navigate(-1), [navigate]);
@@ -347,10 +353,18 @@ function Lightbox({
     return () => window.removeEventListener("keydown", handler);
   }, [onClose, goNext, goPrev]);
 
-  // Compute tape translateX
-  const translateX = animating && sliding
-    ? (tapeDir === 1 ? "-100%" : "100%")
-    : "0%";
+  // Tape layout:
+  // Going right: [current][next], starts at translateX(0), slides to translateX(-50%)
+  // Going left: [next][current], starts at translateX(-50%), slides to translateX(0)
+  const isSliding = tape?.phase === "sliding";
+  let tapeTranslate = "0%";
+  if (tape) {
+    if (tape.dir === 1) {
+      tapeTranslate = isSliding ? "-50%" : "0%";
+    } else {
+      tapeTranslate = isSliding ? "0%" : "-50%";
+    }
+  }
 
   return (
     <motion.div
@@ -361,28 +375,17 @@ function Lightbox({
       style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
       onClick={onClose}
     >
-      <button
-        onClick={onClose}
-        className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
-      >
+      <button onClick={onClose} className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10">
         <X className="w-8 h-8" />
       </button>
-
-      <button
-        onClick={(e) => { e.stopPropagation(); goPrev(); }}
-        className="absolute left-4 md:left-8 text-white/60 hover:text-white transition-colors z-10"
-      >
+      <button onClick={(e) => { e.stopPropagation(); goPrev(); }} className="absolute left-4 md:left-8 text-white/60 hover:text-white transition-colors z-10">
         <ChevronLeft className="w-10 h-10" />
       </button>
-
-      <button
-        onClick={(e) => { e.stopPropagation(); goNext(); }}
-        className="absolute right-4 md:right-8 text-white/60 hover:text-white transition-colors z-10"
-      >
+      <button onClick={(e) => { e.stopPropagation(); goNext(); }} className="absolute right-4 md:right-8 text-white/60 hover:text-white transition-colors z-10">
         <ChevronRight className="w-10 h-10" />
       </button>
 
-      {/* Tape viewport */}
+      {/* Outer viewport — clips overflow */}
       <div
         className="relative overflow-hidden rounded-lg"
         style={{
@@ -393,44 +396,38 @@ function Lightbox({
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Inner tape — 200% wide with two images */}
         <div
+          ref={tapeRef}
+          onTransitionEnd={commitTransition}
           style={{
-            position: "relative",
-            width: "100%",
+            display: "flex",
+            width: tape ? "200%" : "100%",
             height: "100%",
-            transform: `translateX(${translateX})`,
-            transition: animating && sliding ? "transform 0.3s ease-in-out" : "none",
+            transform: `translateX(${tapeTranslate})`,
+            transition: isSliding ? "transform 0.3s ease-in-out" : "none",
           }}
         >
-          {/* Current image */}
+          {tape && tape.dir === -1 && (
+            <img src={tape.nextSrc} alt="" className="block object-contain" style={{ width: "50%", height: "100%", flexShrink: 0 }} />
+          )}
+
           <img
             ref={mainImgRef}
             src={currentSrc}
             alt={`${currentItem.client} – ${currentSlide + 1}`}
             className="block object-contain"
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: tape ? "50%" : "100%", height: "100%", flexShrink: 0 }}
             onLoad={measureImg}
           />
 
-          {/* Next/prev image positioned beside current during animation */}
-          {animating && nextSrc && (
-            <img
-              src={nextSrc}
-              alt=""
-              className="block object-contain"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: tapeDir === 1 ? "100%" : "-100%",
-                width: "100%",
-                height: "100%",
-              }}
-            />
+          {tape && tape.dir === 1 && (
+            <img src={tape.nextSrc} alt="" className="block object-contain" style={{ width: "50%", height: "100%", flexShrink: 0 }} />
           )}
         </div>
       </div>
 
-      {/* Hidden sizer when no dimensions yet */}
+      {/* Hidden sizer for initial measurement */}
       {!imgDims && (
         <img
           src={currentSrc}
@@ -442,7 +439,6 @@ function Lightbox({
         />
       )}
 
-      {/* Delayed spinner */}
       {showSpinner && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
           <Loader2 className="w-8 h-8 animate-spin" style={{ color: "hsl(265 50% 63%)" }} />
@@ -451,9 +447,7 @@ function Lightbox({
 
       <div className="absolute bottom-6 text-white/50 text-sm font-body flex gap-4">
         <span>{currentItem.client}</span>
-        {isCarousel && (
-          <span>{currentSlide + 1} / {currentImages.length}</span>
-        )}
+        {isCarousel && <span>{currentSlide + 1} / {currentImages.length}</span>}
       </div>
     </motion.div>
   );
