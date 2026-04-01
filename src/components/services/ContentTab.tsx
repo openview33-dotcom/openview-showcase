@@ -188,6 +188,25 @@ function getItemImages(item: GridItem): string[] {
   return img ? [img] : [`https://placehold.co/600x600/1a1a2e/ffffff?text=${encodeURIComponent(item.client)}`];
 }
 
+/* ── Preload helper ── */
+const preloadCache = new Set<string>();
+function preloadImages(urls: string[]) {
+  urls.forEach((url) => {
+    if (preloadCache.has(url)) return;
+    preloadCache.add(url);
+    const img = new Image();
+    img.src = url;
+  });
+}
+
+function preloadGridNeighbors(gridIdx: number, radius: number) {
+  for (let offset = -radius; offset <= radius; offset++) {
+    if (offset === 0) continue;
+    const idx = (gridIdx + offset + gridItems.length) % gridItems.length;
+    preloadImages(getItemImages(gridItems[idx]));
+  }
+}
+
 /* ── Lightbox ── */
 function Lightbox({
   gridIndex,
@@ -201,37 +220,112 @@ function Lightbox({
   const [currentGridIndex, setCurrentGridIndex] = useState(gridIndex);
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const [direction, setDirection] = useState(0);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const spinnerTimer = useRef<ReturnType<typeof setTimeout>>();
+  const pendingNav = useRef<{ gridIdx: number; slide: number; dir: number } | null>(null);
 
   const currentItem = gridItems[currentGridIndex];
   const currentImages = getItemImages(currentItem);
   const isCarousel = currentImages.length > 1;
 
-  const goNext = useCallback(() => {
-    if (isCarousel && currentSlide < currentImages.length - 1) {
-      setDirection(1);
-      setCurrentSlide((s) => s + 1);
-    } else {
-      // Go to next grid item
-      const nextGrid = (currentGridIndex + 1) % gridItems.length;
-      setDirection(1);
-      setCurrentGridIndex(nextGrid);
-      setCurrentSlide(0);
+  // On open: preload current carousel + neighbors
+  useEffect(() => {
+    preloadImages(getItemImages(gridItems[gridIndex]));
+    preloadGridNeighbors(gridIndex, 2);
+  }, [gridIndex]);
+
+  // On grid index change: preload ahead
+  useEffect(() => {
+    preloadGridNeighbors(currentGridIndex, 2);
+  }, [currentGridIndex]);
+
+  // Preload all carousel slides when entering a carousel
+  useEffect(() => {
+    preloadImages(currentImages);
+    // Also preload first image of next grid item
+    const nextIdx = (currentGridIndex + 1) % gridItems.length;
+    const nextImages = getItemImages(gridItems[nextIdx]);
+    if (nextImages[0]) preloadImages([nextImages[0]]);
+  }, [currentGridIndex, currentImages]);
+
+  const navigateTo = useCallback((gridIdx: number, slide: number, dir: number) => {
+    const targetImages = getItemImages(gridItems[gridIdx]);
+    const targetSrc = targetImages[slide];
+
+    // Check if already cached in browser
+    const testImg = new Image();
+    testImg.src = targetSrc;
+
+    if (testImg.complete) {
+      // Already loaded — navigate immediately
+      setDirection(dir);
+      setCurrentGridIndex(gridIdx);
+      setCurrentSlide(slide);
+      return;
     }
-  }, [isCarousel, currentSlide, currentImages.length, currentGridIndex]);
+
+    // Not loaded yet — wait for it
+    setIsNavigating(true);
+    pendingNav.current = { gridIdx, slide, dir };
+
+    // Show spinner only after 200ms delay
+    clearTimeout(spinnerTimer.current);
+    spinnerTimer.current = setTimeout(() => setShowSpinner(true), 200);
+
+    testImg.onload = () => {
+      clearTimeout(spinnerTimer.current);
+      setShowSpinner(false);
+      setIsNavigating(false);
+      if (pendingNav.current) {
+        setDirection(pendingNav.current.dir);
+        setCurrentGridIndex(pendingNav.current.gridIdx);
+        setCurrentSlide(pendingNav.current.slide);
+        pendingNav.current = null;
+      }
+    };
+    testImg.onerror = () => {
+      clearTimeout(spinnerTimer.current);
+      setShowSpinner(false);
+      setIsNavigating(false);
+      // Navigate anyway on error
+      setDirection(dir);
+      setCurrentGridIndex(gridIdx);
+      setCurrentSlide(slide);
+      pendingNav.current = null;
+    };
+  }, []);
+
+  const goNext = useCallback(() => {
+    if (isNavigating) return;
+    if (isCarousel && currentSlide < currentImages.length - 1) {
+      navigateTo(currentGridIndex, currentSlide + 1, 1);
+    } else {
+      const nextGrid = (currentGridIndex + 1) % gridItems.length;
+      navigateTo(nextGrid, 0, 1);
+    }
+    // Preload 2 ahead in direction
+    const futureGrid1 = (currentGridIndex + 1) % gridItems.length;
+    const futureGrid2 = (currentGridIndex + 2) % gridItems.length;
+    preloadImages(getItemImages(gridItems[futureGrid1]));
+    preloadImages(getItemImages(gridItems[futureGrid2]));
+  }, [isNavigating, isCarousel, currentSlide, currentImages.length, currentGridIndex, navigateTo]);
 
   const goPrev = useCallback(() => {
+    if (isNavigating) return;
     if (isCarousel && currentSlide > 0) {
-      setDirection(-1);
-      setCurrentSlide((s) => s - 1);
+      navigateTo(currentGridIndex, currentSlide - 1, -1);
     } else {
-      // Go to previous grid item
       const prevGrid = (currentGridIndex - 1 + gridItems.length) % gridItems.length;
-      setDirection(-1);
-      setCurrentGridIndex(prevGrid);
       const prevImages = getItemImages(gridItems[prevGrid]);
-      setCurrentSlide(prevImages.length - 1);
+      navigateTo(prevGrid, prevImages.length - 1, -1);
     }
-  }, [isCarousel, currentSlide, currentGridIndex]);
+    // Preload 2 behind in direction
+    const pastGrid1 = (currentGridIndex - 1 + gridItems.length) % gridItems.length;
+    const pastGrid2 = (currentGridIndex - 2 + gridItems.length) % gridItems.length;
+    preloadImages(getItemImages(gridItems[pastGrid1]));
+    preloadImages(getItemImages(gridItems[pastGrid2]));
+  }, [isNavigating, isCarousel, currentSlide, currentGridIndex, navigateTo]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -243,10 +337,13 @@ function Lightbox({
     return () => window.removeEventListener("keydown", handler);
   }, [onClose, goNext, goPrev]);
 
+  // Cleanup spinner timer
+  useEffect(() => () => clearTimeout(spinnerTimer.current), []);
+
   const slideVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 1 }),
     center: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
+    exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 1 }),
   };
 
   return (
@@ -280,7 +377,8 @@ function Lightbox({
       </button>
 
       <div
-        className="relative max-h-[85vh] max-w-[90vw] overflow-hidden flex items-center justify-center"
+        className="relative overflow-hidden flex items-center justify-center"
+        style={{ maxHeight: "85vh", maxWidth: "90vw" }}
         onClick={(e) => e.stopPropagation()}
       >
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
@@ -291,13 +389,27 @@ function Lightbox({
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             src={currentImages[currentSlide]}
             alt={`${currentItem.client} – ${currentSlide + 1}`}
             className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+            style={{ position: "absolute" }}
           />
         </AnimatePresence>
+        {/* Invisible sizer to keep container dimensions */}
+        <img
+          src={currentImages[currentSlide]}
+          alt=""
+          className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg invisible"
+        />
       </div>
+
+      {/* Delayed spinner */}
+      {showSpinner && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+          <Loader2 className="w-8 h-8 animate-spin" style={{ color: "hsl(265 50% 63%)" }} />
+        </div>
+      )}
 
       <div className="absolute bottom-6 text-white/50 text-sm font-body flex gap-4">
         <span>{currentItem.client}</span>
