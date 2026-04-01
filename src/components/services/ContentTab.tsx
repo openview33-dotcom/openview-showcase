@@ -324,22 +324,25 @@ function Lightbox({
     });
   }, [tape]);
 
-  // When sliding completes (transitionend or timeout fallback)
-  const commitTransition = useCallback(() => {
-    if (!tape) return;
-    const { targetGrid, targetSlide } = tape;
-    setTape(null);
-    setCurrentGridIndex(targetGrid);
-    setCurrentSlide(targetSlide);
-  }, [tape]);
+ const committed = useRef(false);
 
-  // Timeout fallback for transition end
-  useEffect(() => {
-    if (!tape || tape.phase !== "sliding") return;
-    const t = setTimeout(commitTransition, 320);
-    return () => clearTimeout(t);
-  }, [tape, commitTransition]);
+const commitTransition = useCallback(() => {
+  if (!tape || committed.current) return;
+  committed.current = true;
+  const { targetGrid, targetSlide } = tape;
+  setCurrentGridIndex(targetGrid);
+  setCurrentSlide(targetSlide);
+  setTape(null);
+}, [tape]);
 
+// Timeout fallback for transition end
+useEffect(() => {
+  if (!tape || tape.phase !== "sliding") return;
+  committed.current = false;
+  const t = setTimeout(commitTransition, 320);
+  return () => clearTimeout(t);
+}, [tape, commitTransition]);
+  
   const goNext = useCallback(() => navigate(1), [navigate]);
   const goPrev = useCallback(() => navigate(-1), [navigate]);
 
