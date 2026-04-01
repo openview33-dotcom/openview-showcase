@@ -6,7 +6,7 @@ import AudiovisualTab from "./services/AudiovisualTab";
 type ServiceCategory = "conteudo" | "audiovisual" | "branding" | "landing";
 
 const tabs: { key: ServiceCategory; label: string }[] = [
-  { key: "conteudo", label: "Planejamento de Conteúdo" },
+  { key: "conteudo", label: "Design & Copy" },
   { key: "audiovisual", label: "Audiovisual" },
   { key: "branding", label: "Branding" },
   { key: "landing", label: "Landing Pages" },
