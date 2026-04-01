@@ -219,113 +219,128 @@ function Lightbox({
 }) {
   const [currentGridIndex, setCurrentGridIndex] = useState(gridIndex);
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
-  const [direction, setDirection] = useState(0);
   const [isNavigating, setIsNavigating] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const spinnerTimer = useRef<ReturnType<typeof setTimeout>>();
-  const pendingNav = useRef<{ gridIdx: number; slide: number; dir: number } | null>(null);
+
+  // For the tape transition
+  const [nextSrc, setNextSrc] = useState<string | null>(null);
+  const [tapeOffset, setTapeOffset] = useState<"0%" | "-100%" | "100%">("0%");
+  const [tapeDir, setTapeDir] = useState<1 | -1>(1);
+  const [animating, setAnimating] = useState(false);
+  const [containerSize, setContainerSize] = useState<{ w: number; h: number } | null>(null);
+  const currentImgRef = useRef<HTMLImageElement>(null);
 
   const currentItem = gridItems[currentGridIndex];
   const currentImages = getItemImages(currentItem);
   const isCarousel = currentImages.length > 1;
+  const currentSrc = currentImages[currentSlide];
 
-  // On open: preload current carousel + neighbors
+  // Measure current image for container sizing
+  const updateSize = useCallback(() => {
+    if (currentImgRef.current) {
+      setContainerSize({
+        w: currentImgRef.current.clientWidth,
+        h: currentImgRef.current.clientHeight,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [updateSize, currentGridIndex, currentSlide]);
+
+  // On open: preload neighbors
   useEffect(() => {
     preloadImages(getItemImages(gridItems[gridIndex]));
     preloadGridNeighbors(gridIndex, 2);
   }, [gridIndex]);
 
-  // On grid index change: preload ahead
   useEffect(() => {
     preloadGridNeighbors(currentGridIndex, 2);
-  }, [currentGridIndex]);
-
-  // Preload all carousel slides when entering a carousel
-  useEffect(() => {
     preloadImages(currentImages);
-    // Also preload first image of next grid item
     const nextIdx = (currentGridIndex + 1) % gridItems.length;
-    const nextImages = getItemImages(gridItems[nextIdx]);
-    if (nextImages[0]) preloadImages([nextImages[0]]);
+    preloadImages([getItemImages(gridItems[nextIdx])[0]]);
   }, [currentGridIndex, currentImages]);
 
-  const navigateTo = useCallback((gridIdx: number, slide: number, dir: number) => {
+  // Cleanup
+  useEffect(() => () => clearTimeout(spinnerTimer.current), []);
+
+  const resolveNext = useCallback((dir: 1 | -1): { gridIdx: number; slide: number } => {
+    if (dir === 1) {
+      if (isCarousel && currentSlide < currentImages.length - 1) {
+        return { gridIdx: currentGridIndex, slide: currentSlide + 1 };
+      }
+      return { gridIdx: (currentGridIndex + 1) % gridItems.length, slide: 0 };
+    }
+    if (isCarousel && currentSlide > 0) {
+      return { gridIdx: currentGridIndex, slide: currentSlide - 1 };
+    }
+    const prevGrid = (currentGridIndex - 1 + gridItems.length) % gridItems.length;
+    const prevImages = getItemImages(gridItems[prevGrid]);
+    return { gridIdx: prevGrid, slide: prevImages.length - 1 };
+  }, [isCarousel, currentSlide, currentImages.length, currentGridIndex]);
+
+  const navigate = useCallback((dir: 1 | -1) => {
+    if (animating || isNavigating) return;
+
+    const { gridIdx, slide } = resolveNext(dir);
     const targetImages = getItemImages(gridItems[gridIdx]);
     const targetSrc = targetImages[slide];
 
-    // Check if already cached in browser
+    // Preload in direction
+    const f1 = (gridIdx + dir + gridItems.length) % gridItems.length;
+    const f2 = (gridIdx + dir * 2 + gridItems.length) % gridItems.length;
+    preloadImages(getItemImages(gridItems[f1]));
+    preloadImages(getItemImages(gridItems[f2]));
+
+    // Check if loaded
     const testImg = new Image();
     testImg.src = targetSrc;
 
+    const startTransition = () => {
+      clearTimeout(spinnerTimer.current);
+      setShowSpinner(false);
+      setIsNavigating(false);
+
+      // Setup tape: place next image beside current, then animate
+      setTapeDir(dir);
+      setNextSrc(targetSrc);
+      setTapeOffset("0%"); // start flush
+      setAnimating(true);
+
+      // Trigger slide on next frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTapeOffset(dir === 1 ? "-100%" : "100%");
+        });
+      });
+
+      // After transition ends, commit
+      setTimeout(() => {
+        setAnimating(false);
+        setNextSrc(null);
+        setTapeOffset("0%");
+        setCurrentGridIndex(gridIdx);
+        setCurrentSlide(slide);
+      }, 300);
+    };
+
     if (testImg.complete) {
-      // Already loaded — navigate immediately
-      setDirection(dir);
-      setCurrentGridIndex(gridIdx);
-      setCurrentSlide(slide);
-      return;
-    }
-
-    // Not loaded yet — wait for it
-    setIsNavigating(true);
-    pendingNav.current = { gridIdx, slide, dir };
-
-    // Show spinner only after 200ms delay
-    clearTimeout(spinnerTimer.current);
-    spinnerTimer.current = setTimeout(() => setShowSpinner(true), 200);
-
-    testImg.onload = () => {
-      clearTimeout(spinnerTimer.current);
-      setShowSpinner(false);
-      setIsNavigating(false);
-      if (pendingNav.current) {
-        setDirection(pendingNav.current.dir);
-        setCurrentGridIndex(pendingNav.current.gridIdx);
-        setCurrentSlide(pendingNav.current.slide);
-        pendingNav.current = null;
-      }
-    };
-    testImg.onerror = () => {
-      clearTimeout(spinnerTimer.current);
-      setShowSpinner(false);
-      setIsNavigating(false);
-      // Navigate anyway on error
-      setDirection(dir);
-      setCurrentGridIndex(gridIdx);
-      setCurrentSlide(slide);
-      pendingNav.current = null;
-    };
-  }, []);
-
-  const goNext = useCallback(() => {
-    if (isNavigating) return;
-    if (isCarousel && currentSlide < currentImages.length - 1) {
-      navigateTo(currentGridIndex, currentSlide + 1, 1);
+      startTransition();
     } else {
-      const nextGrid = (currentGridIndex + 1) % gridItems.length;
-      navigateTo(nextGrid, 0, 1);
+      setIsNavigating(true);
+      clearTimeout(spinnerTimer.current);
+      spinnerTimer.current = setTimeout(() => setShowSpinner(true), 200);
+      testImg.onload = startTransition;
+      testImg.onerror = startTransition;
     }
-    // Preload 2 ahead in direction
-    const futureGrid1 = (currentGridIndex + 1) % gridItems.length;
-    const futureGrid2 = (currentGridIndex + 2) % gridItems.length;
-    preloadImages(getItemImages(gridItems[futureGrid1]));
-    preloadImages(getItemImages(gridItems[futureGrid2]));
-  }, [isNavigating, isCarousel, currentSlide, currentImages.length, currentGridIndex, navigateTo]);
+  }, [animating, isNavigating, resolveNext]);
 
-  const goPrev = useCallback(() => {
-    if (isNavigating) return;
-    if (isCarousel && currentSlide > 0) {
-      navigateTo(currentGridIndex, currentSlide - 1, -1);
-    } else {
-      const prevGrid = (currentGridIndex - 1 + gridItems.length) % gridItems.length;
-      const prevImages = getItemImages(gridItems[prevGrid]);
-      navigateTo(prevGrid, prevImages.length - 1, -1);
-    }
-    // Preload 2 behind in direction
-    const pastGrid1 = (currentGridIndex - 1 + gridItems.length) % gridItems.length;
-    const pastGrid2 = (currentGridIndex - 2 + gridItems.length) % gridItems.length;
-    preloadImages(getItemImages(gridItems[pastGrid1]));
-    preloadImages(getItemImages(gridItems[pastGrid2]));
-  }, [isNavigating, isCarousel, currentSlide, currentGridIndex, navigateTo]);
+  const goNext = useCallback(() => navigate(1), [navigate]);
+  const goPrev = useCallback(() => navigate(-1), [navigate]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -336,15 +351,6 @@ function Lightbox({
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose, goNext, goPrev]);
-
-  // Cleanup spinner timer
-  useEffect(() => () => clearTimeout(spinnerTimer.current), []);
-
-  const slideVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 1 }),
-    center: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 1 }),
-  };
 
   return (
     <motion.div
@@ -376,33 +382,81 @@ function Lightbox({
         <ChevronRight className="w-10 h-10" />
       </button>
 
+      {/* Tape container */}
       <div
-        className="relative overflow-hidden flex items-center justify-center"
-        style={{ maxHeight: "85vh", maxWidth: "90vw" }}
+        className="relative overflow-hidden"
+        style={{
+          width: containerSize?.w ?? "auto",
+          height: containerSize?.h ?? "auto",
+          maxWidth: "90vw",
+          maxHeight: "85vh",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
-          <motion.img
-            key={`${currentGridIndex}-${currentSlide}`}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            src={currentImages[currentSlide]}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            height: "100%",
+            transform: `translateX(${tapeOffset})`,
+            transition: animating ? "transform 0.3s ease-in-out" : "none",
+          }}
+        >
+          {/* Previous image (only when going left) */}
+          {animating && nextSrc && tapeDir === -1 && (
+            <img
+              src={nextSrc}
+              alt=""
+              className="object-contain rounded-lg"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "-100%",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          )}
+
+          {/* Current image */}
+          <img
+            ref={currentImgRef}
+            src={currentSrc}
             alt={`${currentItem.client} – ${currentSlide + 1}`}
-            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
-            style={{ position: "absolute" }}
+            className="object-contain rounded-lg"
+            style={{ width: "100%", height: "100%", flexShrink: 0 }}
+            onLoad={updateSize}
           />
-        </AnimatePresence>
-        {/* Invisible sizer to keep container dimensions */}
-        <img
-          src={currentImages[currentSlide]}
-          alt=""
-          className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg invisible"
-        />
+
+          {/* Next image (only when going right) */}
+          {animating && nextSrc && tapeDir === 1 && (
+            <img
+              src={nextSrc}
+              alt=""
+              className="object-contain rounded-lg"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "100%",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          )}
+        </div>
       </div>
+
+      {/* Sizer for initial measurement (hidden) */}
+      {!containerSize && (
+        <img
+          src={currentSrc}
+          alt=""
+          className="max-h-[85vh] max-w-[90vw] object-contain invisible absolute"
+          onLoad={updateSize}
+          ref={currentImgRef}
+        />
+      )}
 
       {/* Delayed spinner */}
       {showSpinner && (
