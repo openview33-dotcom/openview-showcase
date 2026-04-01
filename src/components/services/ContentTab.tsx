@@ -304,7 +304,7 @@ const ContentTab = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-auto">
+      <div style={{ columns: 3, columnGap: 8 }}>
         {gridItems.map((item, i) => {
           const isCarousel = item.type === "carousel" && item.carouselId;
           const slides = isCarousel
@@ -321,21 +321,21 @@ const ContentTab = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
-              className={`${sizeToCols[item.size]} relative overflow-hidden rounded-xl cursor-pointer group`}
+              className="relative rounded-xl cursor-pointer group"
+              style={{ breakInside: "avoid", marginBottom: 8 }}
               onClick={() => {
                 if (isCarousel) {
                   setLightbox({ images: slides, index: 0 });
                 }
               }}
             >
-              <div className={`w-full ${sizeToAspect[item.size]} overflow-hidden`}>
-                <img
-                  src={coverImg}
-                  alt={item.client}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  loading="lazy"
-                />
-              </div>
+              <img
+                src={coverImg}
+                alt={item.client}
+                className="w-full rounded-xl transition-transform duration-500 group-hover:scale-[1.02]"
+                style={{ height: "auto" }}
+                loading="lazy"
+              />
 
               {isCarousel && (
                 <span
