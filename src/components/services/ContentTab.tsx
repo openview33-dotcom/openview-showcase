@@ -223,36 +223,35 @@ function Lightbox({
   const [showSpinner, setShowSpinner] = useState(false);
   const spinnerTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  // For the tape transition
+  // Tape transition state
   const [nextSrc, setNextSrc] = useState<string | null>(null);
-  const [tapeOffset, setTapeOffset] = useState<"0%" | "-100%" | "100%">("0%");
   const [tapeDir, setTapeDir] = useState<1 | -1>(1);
   const [animating, setAnimating] = useState(false);
-  const [containerSize, setContainerSize] = useState<{ w: number; h: number } | null>(null);
-  const currentImgRef = useRef<HTMLImageElement>(null);
+  const [sliding, setSliding] = useState(false);
+  const mainImgRef = useRef<HTMLImageElement>(null);
+  const [imgDims, setImgDims] = useState<{ w: number; h: number } | null>(null);
 
   const currentItem = gridItems[currentGridIndex];
   const currentImages = getItemImages(currentItem);
   const isCarousel = currentImages.length > 1;
   const currentSrc = currentImages[currentSlide];
 
-  // Measure current image for container sizing
-  const updateSize = useCallback(() => {
-    if (currentImgRef.current) {
-      setContainerSize({
-        w: currentImgRef.current.clientWidth,
-        h: currentImgRef.current.clientHeight,
-      });
+  // Measure rendered image size
+  const measureImg = useCallback(() => {
+    if (mainImgRef.current && mainImgRef.current.complete) {
+      const { clientWidth: w, clientHeight: h } = mainImgRef.current;
+      if (w > 0 && h > 0) setImgDims({ w, h });
     }
   }, []);
 
+  // Re-measure on slide change or resize
   useEffect(() => {
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, [updateSize, currentGridIndex, currentSlide]);
+    measureImg();
+    window.addEventListener("resize", measureImg);
+    return () => window.removeEventListener("resize", measureImg);
+  }, [measureImg, currentGridIndex, currentSlide]);
 
-  // On open: preload neighbors
+  // Preloading
   useEffect(() => {
     preloadImages(getItemImages(gridItems[gridIndex]));
     preloadGridNeighbors(gridIndex, 2);
@@ -265,7 +264,6 @@ function Lightbox({
     preloadImages([getItemImages(gridItems[nextIdx])[0]]);
   }, [currentGridIndex, currentImages]);
 
-  // Cleanup
   useEffect(() => () => clearTimeout(spinnerTimer.current), []);
 
   const resolveNext = useCallback((dir: 1 | -1): { gridIdx: number; slide: number } => {
@@ -290,52 +288,49 @@ function Lightbox({
     const targetImages = getItemImages(gridItems[gridIdx]);
     const targetSrc = targetImages[slide];
 
-    // Preload in direction
+    // Preload ahead
     const f1 = (gridIdx + dir + gridItems.length) % gridItems.length;
     const f2 = (gridIdx + dir * 2 + gridItems.length) % gridItems.length;
     preloadImages(getItemImages(gridItems[f1]));
     preloadImages(getItemImages(gridItems[f2]));
 
-    // Check if loaded
     const testImg = new Image();
     testImg.src = targetSrc;
 
-    const startTransition = () => {
+    const startTape = () => {
       clearTimeout(spinnerTimer.current);
       setShowSpinner(false);
       setIsNavigating(false);
-
-      // Setup tape: place next image beside current, then animate
       setTapeDir(dir);
       setNextSrc(targetSrc);
-      setTapeOffset("0%"); // start flush
       setAnimating(true);
+      setSliding(false);
 
-      // Trigger slide on next frame
+      // Next frame: trigger the slide
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setTapeOffset(dir === 1 ? "-100%" : "100%");
+          setSliding(true);
         });
       });
 
-      // After transition ends, commit
+      // After transition completes
       setTimeout(() => {
         setAnimating(false);
+        setSliding(false);
         setNextSrc(null);
-        setTapeOffset("0%");
         setCurrentGridIndex(gridIdx);
         setCurrentSlide(slide);
-      }, 300);
+      }, 310);
     };
 
     if (testImg.complete) {
-      startTransition();
+      startTape();
     } else {
       setIsNavigating(true);
       clearTimeout(spinnerTimer.current);
       spinnerTimer.current = setTimeout(() => setShowSpinner(true), 200);
-      testImg.onload = startTransition;
-      testImg.onerror = startTransition;
+      testImg.onload = startTape;
+      testImg.onerror = startTape;
     }
   }, [animating, isNavigating, resolveNext]);
 
@@ -352,13 +347,18 @@ function Lightbox({
     return () => window.removeEventListener("keydown", handler);
   }, [onClose, goNext, goPrev]);
 
+  // Compute tape translateX
+  const translateX = animating && sliding
+    ? (tapeDir === 1 ? "-100%" : "100%")
+    : "0%";
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{ backgroundColor: "rgba(0,0,0,0.92)" }}
+      style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
       onClick={onClose}
     >
       <button
@@ -382,63 +382,46 @@ function Lightbox({
         <ChevronRight className="w-10 h-10" />
       </button>
 
-      {/* Tape container */}
+      {/* Tape viewport */}
       <div
-        className="relative overflow-hidden"
+        className="relative overflow-hidden rounded-lg"
         style={{
-          width: containerSize?.w ?? "auto",
-          height: containerSize?.h ?? "auto",
+          width: imgDims ? imgDims.w : "auto",
+          height: imgDims ? imgDims.h : "auto",
           maxWidth: "90vw",
-          maxHeight: "85vh",
+          maxHeight: "90vh",
         }}
         onClick={(e) => e.stopPropagation()}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
+            position: "relative",
             width: "100%",
             height: "100%",
-            transform: `translateX(${tapeOffset})`,
-            transition: animating ? "transform 0.3s ease-in-out" : "none",
+            transform: `translateX(${translateX})`,
+            transition: animating && sliding ? "transform 0.3s ease-in-out" : "none",
           }}
         >
-          {/* Previous image (only when going left) */}
-          {animating && nextSrc && tapeDir === -1 && (
-            <img
-              src={nextSrc}
-              alt=""
-              className="object-contain rounded-lg"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: "-100%",
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          )}
-
           {/* Current image */}
           <img
-            ref={currentImgRef}
+            ref={mainImgRef}
             src={currentSrc}
             alt={`${currentItem.client} – ${currentSlide + 1}`}
-            className="object-contain rounded-lg"
-            style={{ width: "100%", height: "100%", flexShrink: 0 }}
-            onLoad={updateSize}
+            className="block object-contain"
+            style={{ width: "100%", height: "100%" }}
+            onLoad={measureImg}
           />
 
-          {/* Next image (only when going right) */}
-          {animating && nextSrc && tapeDir === 1 && (
+          {/* Next/prev image positioned beside current during animation */}
+          {animating && nextSrc && (
             <img
               src={nextSrc}
               alt=""
-              className="object-contain rounded-lg"
+              className="block object-contain"
               style={{
                 position: "absolute",
                 top: 0,
-                left: "100%",
+                left: tapeDir === 1 ? "100%" : "-100%",
                 width: "100%",
                 height: "100%",
               }}
@@ -447,14 +430,15 @@ function Lightbox({
         </div>
       </div>
 
-      {/* Sizer for initial measurement (hidden) */}
-      {!containerSize && (
+      {/* Hidden sizer when no dimensions yet */}
+      {!imgDims && (
         <img
           src={currentSrc}
           alt=""
-          className="max-h-[85vh] max-w-[90vw] object-contain invisible absolute"
-          onLoad={updateSize}
-          ref={currentImgRef}
+          ref={mainImgRef}
+          className="absolute invisible"
+          style={{ maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain" }}
+          onLoad={measureImg}
         />
       )}
 
@@ -507,9 +491,7 @@ const ContentTab = () => {
               />
 
               {isCarousel && (
-                <span
-                  className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-body font-medium text-primary-foreground bg-primary"
-                >
+                <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-body font-medium text-primary-foreground bg-primary">
                   ● {images.length}
                 </span>
               )}
