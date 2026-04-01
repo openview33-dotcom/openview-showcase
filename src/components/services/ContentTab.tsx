@@ -227,7 +227,7 @@ function Lightbox({
   const [tape, setTape] = useState<{ nextSrc: string; dir: 1 | -1; phase: "ready" | "sliding"; targetGrid: number; targetSlide: number } | null>(null);
   const tapeRef = useRef<HTMLDivElement>(null);
   const mainImgRef = useRef<HTMLImageElement>(null);
-  const [imgDims, setImgDims] = useState<{ w: number; h: number } | null>(null);
+  const [imgDims, setImgDims] = useState<{ w: number; h: number }>({ w: window.innerWidth * 0.9, h: window.innerHeight * 0.9 });
 
   const currentItem = gridItems[currentGridIndex];
   const currentImages = getItemImages(currentItem);
