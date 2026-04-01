@@ -40,9 +40,6 @@ const ServicesSection = () => {
           <h2 className="font-display text-4xl md:text-5xl font-medium mb-6 text-white">
             O que a OpenView <span className="italic font-normal">entrega</span>
           </h2>
-          <p className="font-body text-white/60 max-w-xl mx-auto">
-            Cada categoria é um universo de possibilidades criativas. Explore nosso portfólio visual.
-          </p>
         </motion.div>
 
         {/* Tabs */}
