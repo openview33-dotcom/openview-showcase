@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 // CS01 - Imobiliário (6 slides, PNG)
@@ -83,6 +83,7 @@ import CS13_04 from "@/assets/CS13.04.jpg";
 import CS13_05 from "@/assets/CS13.05.jpg";
 import CS13_06 from "@/assets/CS13.06.jpg";
 import CS13_07 from "@/assets/CS13.07.jpg";
+
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
@@ -108,7 +109,6 @@ const CS11_SLIDES = [CS11_01, CS11_02, CS11_03, CS11_04, CS11_05, CS11_06, CS11_
 const CS12_SLIDES = [CS12_01, CS12_02, CS12_03, CS12_04, CS12_05];
 const CS13_SLIDES = [CS13_01, CS13_02, CS13_03, CS13_04, CS13_05, CS13_06, CS13_07];
 
-// Map static card clients to real images
 const staticImages: Record<string, string> = {
   "TW Aviation English": imgTWAviation,
   "Fono Michelle Borges": imgFonoMichelle,
@@ -123,84 +123,6 @@ const staticImages: Record<string, string> = {
   "Formiguinhas · Bolos": imgFormiguinhasBolos,
 };
 
-/* ── Carousel metadata ── */
-const carousels: Record<string, { slides: number; client: string }> = {
-  CS1:  { slides: 6, client: "Imobiliário" },
-  CS2:  { slides: 6, client: "Dia Pet" },
-  CS4:  { slides: 6, client: "Formiguinhas POA" },
-  CS5:  { slides: 6, client: "POLO Instaladora" },
-  CS6:  { slides: 5, client: "SCH Advogados" },
-  CS7:  { slides: 7, client: "TW Aviation English" },
-  CS8:  { slides: 7, client: "Dia Pet" },
-  CS11: { slides: 7, client: "SCH Advogados" },
-  CS12: { slides: 5, client: "Voe Winglets" },
-  CS13: { slides: 7, client: "Dasle Coberturas" },
-};
-
-type Size = "featured" | "tall" | "wide" | "card";
-
-interface GridItem {
-  type: "static" | "carousel";
-  carouselId?: string;
-  client: string;
-  size: Size;
-}
-
-const sizeToPlaceholder: Record<Size, string> = {
-  card: "600x600",
-  tall: "600x1200",
-  wide: "1200x600",
-  featured: "1200x1200",
-};
-
-const sizeToCols: Record<Size, string> = {
-  featured: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2",
-  tall: "col-span-1 row-span-1 sm:row-span-2",
-  wide: "col-span-1 sm:col-span-2",
-  card: "col-span-1",
-};
-
-const sizeToAspect: Record<Size, string> = {
-  featured: "aspect-square",
-  tall: "aspect-[1/2] sm:aspect-[1/2]",
-  wide: "aspect-square sm:aspect-[2/1]",
-  card: "aspect-square",
-};
-
-/* ── Grid items ── */
-const gridItems: GridItem[] = [
-  // Row 1
-  { type: "carousel", carouselId: "CS5",  client: "POLO Instaladora",      size: "featured" },
-  { type: "carousel", carouselId: "CS11", client: "SCH Advogados",         size: "tall" },
-  { type: "static",                        client: "TW Aviation English",   size: "card" },
-  { type: "static",                        client: "Fono Michelle Borges",  size: "card" },
-  // Row 2
-  { type: "static",                        client: "Dia Pet",               size: "card" },
-  { type: "carousel", carouselId: "CS1",  client: "Imobiliário",           size: "wide" },
-  { type: "static",                        client: "POLO Instaladora",      size: "card" },
-  { type: "static",                        client: "Formiguinhas POA",      size: "card" },
-  { type: "static",                        client: "TKA Advogados",         size: "card" },
-  // Row 3
-  { type: "carousel", carouselId: "CS7",  client: "TW Aviation English",   size: "featured" },
-  { type: "carousel", carouselId: "CS8",  client: "Dia Pet",               size: "tall" },
-  { type: "static",                        client: "Voe Winglets",          size: "card" },
-  { type: "static",                        client: "POLO · Dia da Mulher",    size: "card" },
-  { type: "static",                        client: "Dia Pet · 3 cuidados",    size: "card" },
-  // Row 4
-  { type: "carousel", carouselId: "CS13", client: "Dasle Coberturas",      size: "wide" },
-  { type: "carousel", carouselId: "CS4",  client: "Formiguinhas POA",      size: "card" },
-  { type: "carousel", carouselId: "CS6",  client: "SCH Advogados",         size: "card" },
-  { type: "carousel", carouselId: "CS12", client: "Voe Winglets",          size: "wide" },
-  { type: "carousel", carouselId: "CS2",  client: "Dia Pet",               size: "card" },
-  { type: "static",                        client: "Fono Michelle · IA e CAA",  size: "card" },
-  { type: "static",                        client: "Formiguinhas · Bolos",    size: "card" },
-];
-
-function placeholderUrl(client: string, size: Size) {
-  const dim = sizeToPlaceholder[size];
-  return `https://placehold.co/${dim}/1a1a2e/ffffff?text=${encodeURIComponent(client)}`;
-}
-
 const realSlides: Record<string, string[]> = {
   CS1: CS1_SLIDES,
   CS2: CS2_SLIDES,
@@ -214,40 +136,118 @@ const realSlides: Record<string, string[]> = {
   CS13: CS13_SLIDES,
 };
 
-function carouselSlides(id: string, client: string, size: Size) {
-  if (realSlides[id]) return realSlides[id];
-  const count = carousels[id]?.slides ?? 1;
-  const dim = sizeToPlaceholder[size];
-  return Array.from({ length: count }, (_, i) =>
-    // TODO: substituir pela imagem real
-    `https://placehold.co/${dim}/1a1a2e/ffffff?text=${encodeURIComponent(`${client} ${i + 1}`)}`
-  );
+const carousels: Record<string, { slides: number; client: string }> = {
+  CS1: { slides: 6, client: "Imobiliário" },
+  CS2: { slides: 6, client: "Dia Pet" },
+  CS4: { slides: 6, client: "Formiguinhas POA" },
+  CS5: { slides: 6, client: "POLO Instaladora" },
+  CS6: { slides: 5, client: "SCH Advogados" },
+  CS7: { slides: 7, client: "TW Aviation English" },
+  CS8: { slides: 7, client: "Dia Pet" },
+  CS11: { slides: 7, client: "SCH Advogados" },
+  CS12: { slides: 5, client: "Voe Winglets" },
+  CS13: { slides: 7, client: "Dasle Coberturas" },
+};
+
+interface GridItem {
+  type: "static" | "carousel";
+  carouselId?: string;
+  client: string;
+}
+
+const gridItems: GridItem[] = [
+  { type: "carousel", carouselId: "CS5", client: "POLO Instaladora" },
+  { type: "carousel", carouselId: "CS11", client: "SCH Advogados" },
+  { type: "static", client: "TW Aviation English" },
+  { type: "static", client: "Fono Michelle Borges" },
+  { type: "static", client: "Dia Pet" },
+  { type: "carousel", carouselId: "CS1", client: "Imobiliário" },
+  { type: "static", client: "POLO Instaladora" },
+  { type: "static", client: "Formiguinhas POA" },
+  { type: "static", client: "TKA Advogados" },
+  { type: "carousel", carouselId: "CS7", client: "TW Aviation English" },
+  { type: "carousel", carouselId: "CS8", client: "Dia Pet" },
+  { type: "static", client: "Voe Winglets" },
+  { type: "static", client: "POLO · Dia da Mulher" },
+  { type: "static", client: "Dia Pet · 3 cuidados" },
+  { type: "carousel", carouselId: "CS13", client: "Dasle Coberturas" },
+  { type: "carousel", carouselId: "CS4", client: "Formiguinhas POA" },
+  { type: "carousel", carouselId: "CS6", client: "SCH Advogados" },
+  { type: "carousel", carouselId: "CS12", client: "Voe Winglets" },
+  { type: "carousel", carouselId: "CS2", client: "Dia Pet" },
+  { type: "static", client: "Fono Michelle · IA e CAA" },
+  { type: "static", client: "Formiguinhas · Bolos" },
+];
+
+/** Get all images for a grid item */
+function getItemImages(item: GridItem): string[] {
+  if (item.type === "carousel" && item.carouselId && realSlides[item.carouselId]) {
+    return realSlides[item.carouselId];
+  }
+  const img = staticImages[item.client];
+  return img ? [img] : [`https://placehold.co/600x600/1a1a2e/ffffff?text=${encodeURIComponent(item.client)}`];
 }
 
 /* ── Lightbox ── */
 function Lightbox({
-  images,
-  startIndex,
+  gridIndex,
+  slideIndex: initialSlide,
   onClose,
 }: {
-  images: string[];
-  startIndex: number;
+  gridIndex: number;
+  slideIndex: number;
   onClose: () => void;
 }) {
-  const [index, setIndex] = useState(startIndex);
+  const [currentGridIndex, setCurrentGridIndex] = useState(gridIndex);
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
+  const [direction, setDirection] = useState(0);
 
-  const prev = useCallback(() => setIndex((i) => (i > 0 ? i - 1 : images.length - 1)), [images.length]);
-  const next = useCallback(() => setIndex((i) => (i < images.length - 1 ? i + 1 : 0)), [images.length]);
+  const currentItem = gridItems[currentGridIndex];
+  const currentImages = getItemImages(currentItem);
+  const isCarousel = currentImages.length > 1;
+
+  const goNext = useCallback(() => {
+    if (isCarousel && currentSlide < currentImages.length - 1) {
+      setDirection(1);
+      setCurrentSlide((s) => s + 1);
+    } else {
+      // Go to next grid item
+      const nextGrid = (currentGridIndex + 1) % gridItems.length;
+      setDirection(1);
+      setCurrentGridIndex(nextGrid);
+      setCurrentSlide(0);
+    }
+  }, [isCarousel, currentSlide, currentImages.length, currentGridIndex]);
+
+  const goPrev = useCallback(() => {
+    if (isCarousel && currentSlide > 0) {
+      setDirection(-1);
+      setCurrentSlide((s) => s - 1);
+    } else {
+      // Go to previous grid item
+      const prevGrid = (currentGridIndex - 1 + gridItems.length) % gridItems.length;
+      setDirection(-1);
+      setCurrentGridIndex(prevGrid);
+      const prevImages = getItemImages(gridItems[prevGrid]);
+      setCurrentSlide(prevImages.length - 1);
+    }
+  }, [isCarousel, currentSlide, currentGridIndex]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose, prev, next]);
+  }, [onClose, goNext, goPrev]);
+
+  const slideVariants = {
+    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
+  };
 
   return (
     <motion.div
@@ -266,33 +266,44 @@ function Lightbox({
       </button>
 
       <button
-        onClick={(e) => { e.stopPropagation(); prev(); }}
+        onClick={(e) => { e.stopPropagation(); goPrev(); }}
         className="absolute left-4 md:left-8 text-white/60 hover:text-white transition-colors z-10"
       >
         <ChevronLeft className="w-10 h-10" />
       </button>
 
       <button
-        onClick={(e) => { e.stopPropagation(); next(); }}
+        onClick={(e) => { e.stopPropagation(); goNext(); }}
         className="absolute right-4 md:right-8 text-white/60 hover:text-white transition-colors z-10"
       >
         <ChevronRight className="w-10 h-10" />
       </button>
 
-      <motion.img
-        key={index}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.25 }}
-        src={images[index]}
-        alt={`Slide ${index + 1}`}
-        className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+      <div
+        className="relative max-h-[85vh] max-w-[90vw] overflow-hidden flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
-      />
+      >
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+          <motion.img
+            key={`${currentGridIndex}-${currentSlide}`}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            src={currentImages[currentSlide]}
+            alt={`${currentItem.client} – ${currentSlide + 1}`}
+            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+          />
+        </AnimatePresence>
+      </div>
 
-      <div className="absolute bottom-6 text-white/50 text-sm font-body">
-        {index + 1} / {images.length}
+      <div className="absolute bottom-6 text-white/50 text-sm font-body flex gap-4">
+        <span>{currentItem.client}</span>
+        {isCarousel && (
+          <span>{currentSlide + 1} / {currentImages.length}</span>
+        )}
       </div>
     </motion.div>
   );
@@ -300,19 +311,15 @@ function Lightbox({
 
 /* ── Main grid ── */
 const ContentTab = () => {
-  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+  const [lightbox, setLightbox] = useState<{ gridIndex: number; slideIndex: number } | null>(null);
 
   return (
     <>
       <div style={{ columns: 3, columnGap: 8 }}>
         {gridItems.map((item, i) => {
-          const isCarousel = item.type === "carousel" && item.carouselId;
-          const slides = isCarousel
-            ? carouselSlides(item.carouselId!, item.client, item.size)
-            : [];
-          const coverImg = isCarousel
-            ? slides[0]
-            : (staticImages[item.client] || placeholderUrl(item.client, item.size));
+          const images = getItemImages(item);
+          const coverImg = images[0];
+          const isCarousel = images.length > 1;
 
           return (
             <motion.div
@@ -323,11 +330,7 @@ const ContentTab = () => {
               transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
               className="relative rounded-xl cursor-pointer group"
               style={{ breakInside: "avoid", marginBottom: 8 }}
-              onClick={() => {
-                if (isCarousel) {
-                  setLightbox({ images: slides, index: 0 });
-                }
-              }}
+              onClick={() => setLightbox({ gridIndex: i, slideIndex: 0 })}
             >
               <img
                 src={coverImg}
@@ -339,10 +342,9 @@ const ContentTab = () => {
 
               {isCarousel && (
                 <span
-                  className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-body font-medium text-primary-foreground"
-                  style={{ backgroundColor: "hsl(265 50% 63%)" }}
+                  className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-body font-medium text-primary-foreground bg-primary"
                 >
-                  ● {carousels[item.carouselId!]?.slides}
+                  ● {images.length}
                 </span>
               )}
             </motion.div>
@@ -353,8 +355,8 @@ const ContentTab = () => {
       <AnimatePresence>
         {lightbox && (
           <Lightbox
-            images={lightbox.images}
-            startIndex={lightbox.index}
+            gridIndex={lightbox.gridIndex}
+            slideIndex={lightbox.slideIndex}
             onClose={() => setLightbox(null)}
           />
         )}
