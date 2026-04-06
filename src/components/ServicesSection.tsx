@@ -61,7 +61,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Content */}
-        <motion.div key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <motion.div key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className={active === "branding" ? "-mx-6 md:-mx-12 lg:-mx-20 xl:-mx-28" : ""}>
           {active === "conteudo" && <ContentTab />}
           {active === "audiovisual" && <AudiovisualTab />}
           {active === "branding" && <BrandingTab />}
