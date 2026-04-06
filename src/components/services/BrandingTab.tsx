@@ -4,7 +4,7 @@ const BrandingTab = () => {
   return (
     <div
       className="w-full overflow-hidden"
-      style={{ margin: "0 -112px" }}
+      style={{ margin: "0 calc(-1 * (50vw - 50%))" }}
     >
       <div
         style={{ display: "flex", width: "max-content", animation: "brandingScroll 40s linear infinite" }}
