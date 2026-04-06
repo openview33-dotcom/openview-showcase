@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import ContentTab from "./services/ContentTab";
 import AudiovisualTab from "./services/AudiovisualTab";
+import BrandingTab from "./services/BrandingTab";
 
 type ServiceCategory = "conteudo" | "audiovisual" | "branding" | "landing";
 
@@ -63,7 +64,7 @@ const ServicesSection = () => {
         <motion.div key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           {active === "conteudo" && <ContentTab />}
           {active === "audiovisual" && <AudiovisualTab />}
-          {active === "branding" && <ComingSoon />}
+          {active === "branding" && <BrandingTab />}
           {active === "landing" && <ComingSoon />}
         </motion.div>
       </div>
