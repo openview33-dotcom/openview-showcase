@@ -12,8 +12,7 @@ const Navbar = () => {
   }, []);
 
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.open("https://wa.me/5551984476625", "_blank");
   };
 
   return (

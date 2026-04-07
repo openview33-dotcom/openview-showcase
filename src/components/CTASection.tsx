@@ -24,7 +24,7 @@ const CTASection = () => {
             sua presença digital com estratégia e criatividade.
           </p>
           <a
-            href="https://wa.me/5551999999999"
+            href="https://wa.me/5551984476625"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-body text-sm tracking-wider uppercase rounded-full hover:opacity-90 transition-opacity"
