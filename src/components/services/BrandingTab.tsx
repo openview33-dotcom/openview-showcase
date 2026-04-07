@@ -4,8 +4,8 @@ import formiguinhasStrip from "@/assets/formiguinhas-marca.png";
 
 const strips = [
   { src: tommasiStrip, alt: "Tommasi", duration: "40s", anim: "s0" },
-  { src: poloStrip, alt: "Polo", duration: "35s", anim: "s1" },
-  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s2" },
+  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s1" },
+  { src: poloStrip, alt: "Polo", duration: "35s", anim: "s2" },
 ];
 
 const BrandingTab = () => {
@@ -23,6 +23,10 @@ const BrandingTab = () => {
           </div>
         </div>
       ))}
+
+      <div style={{ width: "100%", height: 300, backgroundColor: "#1a1a1a" }} />
+      <div style={{ width: "100%", height: 300, backgroundColor: "#1a1a1a" }} />
+
       <style>{`
         @keyframes s0 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes s1 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
