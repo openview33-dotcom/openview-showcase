@@ -9,11 +9,11 @@ const videoTestimonials = [
 ];
 
 const textTestimonials = [
-  { text: "Além da qualidade, o atendimento é impecável. A equipe é próxima, entende o negócio e entrega sempre além do esperado.", author: "Cliente OpenView" },
-  { text: "Logo no primeiro mês já sentimos a diferença. As vendas aumentaram, o movimento cresceu e muitos clientes novos começaram a chegar na loja. Valeu cada centavo do investimento!", author: "Cliente OpenView" },
-  { text: "Nosso negócio mudou completamente depois que começamos com a OpenView. Os clientes comentam, chegam pelo Instagram e elogiam a comunicação. Foi a melhor decisão que tomamos.", author: "Cliente OpenView" },
-  { text: "Entraram muitos clientes novos! Percebemos que vieram do Google e do Instagram.", author: "Cliente OpenView" },
-  { text: "Fiquei muito feliz com o resultado. É um salto de qualidade gigantesco. Parabenizo toda a equipe, estou certo de que fiz uma ótima escolha.", author: "Cliente OpenView" },
+  { text: "Além da qualidade, o atendimento é impecável. A equipe é próxima, entende o negócio e entrega sempre além do esperado.", author: "" },
+  { text: "Logo no primeiro mês já sentimos a diferença. As vendas aumentaram, o movimento cresceu e muitos clientes novos começaram a chegar na loja. Valeu cada centavo do investimento!", author: "" },
+  { text: "Nosso negócio mudou completamente depois que começamos com a OpenView. Os clientes comentam, chegam pelo Instagram e elogiam a comunicação. Foi a melhor decisão que tomamos.", author: "" },
+  { text: "Entraram muitos clientes novos! Percebemos que vieram do Google e do Instagram.", author: "" },
+  { text: "Fiquei muito feliz com o resultado. É um salto de qualidade gigantesco. Parabenizo toda a equipe, estou certo de que fiz uma ótima escolha.", author: "" },
   { text: "Quando contratamos a OpenView, a ideia era só profissionalizar o Instagram da Polo. Mas o que aconteceu foi muito além disso. Desde a primeira entrega já deu pra sentir a diferença na qualidade.", author: "POLO Instaladora" },
 ];
 
