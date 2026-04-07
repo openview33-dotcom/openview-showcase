@@ -4,9 +4,9 @@ import poloStrip from "@/assets/Polo-marca.png";
 import formiguinhasStrip from "@/assets/formiguinhas-marca.png";
 
 const strips = [
-  { src: tommasiStrip, alt: "Tommasi", duration: "40s", anim: "s0" },
-  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s1" },
-  { src: poloStrip, alt: "Polo", duration: "35s", anim: "s2" },
+  { src: tommasiStrip, alt: "Tommasi", duration: "40s", anim: "s0", label: "Tommasi · Consulenza Internazionale" },
+  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s1", label: "Formiguinhas POA" },
+  { src: poloStrip, alt: "Polo", duration: "35s", anim: "s2", label: "Polo Instaladora" },
 ];
 
 const BrandingTab = () => {
@@ -31,8 +31,19 @@ const BrandingTab = () => {
               opacity: hovered[i] ? 0 : 1,
               transition: "opacity 0.4s ease",
               pointerEvents: "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
+          >
+            <span style={{ fontSize: 13, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
+              {strip.label}
+            </span>
+            <span style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 6 }}>
+              passe o mouse para ver
+            </span>
+          </div>
           <div
             style={{
               display: "flex",
