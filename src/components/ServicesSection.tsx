@@ -3,6 +3,7 @@ import { useState } from "react";
 import ContentTab from "./services/ContentTab";
 import AudiovisualTab from "./services/AudiovisualTab";
 import BrandingTab from "./services/BrandingTab";
+import LandingPagesTab from "./services/LandingPagesTab";
 
 type ServiceCategory = "conteudo" | "audiovisual" | "branding" | "landing";
 
@@ -65,7 +66,7 @@ const ServicesSection = () => {
           {active === "conteudo" && <ContentTab />}
           {active === "audiovisual" && <AudiovisualTab />}
           {active === "branding" && <BrandingTab />}
-          {active === "landing" && <ComingSoon />}
+          {active === "landing" && <LandingPagesTab />}
         </motion.div>
       </div>
     </section>
