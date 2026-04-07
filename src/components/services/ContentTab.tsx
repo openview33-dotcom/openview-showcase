@@ -84,6 +84,26 @@ import CS13_05 from "@/assets/CS13.05.jpg";
 import CS13_06 from "@/assets/CS13.06.jpg";
 import CS13_07 from "@/assets/CS13.07.jpg";
 
+// CS14 - Fono Michelle Borges (10 slides)
+import CS14_01 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_01.png";
+import CS14_02 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_02.png";
+import CS14_03 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_03.png";
+import CS14_04 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_04.png";
+import CS14_05 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_05.png";
+import CS14_06 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_06.png";
+import CS14_07 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_07.png";
+import CS14_08 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_08.png";
+import CS14_09 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_09.png";
+import CS14_10 from "@/assets/POST 1-ok/Criativo-1---7-Sinais-(Carrossel)_10.png";
+
+// CS15 - Fono Michelle Borges (6 slides)
+import CS15_01 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_01.png";
+import CS15_02 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_02.png";
+import CS15_03 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_03.png";
+import CS15_04 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_04.png";
+import CS15_05 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_05.png";
+import CS15_06 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_06.png";
+
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
@@ -98,6 +118,14 @@ import imgDiaPet3Cuidados from "@/assets/diadepet_petshop_post_20_03_2026_10_00_
 import imgFonoIA from "@/assets/fonomichelleborges_post_09_03_2026_16_00_363849197535789977397.jpg";
 import imgFormiguinhasBolos from "@/assets/formiguinhaspoa_post_23_01_2026_13_17_433816522946663461519.jpg";
 
+// New static images - Fono Michelle Borges
+import imgFonoAntecipacao7 from "@/assets/1._Criativo_Antecipação_l_Faltam_7_Dias_(Feed).png";
+import imgFonoAntecipacao5 from "@/assets/3._Criativo_Antecipação_l_Faltam_5_Dias_(Feed).png";
+import imgFonoAntecipacao4 from "@/assets/4._Criativo_Antecipação_l_Faltam_4_Dias_(Feed).png";
+import imgFonoComunicacao from "@/assets/Criativo-2---Comunicação-Autismo-(Feed).png";
+import imgFonoPsicoterapia from "@/assets/Criativo-6---Psicoterapia-(Feed).png";
+import imgFonoAgenda from "@/assets/Criativo-8---Agenda-Aberta-(Feed).png";
+
 const CS1_SLIDES = [CS01_01, CS01_02, CS01_03, CS01_04, CS01_05, CS01_06];
 const CS2_SLIDES = [CS02_01, CS02_02, CS02_03, CS02_04, CS02_05, CS02_06];
 const CS4_SLIDES = [CS04_01, CS04_02, CS04_03, CS04_04, CS04_05, CS04_06];
@@ -108,6 +136,8 @@ const CS8_SLIDES = [CS08_01, CS08_02, CS08_03, CS08_04, CS08_05, CS08_06, CS08_0
 const CS11_SLIDES = [CS11_01, CS11_02, CS11_03, CS11_04, CS11_05, CS11_06, CS11_07];
 const CS12_SLIDES = [CS12_01, CS12_02, CS12_03, CS12_04, CS12_05];
 const CS13_SLIDES = [CS13_01, CS13_02, CS13_03, CS13_04, CS13_05, CS13_06, CS13_07];
+const CS14_SLIDES = [CS14_01, CS14_02, CS14_03, CS14_04, CS14_05, CS14_06, CS14_07, CS14_08, CS14_09, CS14_10];
+const CS15_SLIDES = [CS15_01, CS15_02, CS15_03, CS15_04, CS15_05, CS15_06];
 
 const staticImages: Record<string, string> = {
   "TW Aviation English": imgTWAviation,
@@ -121,6 +151,12 @@ const staticImages: Record<string, string> = {
   "Dia Pet · 3 cuidados": imgDiaPet3Cuidados,
   "Fono Michelle · IA e CAA": imgFonoIA,
   "Formiguinhas · Bolos": imgFormiguinhasBolos,
+  "Fono · Antecipação 7 dias": imgFonoAntecipacao7,
+  "Fono · Antecipação 5 dias": imgFonoAntecipacao5,
+  "Fono · Antecipação 4 dias": imgFonoAntecipacao4,
+  "Fono · Comunicação Autismo": imgFonoComunicacao,
+  "Fono · Psicoterapia": imgFonoPsicoterapia,
+  "Fono · Agenda Aberta": imgFonoAgenda,
 };
 
 const realSlides: Record<string, string[]> = {
@@ -134,6 +170,8 @@ const realSlides: Record<string, string[]> = {
   CS11: CS11_SLIDES,
   CS12: CS12_SLIDES,
   CS13: CS13_SLIDES,
+  CS14: CS14_SLIDES,
+  CS15: CS15_SLIDES,
 };
 
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -147,6 +185,8 @@ const carousels: Record<string, { slides: number; client: string }> = {
   CS11: { slides: 7, client: "SCH Advogados" },
   CS12: { slides: 5, client: "Voe Winglets" },
   CS13: { slides: 7, client: "Dasle Coberturas" },
+  CS14: { slides: 10, client: "Fono Michelle Borges" },
+  CS15: { slides: 6, client: "Fono Michelle Borges" },
 };
 
 interface GridItem {
@@ -159,24 +199,32 @@ const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS5", client: "POLO Instaladora" },
   { type: "carousel", carouselId: "CS11", client: "SCH Advogados" },
   { type: "static", client: "TW Aviation English" },
-  { type: "static", client: "Fono Michelle Borges" },
+  { type: "static", client: "Fono · Comunicação Autismo" },
   { type: "static", client: "Dia Pet" },
-  { type: "carousel", carouselId: "CS1", client: "Imobiliário" },
+  { type: "carousel", carouselId: "CS14", client: "Fono Michelle Borges" },
   { type: "static", client: "POLO Instaladora" },
   { type: "static", client: "Formiguinhas POA" },
+  { type: "carousel", carouselId: "CS1", client: "Imobiliário" },
   { type: "static", client: "TKA Advogados" },
   { type: "carousel", carouselId: "CS7", client: "TW Aviation English" },
+  { type: "static", client: "Fono · Antecipação 7 dias" },
   { type: "carousel", carouselId: "CS8", client: "Dia Pet" },
   { type: "static", client: "Voe Winglets" },
   { type: "static", client: "POLO · Dia da Mulher" },
+  { type: "carousel", carouselId: "CS15", client: "Fono Michelle Borges" },
   { type: "static", client: "Dia Pet · 3 cuidados" },
   { type: "carousel", carouselId: "CS13", client: "Dasle Coberturas" },
+  { type: "static", client: "Fono · Psicoterapia" },
   { type: "carousel", carouselId: "CS4", client: "Formiguinhas POA" },
+  { type: "static", client: "Fono · Antecipação 5 dias" },
   { type: "carousel", carouselId: "CS6", client: "SCH Advogados" },
+  { type: "static", client: "Fono · Agenda Aberta" },
   { type: "carousel", carouselId: "CS12", client: "Voe Winglets" },
-  { type: "carousel", carouselId: "CS2", client: "Dia Pet" },
   { type: "static", client: "Fono Michelle · IA e CAA" },
+  { type: "carousel", carouselId: "CS2", client: "Dia Pet" },
+  { type: "static", client: "Fono · Antecipação 4 dias" },
   { type: "static", client: "Formiguinhas · Bolos" },
+  { type: "static", client: "Fono Michelle Borges" },
 ];
 
 /** Get all images for a grid item */
