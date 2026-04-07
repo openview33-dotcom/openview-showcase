@@ -87,7 +87,7 @@ const CasesSection = () => {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: i * 0.1 }} className="bg-background rounded-2xl p-8 border border-border hover:border-primary/30 transition-colors">
                 <Quote className="w-8 h-8 text-primary/40 mb-4" />
                 <p className="font-body text-foreground/90 leading-relaxed mb-6 text-sm">"{item.text}"</p>
-                <p className="font-body text-xs tracking-wider uppercase text-muted-foreground">{item.author}</p>
+                {item.author && <p className="font-body text-xs tracking-wider uppercase text-muted-foreground">{item.author}</p>}
               </motion.div>
             ))}
           </motion.div>
