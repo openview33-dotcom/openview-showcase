@@ -197,33 +197,33 @@ interface GridItem {
 
 const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS5", client: "POLO Instaladora" },
+  { type: "carousel", carouselId: "CS14", client: "Fono Michelle · 7 Sinais" },
+  { type: "static", client: "Dia Pet" },
   { type: "carousel", carouselId: "CS11", client: "SCH Advogados" },
   { type: "static", client: "TW Aviation English" },
-  { type: "static", client: "Fono · Comunicação Autismo" },
-  { type: "static", client: "Dia Pet" },
-  { type: "carousel", carouselId: "CS14", client: "Fono Michelle Borges" },
-  { type: "static", client: "POLO Instaladora" },
   { type: "static", client: "Formiguinhas POA" },
   { type: "carousel", carouselId: "CS1", client: "Imobiliário" },
+  { type: "static", client: "Fono · Comunicação Autismo" },
   { type: "static", client: "TKA Advogados" },
   { type: "carousel", carouselId: "CS7", client: "TW Aviation English" },
   { type: "static", client: "Fono · Antecipação 7 dias" },
-  { type: "carousel", carouselId: "CS8", client: "Dia Pet" },
   { type: "static", client: "Voe Winglets" },
+  { type: "carousel", carouselId: "CS8", client: "Dia Pet" },
   { type: "static", client: "POLO · Dia da Mulher" },
-  { type: "carousel", carouselId: "CS15", client: "Fono Michelle Borges" },
-  { type: "static", client: "Dia Pet · 3 cuidados" },
+  { type: "carousel", carouselId: "CS15", client: "Fono Michelle · Atendimentos" },
   { type: "carousel", carouselId: "CS13", client: "Dasle Coberturas" },
-  { type: "static", client: "Fono · Psicoterapia" },
   { type: "carousel", carouselId: "CS4", client: "Formiguinhas POA" },
-  { type: "static", client: "Fono · Antecipação 5 dias" },
+  { type: "static", client: "Fono · Psicoterapia" },
+  { type: "carousel", carouselId: "CS12", client: "Voe Winglets" },
+  { type: "static", client: "Dia Pet · 3 cuidados" },
   { type: "carousel", carouselId: "CS6", client: "SCH Advogados" },
   { type: "static", client: "Fono · Agenda Aberta" },
-  { type: "carousel", carouselId: "CS12", client: "Voe Winglets" },
-  { type: "static", client: "Fono Michelle · IA e CAA" },
   { type: "carousel", carouselId: "CS2", client: "Dia Pet" },
-  { type: "static", client: "Fono · Antecipação 4 dias" },
+  { type: "static", client: "Fono Michelle · IA e CAA" },
   { type: "static", client: "Formiguinhas · Bolos" },
+  { type: "static", client: "Fono · Antecipação 5 dias" },
+  { type: "static", client: "POLO Instaladora" },
+  { type: "static", client: "Fono · Antecipação 4 dias" },
   { type: "static", client: "Fono Michelle Borges" },
 ];
 
@@ -523,6 +523,12 @@ const ContentTab = () => {
                 style={{ height: "auto" }}
                 loading="lazy"
               />
+
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "rgba(0,0,0,0.45)" }}>
+                <div className="absolute bottom-0 left-0 p-3">
+                  <span className="font-body text-[10px] tracking-[0.2em] uppercase text-white/70">{item.client}</span>
+                </div>
+              </div>
 
               {isCarousel && (
                 <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-body font-medium text-primary-foreground bg-primary">
