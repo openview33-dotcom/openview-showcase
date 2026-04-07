@@ -326,40 +326,19 @@ function Lightbox({
   }, [isCarousel, currentSlide, currentImages.length, currentGridIndex]);
 
   const navigate = useCallback((dir: 1 | -1) => {
-    if (tape || isNavigating) return;
+    if (tape) return;
 
     const { gridIdx, slide } = resolveNext(dir);
     const targetImages = getItemImages(gridItems[gridIdx]);
     const targetSrc = targetImages[slide];
 
-    // Preload ahead
+    // Preload ahead in background
     const f1 = (gridIdx + dir + gridItems.length) % gridItems.length;
-    const f2 = (gridIdx + dir * 2 + gridItems.length) % gridItems.length;
     preloadImages(getItemImages(gridItems[f1]));
-    preloadImages(getItemImages(gridItems[f2]));
 
-    const testImg = new Image();
-    testImg.src = targetSrc;
-
-    const startTape = () => {
-      clearTimeout(spinnerTimer.current);
-      setShowSpinner(false);
-      setIsNavigating(false);
-
-      // Phase 1: place images side by side, no transition yet
-      setTape({ nextSrc: targetSrc, dir, phase: "ready", targetGrid: gridIdx, targetSlide: slide });
-    };
-
-    if (testImg.complete) {
-      startTape();
-    } else {
-      setIsNavigating(true);
-      clearTimeout(spinnerTimer.current);
-      spinnerTimer.current = setTimeout(() => setShowSpinner(true), 200);
-      testImg.onload = startTape;
-      testImg.onerror = startTape;
-    }
-  }, [tape, isNavigating, resolveNext]);
+    // Start tape immediately — images are typically preloaded already
+    setTape({ nextSrc: targetSrc, dir, phase: "ready", targetGrid: gridIdx, targetSlide: slide });
+  }, [tape, resolveNext]);
 
   // When tape phase is "ready", trigger the slide on next frame
   useEffect(() => {
