@@ -81,7 +81,7 @@ const HeroSection = () => {
                 Agência de marketing digital em Porto Alegre.
               </p>
               <p className="font-body text-base leading-relaxed" style={{ color: "#666" }}>
-                Conteúdo, performance, audiovisual e branding — tudo para gerar resultado real.
+                Conteúdo, performance, audiovisual e branding: tudo para gerar resultado real.
               </p>
             </motion.div>
 

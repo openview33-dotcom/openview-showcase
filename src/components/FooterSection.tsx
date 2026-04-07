@@ -28,7 +28,7 @@ const FooterSection = () => {
             </a>
             <span className="inline-flex items-center gap-2 font-body text-sm text-white/50">
               <MapPin className="w-4 h-4" />
-              Santana, Porto Alegre — RS
+              Santana, Porto Alegre, RS
             </span>
           </div>
         </div>
