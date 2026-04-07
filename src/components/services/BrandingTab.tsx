@@ -1,9 +1,11 @@
 import tommasiStrip from "@/assets/tommasi-strip.png";
 import docariaStrip from "@/assets/doceria (3).svg";
+import poloStrip from "@/assets/Polo-marca.svg";
 
 const strips = [
   { src: tommasiStrip, alt: "Tommasi" },
   { src: docariaStrip, alt: "Doceria" },
+  { src: poloStrip, alt: "Polo" },
 ];
 
 const BrandingTab = () => {
