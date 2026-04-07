@@ -2,11 +2,13 @@ import { useState } from "react";
 import tommasiStrip from "@/assets/tommasi-strip.png";
 import poloStrip from "@/assets/Polo-marca.png";
 import formiguinhasStrip from "@/assets/formiguinhas-marca.png";
+import beabaStrip from "@/assets/Beaba-marca.png";
 
 const strips = [
   { src: tommasiStrip, alt: "Tommasi", duration: "40s", anim: "s0", label: "Tommasi · Consulenza Internazionale" },
   { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s1", label: "Formiguinhas POA" },
   { src: poloStrip, alt: "Polo", duration: "35s", anim: "s2", label: "Polo Instaladora" },
+  { src: beabaStrip, alt: "BeABA", duration: "50s", anim: "s3", label: "BeABA · Intervenção Comportamental" },
 ];
 
 const BrandingTab = () => {
