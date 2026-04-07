@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useEffect, useRef, useMemo } from "react";
-import { ChevronLeft, ChevronRight, X, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 // CS01 - Imobiliário (6 slides, PNG)
 import CS01_01 from "@/assets/CS01.01.png";
