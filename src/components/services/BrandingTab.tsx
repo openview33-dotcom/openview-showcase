@@ -1,5 +1,5 @@
 import tommasiStrip from "@/assets/tommasi-strip.png";
-import docariaStrip from "@/assets/doceria.svg";
+import docariaStrip from "@/assets/doceria (3).svg";
 
 const strips = [
   { src: tommasiStrip, alt: "Tommasi" },
