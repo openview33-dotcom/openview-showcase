@@ -1,13 +1,12 @@
+```tsx
 import tommasiStrip from "@/assets/tommasi-strip.png";
-import docariaStrip from "@/assets/doceria.png";
 import poloStrip from "@/assets/Polo-marca.png";
 import formiguinhasStrip from "@/assets/formiguinhas-marca.png";
 
 const strips = [
   { src: tommasiStrip, alt: "Tommasi", duration: "40s" },
-  { src: docariaStrip, alt: "Doceria", duration: "45s" },
   { src: poloStrip, alt: "Polo", duration: "35s" },
-  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "50s" },
+  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s" },
 ];
 
 const BrandingTab = () => {
@@ -37,10 +36,10 @@ const BrandingTab = () => {
         @keyframes scroll0 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes scroll1 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes scroll2 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @keyframes scroll3 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
     </div>
   );
 };
 
 export default BrandingTab;
+```
