@@ -60,13 +60,11 @@ const BrandingTab = () => {
         </div>
       ))}
 
-      <div style={{ width: "100%", height: 300, backgroundColor: "#1a1a1a" }} />
-      <div style={{ width: "100%", height: 300, backgroundColor: "#1a1a1a" }} />
-
       <style>{`
         @keyframes s0 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes s1 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes s2 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes s3 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
     </div>
   );
