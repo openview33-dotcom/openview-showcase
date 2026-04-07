@@ -35,6 +35,16 @@ const verticalVideos: VideoItem[] = [
   { id: "V5", url: "https://youtube.com/shorts/KI8IT1CGKNI" },
   { id: "V6", url: "https://youtube.com/shorts/AOI0NhG5Qb0" },
   { id: "V7", url: "https://youtube.com/shorts/tnK1iUAwpV0" },
+  { id: "V8", url: "https://youtube.com/shorts/391KsDx-QKk" },
+  { id: "V9", url: "https://youtube.com/shorts/YN3YznLuxpE" },
+  { id: "V10", url: "https://youtube.com/shorts/ylYhuW5To8Q" },
+  { id: "V11", url: "https://youtube.com/shorts/WyGPvuekkM8" },
+  { id: "V12", url: "https://youtube.com/shorts/u2NEwoAmtkc" },
+  { id: "V13", url: "https://youtube.com/shorts/Ek3bDiCEvEk" },
+  { id: "V14", url: "https://youtube.com/shorts/ZXPDQuXPj60" },
+  { id: "V15", url: "https://youtube.com/shorts/LS-R2XW_23E" },
+  { id: "V16", url: "https://youtube.com/shorts/VSUj9vSt2g4" },
+  { id: "V17", url: "https://youtube.com/shorts/GmFpgQ9ND5U" },
 ];
 
 
@@ -74,7 +84,7 @@ const AudiovisualTab = () => {
       {/* Vertical videos / Shorts */}
       <div>
         <p className="font-body text-xs tracking-[0.25em] uppercase mb-6" style={{ color: "hsl(160 60% 56%)" }}>
-          ◆ Shorts / Verticais
+          ◆ Vídeos verticais
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
           {verticalVideos.map((v, i) => (
