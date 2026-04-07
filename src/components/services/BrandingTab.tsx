@@ -4,9 +4,9 @@ import poloStrip from "@/assets/Polo-marca.png";
 import formiguinhasStrip from "@/assets/formiguinhas-marca.png";
 
 const strips = [
-  { src: tommasiStrip, alt: "Tommasi", duration: "40s", anim: "s0" },
-  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s1" },
-  { src: poloStrip, alt: "Polo", duration: "35s", anim: "s2" },
+  { src: tommasiStrip, alt: "Tommasi", duration: "40s", anim: "s0", label: "Tommasi · Consulenza Internazionale" },
+  { src: formiguinhasStrip, alt: "Formiguinhas", duration: "45s", anim: "s1", label: "Formiguinhas POA" },
+  { src: poloStrip, alt: "Polo", duration: "35s", anim: "s2", label: "Polo Instaladora" },
 ];
 
 const BrandingTab = () => {
