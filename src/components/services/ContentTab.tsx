@@ -499,7 +499,7 @@ const ContentTab = () => {
 
   return (
     <>
-      <div style={{ columns: 3, columnGap: 8 }}>
+      <div className="group/grid" style={{ columns: 3, columnGap: 8 }}>
         {gridItems.map((item, i) => {
           const images = getItemImages(item);
           const coverImg = images[0];
@@ -512,23 +512,17 @@ const ContentTab = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
-              className="relative rounded-xl cursor-pointer group"
+              className="relative rounded-xl cursor-pointer group/item transition-all duration-350"
               style={{ breakInside: "avoid", marginBottom: 8 }}
               onClick={() => setLightbox({ gridIndex: i, slideIndex: 0 })}
             >
               <img
                 src={coverImg}
                 alt={item.client}
-                className="w-full rounded-xl transition-transform duration-500 group-hover:scale-[1.02]"
+                className="w-full rounded-xl transition-all duration-350 group-hover/grid:brightness-50 group-hover/grid:scale-[0.98] group-hover/item:brightness-100 group-hover/item:scale-[1.06]"
                 style={{ height: "auto" }}
                 loading="lazy"
               />
-
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "rgba(0,0,0,0.45)" }}>
-                <div className="absolute bottom-0 left-0 p-3">
-                  <span className="font-body text-[10px] tracking-[0.2em] uppercase text-white/70">{item.client}</span>
-                </div>
-              </div>
 
               {isCarousel && (
                 <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-body font-medium text-primary-foreground bg-primary">
