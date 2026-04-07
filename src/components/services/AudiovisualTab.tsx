@@ -24,6 +24,7 @@ const horizontalVideos: VideoItem[] = [
   { id: "H5", url: "https://youtu.be/LXhCkj86GnE" },
   { id: "H6", url: "https://youtu.be/OQQMcp_48GU" },
   { id: "H7", url: "https://youtu.be/f3y-VLJyl6c" },
+  { id: "H8", url: "https://youtu.be/AhNlfGYkcY4" },
 ];
 
 const verticalVideos: VideoItem[] = [
