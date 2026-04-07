@@ -267,9 +267,6 @@ function Lightbox({
 }) {
   const [currentGridIndex, setCurrentGridIndex] = useState(gridIndex);
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false);
-  const spinnerTimer = useRef<ReturnType<typeof setTimeout>>();
 
   // Tape state
   const [tape, setTape] = useState<{ nextSrc: string; dir: 1 | -1; phase: "ready" | "sliding"; targetGrid: number; targetSlide: number } | null>(null);
