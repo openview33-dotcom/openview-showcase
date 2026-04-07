@@ -20,8 +20,6 @@ interface VideoItem {
 }
 
 const horizontalVideos: VideoItem[] = [
-  { id: "H1", url: null, label: "Experiência do Cliente — Dia de Pet" },
-  { id: "H2", url: null, label: "EP 01 – Nutrição Pet" },
   { id: "H3", url: "https://youtu.be/i5LiMQ13qvs" },
   { id: "H4", url: "https://youtu.be/QGOij7iMpmQ" },
   { id: "H5", url: "https://youtu.be/LXhCkj86GnE" },
@@ -30,34 +28,15 @@ const horizontalVideos: VideoItem[] = [
 ];
 
 const verticalVideos: VideoItem[] = [
-  { id: "V1",  url: "https://youtube.com/shorts/rzJNPJcOCTs" },
-  { id: "V2",  url: "https://youtube.com/shorts/IFCVsyyH6WQ" },
-  { id: "V3",  url: "https://youtube.com/shorts/NxxwapZoJI0" },
-  { id: "V4",  url: "https://youtube.com/shorts/TooWjeRW9rw" },
-  { id: "V5",  url: "https://youtube.com/shorts/KI8IT1CGKNI" },
-  { id: "V6",  url: "https://youtube.com/shorts/AOI0NhG5Qb0" },
-  { id: "V7",  url: "https://youtube.com/shorts/tnK1iUAwpV0" },
-  { id: "V8",  url: null },
-  { id: "V9",  url: null },
-  { id: "V10", url: null },
-  { id: "V11", url: null },
-  { id: "V12", url: null },
-  { id: "V13", url: null },
-  { id: "V14", url: null },
-  { id: "V15", url: null },
-  { id: "V16", url: null },
-  { id: "V17", url: null },
+  { id: "V1", url: "https://youtube.com/shorts/rzJNPJcOCTs" },
+  { id: "V2", url: "https://youtube.com/shorts/IFCVsyyH6WQ" },
+  { id: "V3", url: "https://youtube.com/shorts/NxxwapZoJI0" },
+  { id: "V4", url: "https://youtube.com/shorts/TooWjeRW9rw" },
+  { id: "V5", url: "https://youtube.com/shorts/KI8IT1CGKNI" },
+  { id: "V6", url: "https://youtube.com/shorts/AOI0NhG5Qb0" },
+  { id: "V7", url: "https://youtube.com/shorts/tnK1iUAwpV0" },
 ];
 
-/* ── Placeholder ── */
-function VideoPlaceholder() {
-  return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-3" style={{ backgroundColor: "#1a1a1a" }}>
-      <Play className="w-10 h-10 text-white" style={{ opacity: 0.5 }} />
-      <span className="font-body text-sm text-white" style={{ opacity: 0.5 }}>Em breve</span>
-    </div>
-  );
-}
 
 /* ── Component ── */
 const AudiovisualTab = () => {
