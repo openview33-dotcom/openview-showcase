@@ -119,10 +119,10 @@ import imgFonoIA from "@/assets/fonomichelleborges_post_09_03_2026_16_00_3638491
 import imgFormiguinhasBolos from "@/assets/formiguinhaspoa_post_23_01_2026_13_17_433816522946663461519.jpg";
 
 // New static images - Fono Michelle Borges
-import imgFonoAntecipacao7 from "@/assets/1._Criativo_Antecipação_l_Faltam_7_Dias_(Feed).png";
-import imgFonoAntecipacao5 from "@/assets/3._Criativo_Antecipação_l_Faltam_5_Dias_(Feed).png";
-import imgFonoAntecipacao4 from "@/assets/4._Criativo_Antecipação_l_Faltam_4_Dias_(Feed).png";
-import imgFonoComunicacao from "@/assets/Criativo-2---Comunicação-Autismo-(Feed).png";
+import imgFonoAntecipacao7 from "@/assets/1._Criativo_Antecipacao_l_Faltam_7_Dias_(Feed).png";
+import imgFonoAntecipacao5 from "@/assets/3._Criativo_Antecipacao_l_Faltam_5_Dias_(Feed).png";
+import imgFonoAntecipacao4 from "@/assets/4._Criativo_Antecipacao_l_Faltam_4_Dias_(Feed).png";
+import imgFonoComunicacao from "@/assets/Criativo-2---Comunicacao-Autismo-(Feed).png";
 import imgFonoPsicoterapia from "@/assets/Criativo-6---Psicoterapia-(Feed).png";
 import imgFonoAgenda from "@/assets/Criativo-8---Agenda-Aberta-(Feed).png";
 
