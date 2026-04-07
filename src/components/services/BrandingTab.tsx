@@ -31,8 +31,19 @@ const BrandingTab = () => {
               opacity: hovered[i] ? 0 : 1,
               transition: "opacity 0.4s ease",
               pointerEvents: "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
+          >
+            <span style={{ fontSize: 13, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
+              {strip.label}
+            </span>
+            <span style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 6 }}>
+              passe o mouse para ver
+            </span>
+          </div>
           <div
             style={{
               display: "flex",
