@@ -343,12 +343,11 @@ function Lightbox({
   // When tape phase is "ready", trigger the slide on next frame
   useEffect(() => {
     if (!tape || tape.phase !== "ready") return;
-    // Force layout read, then start sliding
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setTape((t) => t ? { ...t, phase: "sliding" } : null);
-      });
+    // Single rAF — force one layout pass then slide
+    const id = requestAnimationFrame(() => {
+      setTape((t) => t ? { ...t, phase: "sliding" } : null);
     });
+    return () => cancelAnimationFrame(id);
   }, [tape]);
 
  const committed = useRef(false);
