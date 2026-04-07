@@ -305,7 +305,7 @@ function Lightbox({
     preloadImages([getItemImages(gridItems[nextIdx])[0]]);
   }, [currentGridIndex, currentImages]);
 
-  useEffect(() => () => clearTimeout(spinnerTimer.current), []);
+  
 
   const resolveNext = useCallback((dir: 1 | -1): { gridIdx: number; slide: number } => {
     if (dir === 1) {
@@ -454,11 +454,6 @@ useEffect(() => {
       </div>
 
 
-      {showSpinner && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-          <Loader2 className="w-8 h-8 animate-spin" style={{ color: "hsl(265 50% 63%)" }} />
-        </div>
-      )}
 
       <div className="absolute bottom-6 text-white/50 text-sm font-body flex gap-4">
         <span>{currentItem.client}</span>
