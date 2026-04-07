@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 
 /* ── Helpers ── */
 function toEmbedUrl(url: string): string {
@@ -15,7 +14,7 @@ function toEmbedUrl(url: string): string {
 /* ── Data ── */
 interface VideoItem {
   id: string;
-  url: string | null;
+  url: string;
   label?: string;
 }
 
@@ -58,18 +57,14 @@ const AudiovisualTab = () => {
               className="rounded-xl overflow-hidden"
               style={{ aspectRatio: "16/9" }}
             >
-              {v.url ? (
-                <iframe
-                  src={toEmbedUrl(v.url)}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={v.label ?? v.id}
-                  loading="lazy"
-                />
-              ) : (
-                <VideoPlaceholder />
-              )}
+              <iframe
+                src={toEmbedUrl(v.url)}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={v.label ?? v.id}
+                loading="lazy"
+              />
             </motion.div>
           ))}
         </div>
@@ -91,18 +86,14 @@ const AudiovisualTab = () => {
               className="w-full max-w-[320px] rounded-xl overflow-hidden"
               style={{ aspectRatio: "9/16" }}
             >
-              {v.url ? (
-                <iframe
-                  src={toEmbedUrl(v.url)}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={v.id}
-                  loading="lazy"
-                />
-              ) : (
-                <VideoPlaceholder />
-              )}
+              <iframe
+                src={toEmbedUrl(v.url)}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={v.id}
+                loading="lazy"
+              />
             </motion.div>
           ))}
         </div>
