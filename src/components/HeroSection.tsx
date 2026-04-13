@@ -77,8 +77,8 @@ const HeroSection = () => {
             </motion.h1>
 
             <motion.div {...fade(0.42)} className="mb-8 max-w-lg">
-              <p className="font-body text-base font-medium text-foreground mb-1">
-                Agência de marketing digital em Porto Alegre.
+              <p className="font-body text-base font-medium text-foreground mb-1 text-left">
+                Agência de marketing digital que gera resultados visíveis no seu negócio.
               </p>
               <p className="font-body text-base leading-relaxed" style={{ color: "#666" }}>
                 Conteúdo, performance, audiovisual e branding: tudo para gerar resultado real.
