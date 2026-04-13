@@ -81,7 +81,7 @@ const HeroSection = () => {
                 Agência de marketing digital que gera resultados visíveis no seu negócio.
               </p>
               <p className="font-body text-base leading-relaxed" style={{ color: "#666" }}>
-                Conteúdo, performance, audiovisual e branding: tudo para gerar resultado real.
+                Conteúdo, tráfego pago, audiovisual e branding.
               </p>
             </motion.div>
 
