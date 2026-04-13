@@ -58,8 +58,8 @@ const PositioningSection = () => {
           O resultado, <span className="text-yellow">não.</span>
         </motion.h3>
 
-        <motion.p {...fade(0.55)} className="font-body text-base text-white/50 max-w-[480px] mx-auto leading-relaxed mb-16 font-light">
-          Marketing sob medida para qualquer negócio: do planejamento à execução, com estratégia e criatividade.
+        <motion.p {...fade(0.55)} className="font-body text-base text-white/50 max-w-[480px] mx-auto leading-relaxed mb-16 font-extralight">
+          Marketing sob medida para o seu negócio: do planejamento à execução, com estratégia, autenticidade e criatividade.
         </motion.p>
       </div>
 

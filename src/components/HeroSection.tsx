@@ -96,7 +96,7 @@ const HeroSection = () => {
                 onClick={() => scrollTo("servicos")}
                 className="px-8 py-3.5 border border-muted-foreground/30 text-foreground font-body text-sm tracking-wider uppercase rounded-full hover:border-foreground transition-colors"
               >
-                Serviços
+                Portfólio
               </button>
             </motion.div>
           </div>
