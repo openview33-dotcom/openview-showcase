@@ -9,7 +9,7 @@ const EssenceSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-tight text-white"
+          className="font-display text-3xl md:text-5xl lg:text-6xl font-light leading-tight text-white/80"
         >
           Mostre a sua essência, destaque-se dos concorrentes, atraia os clientes certos.{" "}
           <span className="italic text-primary font-normal">E cobre mais por isso.</span>
