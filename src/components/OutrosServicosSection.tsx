@@ -11,11 +11,12 @@ const tabs = [
 
 const floatVariants = [
   { y: [0, -8, 0], duration: 5.0 },
-  { y: [0, 12, 0], duration: 4.2 },
-  { y: [0, -14, 0], duration: 3.8 },
-  { y: [0, -10, 0], duration: 4.6 },
-  { y: [0, 16, 0], duration: 3.4 },
-  { y: [0, -12, 0], duration: 4.8 },
+  { y: [0, 10, 0], duration: 4.2 },
+  { y: [0, -12, 0], duration: 3.8 },
+  { y: [0, -6, 0], duration: 4.6 },
+  { y: [0, 14, 0], duration: 3.4 },
+  { y: [0, -10, 0], duration: 4.8 },
+  { y: [0, 8, 0], duration: 5.2 },
 ];
 
 function TrafegoVisual() {
