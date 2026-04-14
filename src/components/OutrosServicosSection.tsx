@@ -59,23 +59,23 @@ const chatMsgs = [
 
 function TrafegoVisual() {
   return (
-    <div className="relative w-full" style={{ height: 300 }}>
+    <div className="relative w-full" style={{ height: 380 }}>
       {platforms.map((p, i) => (
         <motion.div
           key={p.name}
-          initial={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, scale: 0.4 }}
           animate={{
-            opacity: 1,
+            opacity: p.opacity,
             scale: 1,
             y: floatVariants[i].y,
           }}
           transition={{
-            opacity: { duration: 0.5, delay: i * 0.1 },
-            scale: { duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 180 },
+            opacity: { duration: 0.6, delay: i * 0.1 },
+            scale: { duration: 0.6, delay: i * 0.1, type: "spring", stiffness: 160 },
             y: { duration: floatVariants[i].duration, repeat: Infinity, ease: "easeInOut" },
           }}
           className="absolute flex flex-col items-center gap-2 cursor-default"
-          style={{ top: p.top, left: p.left }}
+          style={{ top: p.top, left: p.left, filter: p.blur ? `blur(${p.blur}px)` : undefined }}
         >
           <div
             className="rounded-2xl flex items-center justify-center"
