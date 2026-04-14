@@ -81,7 +81,7 @@ function TrafegoVisual() {
             left: icon.left,
             zIndex: icon.zIndex,
             borderRadius: "50%",
-            background: "#232323",
+            background: "radial-gradient(circle at 30% 30%, rgba(210, 200, 185, 0.18), rgba(160, 155, 145, 0.10) 50%, rgba(120, 115, 108, 0.06) 100%)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
