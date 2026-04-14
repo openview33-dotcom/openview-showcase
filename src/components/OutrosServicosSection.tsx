@@ -11,31 +11,37 @@ const tabs = [
 
 const floatVariants = [
   { y: [0, -8, 0], duration: 5.0 },
-  { y: [0, 12, 0], duration: 4.2 },
-  { y: [0, -14, 0], duration: 3.8 },
-  { y: [0, -10, 0], duration: 4.6 },
-  { y: [0, 16, 0], duration: 3.4 },
-  { y: [0, -12, 0], duration: 4.8 },
+  { y: [0, 10, 0], duration: 4.2 },
+  { y: [0, -12, 0], duration: 3.8 },
+  { y: [0, -6, 0], duration: 4.6 },
+  { y: [0, 14, 0], duration: 3.4 },
+  { y: [0, -10, 0], duration: 4.8 },
+  { y: [0, 8, 0], duration: 5.2 },
 ];
 
 function TrafegoVisual() {
   const icons = [
-    // Instagram — topo esquerdo (grande)
-    { svg: <svg width="70" height="70" viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stopColor="#fdf497"/><stop offset="45%" stopColor="#fd5949"/><stop offset="60%" stopColor="#d6249f"/><stop offset="90%" stopColor="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig)"/><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="17" cy="7" r="1.2" fill="white"/></svg>, size: 150, top: 0, left: 20, zIndex: 1 },
-    // Google Ads — topo direito (grande)
-    { svg: <svg width="60" height="60" viewBox="0 0 256 256"><path d="M5.7 166.9l66.4-115c5.4-9.3 17.2-12.5 26.5-7.1l0 0l66.4 115c5.4 9.3 2.2 21.2-7.1 26.5c-3 1.7-6.4 2.7-9.7 2.7H22.5c-10.7 0-19.4-8.7-19.4-19.4c0-3.3.9-6.6 2.6-9.6z" fill="#FBBC04"/><path d="M182.6 256c-21.4 0-38.8-17.3-38.8-38.8c0-21.4 17.3-38.8 38.8-38.8c21.4 0 38.8 17.3 38.8 38.8c0 21.4-17.4 38.8-38.8 38.8z" fill="#34A853"/><path d="M182.6 178.5l-66.4-115c-5.4-9.3-2.2-21.2 7.1-26.5c9.3-5.4 21.2-2.2 26.5 7.1l66.4 115c5.4 9.3 2.2 21.2-7.1 26.5c-9.3 5.4-21.1 2.2-26.5-7.1z" fill="#4285F4"/></svg>, size: 140, top: 10, left: 230, zIndex: 1 },
-    // Facebook — centro esquerdo
-    { svg: <svg width="50" height="50" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>, size: 110, top: 140, left: 0, zIndex: 2 },
-    // YouTube — centro direito
-    { svg: <svg width="40" height="28" viewBox="0 0 24 17"><path d="M23.495 2.91A3.01 3.01 0 0021.38.78C19.505.25 12 .25 12 .25S4.495.25 2.62.78A3.01 3.01 0 00.505 2.91 31.6 31.6 0 000 8.5a31.6 31.6 0 00.505 5.59 3.01 3.01 0 002.115 2.13C4.495 16.75 12 16.75 12 16.75s7.505 0 9.38-.53a3.01 3.01 0 002.115-2.13A31.6 31.6 0 0024 8.5a31.6 31.6 0 00-.505-5.59zM9.545 12.02V4.98L15.818 8.5l-6.273 3.52z" fill="#FF0000"/></svg>, size: 90, top: 150, left: 165, zIndex: 2 },
-    // LinkedIn — baixo esquerdo
-    { svg: <svg width="36" height="36" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2"/></svg>, size: 80, top: 240, left: 80, zIndex: 3 },
-    // TikTok — baixo direito
-    { svg: <svg width="30" height="30" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.17a8.16 8.16 0 004.77 1.52V7.25a4.85 4.85 0 01-1-.56z" fill="#111"/></svg>, size: 65, top: 235, left: 260, zIndex: 3 },
+    // Instagram — grande, topo-esquerda
+    { svg: <svg width="65" height="65" viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stopColor="#fdf497"/><stop offset="45%" stopColor="#fd5949"/><stop offset="60%" stopColor="#d6249f"/><stop offset="90%" stopColor="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig)"/><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="17" cy="7" r="1.2" fill="white"/></svg>, size: 150, top: 5, left: 40, zIndex: 2 },
+    // Google Ads — grande, topo-direita
+    { svg: <svg width="55" height="55" viewBox="0 0 256 256"><path d="M5.7 166.9l66.4-115c5.4-9.3 17.2-12.5 26.5-7.1l0 0l66.4 115c5.4 9.3 2.2 21.2-7.1 26.5c-3 1.7-6.4 2.7-9.7 2.7H22.5c-10.7 0-19.4-8.7-19.4-19.4c0-3.3.9-6.6 2.6-9.6z" fill="#FBBC04"/><path d="M182.6 256c-21.4 0-38.8-17.3-38.8-38.8c0-21.4 17.3-38.8 38.8-38.8c21.4 0 38.8 17.3 38.8 38.8c0 21.4-17.4 38.8-38.8 38.8z" fill="#34A853"/><path d="M182.6 178.5l-66.4-115c-5.4-9.3-2.2-21.2 7.1-26.5c9.3-5.4 21.2-2.2 26.5 7.1l66.4 115c5.4 9.3 2.2 21.2-7.1 26.5c-9.3 5.4-21.1 2.2-26.5-7.1z" fill="#4285F4"/></svg>, size: 130, top: 0, left: 230, zIndex: 2 },
+    // LinkedIn — médio, esquerda-meio
+    { svg: <svg width="32" height="32" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2"/></svg>, size: 85, top: 130, left: 0, zIndex: 1 },
+    // YouTube — médio, centro
+    { svg: <svg width="36" height="25" viewBox="0 0 24 17"><path d="M23.495 2.91A3.01 3.01 0 0021.38.78C19.505.25 12 .25 12 .25S4.495.25 2.62.78A3.01 3.01 0 00.505 2.91 31.6 31.6 0 000 8.5a31.6 31.6 0 00.505 5.59 3.01 3.01 0 002.115 2.13C4.495 16.75 12 16.75 12 16.75s7.505 0 9.38-.53a3.01 3.01 0 002.115-2.13A31.6 31.6 0 0024 8.5a31.6 31.6 0 00-.505-5.59zM9.545 12.02V4.98L15.818 8.5l-6.273 3.52z" fill="#FF0000"/></svg>, size: 90, top: 160, left: 120, zIndex: 1 },
+    // Meta — grande, direita-meio
+    { svg: <svg width="50" height="30" viewBox="0 0 100 60" fill="#0668E1"><path d="M15.6 5C9.4 5 4.8 11.2 2.4 17.6.8 22 0 27 0 30.6c0 7.2 3 14.4 9.4 14.4 3.6 0 6.2-2.2 9.4-7.4l5.6-9.2 5.6 9.2c3.2 5.2 5.8 7.4 9.4 7.4 6.4 0 9.4-7.2 9.4-14.4 0-3.6-.8-8.6-2.4-13C44.2 11.2 39.6 5 33.4 5c-4.8 0-8 3-11.8 8.6L16.4 22l-5.2-8.4C7.4 8 4.6 5 15.6 5zm0 7c2.4 0 4.6 2.4 7.2 6.8L28 27.4l-5.2 8.4c-3.2 5.2-5 6.6-7.4 6.6-3.4 0-5.8-4.8-5.8-11.8 0-3.2.6-7.2 1.8-10.6C13 15.4 14 12 15.6 12zm17.8 0c1.6 0 2.6 3.4 4.2 8 1.2 3.4 1.8 7.4 1.8 10.6 0 7-2.4 11.8-5.8 11.8-2.4 0-4.2-1.4-7.4-6.6L21 27.4l5.2-8.6C29.4 14.4 31 12 33.4 12z"/></svg>, size: 120, top: 110, left: 220, zIndex: 2 },
+    // TikTok — pequeno, baixo-esquerda
+    { svg: <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.17a8.16 8.16 0 004.77 1.52V7.25a4.85 4.85 0 01-1-.56z" fill="#999"/></svg>, size: 60, top: 250, left: 40, zIndex: 1 },
+    // Pinterest — pequeno, direita-baixo
+    { svg: <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill="#E60023"/></svg>, size: 50, top: 200, left: 345, zIndex: 1 },
   ];
 
+  // Gradient IDs unique per icon to avoid conflicts
+  const gradientIds = icons.map((_, i) => `disc-grad-${i}`);
+
   return (
-    <div className="relative" style={{ height: 340, width: "100%" }}>
+    <div className="relative" style={{ height: 320, width: "100%" }}>
       {icons.map((icon, i) => (
         <motion.div
           key={i}
@@ -59,15 +65,24 @@ function TrafegoVisual() {
             left: icon.left,
             zIndex: icon.zIndex,
             borderRadius: "50%",
-            background: "rgba(255,255,255,0.85)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 8px 30px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
-            border: "1px solid rgba(0,0,0,0.06)",
           }}
         >
-          {icon.svg}
+          {/* Circle with gradient background */}
+          <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id={gradientIds[i]} cx="40%" cy="35%" r="65%">
+                <stop offset="0%" stopColor="rgba(220,218,212,0.6)" />
+                <stop offset="100%" stopColor="rgba(200,196,188,0.35)" />
+              </radialGradient>
+            </defs>
+            <circle cx="50" cy="50" r="50" fill={`url(#${gradientIds[i]})`} />
+          </svg>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {icon.svg}
+          </div>
         </motion.div>
       ))}
     </div>
