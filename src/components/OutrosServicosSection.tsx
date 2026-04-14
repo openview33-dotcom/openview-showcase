@@ -104,53 +104,8 @@ const chatMsgs = [
   { side: "r", text: "Temos horários amanhã às 10h, 14h ou 16h. Qual prefere?" },
 ];
 
-function TrafegoVisual() {
-  const icons = [
-    { svg: <svg width="70" height="70" viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stopColor="#fdf497"/><stop offset="45%" stopColor="#fd5949"/><stop offset="60%" stopColor="#d6249f"/><stop offset="90%" stopColor="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig)"/><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="17" cy="7" r="1.2" fill="white"/></svg>, size: 160, top: 0, left: 60, zIndex: 1 },
-    { svg: <svg width="65" height="65" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>, size: 150, top: 30, left: 220, zIndex: 1 },
-    { svg: <svg width="44" height="44" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2"/></svg>, size: 100, top: 140, left: 0, zIndex: 2 },
-    { svg: <svg width="36" height="26" viewBox="0 0 24 17"><path d="M23.495 2.91A3.01 3.01 0 0021.38.78C19.505.25 12 .25 12 .25S4.495.25 2.62.78A3.01 3.01 0 00.505 2.91 31.6 31.6 0 000 8.5a31.6 31.6 0 00.505 5.59 3.01 3.01 0 002.115 2.13C4.495 16.75 12 16.75 12 16.75s7.505 0 9.38-.53a3.01 3.01 0 002.115-2.13A31.6 31.6 0 0024 8.5a31.6 31.6 0 00-.505-5.59zM9.545 12.02V4.98L15.818 8.5l-6.273 3.52z" fill="#FF0000"/></svg>, size: 80, top: 160, left: 150, zIndex: 2 },
-    { svg: <svg width="30" height="30" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.17a8.16 8.16 0 004.77 1.52V7.25a4.85 4.85 0 01-1-.56z" fill="white"/></svg>, size: 60, top: 220, left: 60, zIndex: 3 },
-  ];
 
-  return (
-    <div className="relative" style={{ height: 320, width: "100%" }}>
-      {icons.map((icon, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            y: floatVariants[i].y,
-          }}
-          transition={{
-            opacity: { duration: 0.5, delay: i * 0.1 },
-            scale: { duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 180 },
-            y: { duration: floatVariants[i].duration, repeat: Infinity, ease: "easeInOut" },
-          }}
-          whileHover={{ scale: 1.08 }}
-          style={{
-            position: "absolute",
-            width: icon.size,
-            height: icon.size,
-            top: icon.top,
-            left: icon.left,
-            zIndex: icon.zIndex,
-            borderRadius: "50%",
-            background: "#232323",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 12px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06)",
-          }}
-        >
-          {icon.svg}
-        </motion.div>
-      ))}
-    </div>
-  );
-}
+
 
 function SeoVisual() {
   return (
