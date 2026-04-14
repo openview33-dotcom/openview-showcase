@@ -59,13 +59,13 @@ const chatMsgs = [
 
 function TrafegoVisual() {
   return (
-    <div className="relative w-full" style={{ height: 380 }}>
+    <div className="relative w-full" style={{ height: 420 }}>
       {platforms.map((p, i) => (
         <motion.div
           key={p.name}
           initial={{ opacity: 0, scale: 0.4 }}
           animate={{
-            opacity: p.opacity,
+            opacity: 1,
             scale: 1,
             y: floatVariants[i].y,
           }}
@@ -75,18 +75,28 @@ function TrafegoVisual() {
             y: { duration: floatVariants[i].duration, repeat: Infinity, ease: "easeInOut" },
           }}
           className="absolute flex flex-col items-center gap-2 cursor-default"
-          style={{ top: p.top, left: p.left, filter: p.blur ? `blur(${p.blur}px)` : undefined }}
+          style={{ top: p.top, left: p.left }}
         >
           <div
-            className="rounded-2xl flex items-center justify-center"
+            className="rounded-full flex items-center justify-center"
             style={{
-              width: p.size,
-              height: p.size,
-              background: p.bg,
-              border: p.bg === "#ffffff" ? "1px solid rgba(0,0,0,0.08)" : "none",
+              width: p.discSize,
+              height: p.discSize,
+              background: "rgba(30, 30, 35, 0.85)",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
-            {p.svg}
+            <div
+              className="rounded-full flex items-center justify-center"
+              style={{
+                width: p.iconSize + 16,
+                height: p.iconSize + 16,
+                background: p.bg,
+                border: p.bg === "#ffffff" ? "1px solid rgba(0,0,0,0.08)" : "none",
+              }}
+            >
+              {p.svg}
+            </div>
           </div>
           <span className="font-body text-[10px] text-foreground/50 tracking-wide font-medium">{p.name}</span>
         </motion.div>
