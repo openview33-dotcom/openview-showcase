@@ -45,6 +45,13 @@ const verticalVideos: VideoItem[] = [
   { id: "V15", url: "https://youtube.com/shorts/LS-R2XW_23E" },
   { id: "V16", url: "https://youtube.com/shorts/VSUj9vSt2g4" },
   { id: "V17", url: "https://youtube.com/shorts/GmFpgQ9ND5U" },
+  { id: "V18", url: "https://youtube.com/shorts/wLVA8UufPN0" },
+  { id: "V19", url: "https://youtube.com/shorts/YqHk5HF41Lk" },
+  { id: "V20", url: "https://youtube.com/shorts/KLElLlFJ8r4" },
+  { id: "V21", url: "https://youtube.com/shorts/v-tyIVH-fEI" },
+  { id: "V22", url: "https://youtube.com/shorts/WzudKtzzYtI" },
+  { id: "V23", url: "https://youtube.com/shorts/vsvzvTmYTXs" },
+  { id: "V24", url: "https://youtube.com/shorts/96eGa9Wxf08" },
 ];
 
 
