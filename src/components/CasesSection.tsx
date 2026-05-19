@@ -4,7 +4,7 @@ import { Play, Quote } from "lucide-react";
 
 const videoTestimonials = [
   { name: "Márcio", videoId: "fpoIZ1X0gFw", thumb: `https://img.youtube.com/vi/fpoIZ1X0gFw/maxresdefault.jpg` },
-  { name: "Michelle", videoId: "TrAYtc9iDTo", thumb: `https://img.youtube.com/vi/TrAYtc9iDTo/maxresdefault.jpg` },
+  { name: "Michelle", videoId: "hlS6DsWd0qU", thumb: `https://img.youtube.com/vi/hlS6DsWd0qU/maxresdefault.jpg` },
   { name: "Dr. Arthur", videoId: "BaHM4EtbLDY", thumb: `https://img.youtube.com/vi/BaHM4EtbLDY/maxresdefault.jpg` },
 ];
 
