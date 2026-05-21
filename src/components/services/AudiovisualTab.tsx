@@ -28,35 +28,35 @@ const horizontalVideos: VideoItem[] = [
 ];
 
 const verticalVideos: VideoItem[] = [
-  { id: "V1", url: "https://youtube.com/shorts/rzJNPJcOCTs" },
-  { id: "V2", url: "https://youtube.com/shorts/IFCVsyyH6WQ" },
-  { id: "V3", url: "https://youtube.com/shorts/uu3fx032OF4" },
-  { id: "V4", url: "https://youtube.com/shorts/TooWjeRW9rw" },
-  { id: "V5", url: "https://youtube.com/shorts/KI8IT1CGKNI" },
-  { id: "V6", url: "https://youtube.com/shorts/HCGDCp3HdoQ" },
-  { id: "V7", url: "https://youtube.com/shorts/tnK1iUAwpV0" },
-  { id: "V8", url: "https://youtube.com/shorts/391KsDx-QKk" },
-  { id: "V9", url: "https://youtube.com/shorts/YN3YznLuxpE" },
-  { id: "V10", url: "https://youtube.com/shorts/ylYhuW5To8Q" },
-  { id: "V11", url: "https://youtube.com/shorts/WyGPvuekkM8" },
-  { id: "V12", url: "https://youtube.com/shorts/u2NEwoAmtkc" },
-  { id: "V13", url: "https://youtube.com/shorts/Ek3bDiCEvEk" },
-  { id: "V14", url: "https://youtube.com/shorts/ZXPDQuXPj60" },
-  { id: "V15", url: "https://youtube.com/shorts/LS-R2XW_23E" },
-  { id: "V16", url: "https://youtube.com/shorts/VSUj9vSt2g4" },
-  { id: "V17", url: "https://youtube.com/shorts/GmFpgQ9ND5U" },
-  { id: "V18", url: "https://youtube.com/shorts/wLVA8UufPN0" },
-  { id: "V19", url: "https://youtube.com/shorts/YqHk5HF41Lk" },
-  { id: "V20", url: "https://youtube.com/shorts/KLElLlFJ8r4" },
-  { id: "V21", url: "https://youtube.com/shorts/v-tyIVH-fEI" },
-  { id: "V22", url: "https://youtube.com/shorts/WzudKtzzYtI" },
-  { id: "V23", url: "https://youtube.com/shorts/vsvzvTmYTXs" },
-  { id: "V24", url: "https://youtube.com/shorts/96eGa9Wxf08" },
-  { id: "V25", url: "https://youtube.com/shorts/knMocSKzcDM" },
-  { id: "V26", url: "https://youtube.com/shorts/7aPjmRqon0M" },
-  { id: "V27", url: "https://youtube.com/shorts/FZDM8GOr_a0" },
-  { id: "V28", url: "https://youtube.com/shorts/d1Kqn6Rii7I" },
-  { id: "V29", url: "https://youtube.com/shorts/0yON4aeeBLc" },
+  { id: "V29", url: "https://youtube.com/shorts/0yON4aeeBLc" },   // Ímãs de geladeira
+  { id: "V28", url: "https://youtube.com/shorts/d1Kqn6Rii7I" },   // Jurídico - Inventário
+  { id: "V26", url: "https://youtube.com/shorts/7aPjmRqon0M" },   // Marca pessoal
+  { id: "V25", url: "https://youtube.com/shorts/knMocSKzcDM" },   // Corte podcast
+  { id: "V23", url: "https://youtube.com/shorts/vsvzvTmYTXs" },   // D'asle
+  { id: "V27", url: "https://youtube.com/shorts/FZDM8GOr_a0" },   // Anúncio Inventário
+  { id: "V21", url: "https://youtube.com/shorts/v-tyIVH-fEI" },   // Xerifes
+  { id: "V22", url: "https://youtube.com/shorts/WzudKtzzYtI" },   // Itália
+  { id: "V19", url: "https://youtube.com/shorts/YqHk5HF41Lk" },   // Clínica da Linguagem - Apraxia
+  { id: "V24", url: "https://youtube.com/shorts/96eGa9Wxf08" },   // Inglês para aviação
+  { id: "V18", url: "https://youtube.com/shorts/wLVA8UufPN0" },   // Alívio CB
+  { id: "V20", url: "https://youtube.com/shorts/KLElLlFJ8r4" },   // Reservas corporativas
+  { id: "V17", url: "https://youtube.com/shorts/GmFpgQ9ND5U" },   // Michelle - Conversia
+  { id: "V14", url: "https://youtube.com/shorts/ZXPDQuXPj60" },   // TKA - Inventário
+  { id: "V16", url: "https://youtube.com/shorts/VSUj9vSt2g4" },   // Tommasi - Itália
+  { id: "V11", url: "https://youtube.com/shorts/WyGPvuekkM8" },   // Xerifes 01
+  { id: "V15", url: "https://youtube.com/shorts/LS-R2XW_23E" },   // D'asle Coberturas
+  { id: "V13", url: "https://youtube.com/shorts/Ek3bDiCEvEk" },   // EspetoFlex
+  { id: "V10", url: "https://youtube.com/shorts/ylYhuW5To8Q" },   // Clínica da Linguagem - Marcos
+  { id: "V12", url: "https://youtube.com/shorts/u2NEwoAmtkc" },   // Atitude Positiva
+  { id: "V9",  url: "https://youtube.com/shorts/YN3YznLuxpE" },   // Alívio LB
+  { id: "V8",  url: "https://youtube.com/shorts/391KsDx-QKk" },   // Cookie Formiguinhas
+  { id: "V6",  url: "https://youtube.com/shorts/HCGDCp3HdoQ" },   // DMI
+  { id: "V7",  url: "https://youtube.com/shorts/tnK1iUAwpV0" },
+  { id: "V3",  url: "https://youtube.com/shorts/uu3fx032OF4" },   // Atendimento humanizado
+  { id: "V5",  url: "https://youtube.com/shorts/KI8IT1CGKNI" },
+  { id: "V4",  url: "https://youtube.com/shorts/TooWjeRW9rw" },
+  { id: "V2",  url: "https://youtube.com/shorts/IFCVsyyH6WQ" },
+  { id: "V1",  url: "https://youtube.com/shorts/rzJNPJcOCTs" },
 ];
 
 
