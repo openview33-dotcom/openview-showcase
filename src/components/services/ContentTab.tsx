@@ -209,6 +209,7 @@ interface GridItem {
 }
 
 const gridItems: GridItem[] = [
+  { type: "carousel", carouselId: "CS16", client: "Independência · Antes e Depois Bom Fim" },
   { type: "carousel", carouselId: "CS5", client: "POLO Instaladora" },
   { type: "carousel", carouselId: "CS14", client: "Fono Michelle · 7 Sinais" },
   { type: "static", client: "Dia Pet" },
@@ -218,7 +219,6 @@ const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS1", client: "Imobiliário" },
   { type: "static", client: "Fono · Comunicação Autismo" },
   { type: "static", client: "TKA Advogados" },
-  { type: "carousel", carouselId: "CS16", client: "Independência · Antes e Depois Bom Fim" },
   { type: "carousel", carouselId: "CS7", client: "TW Aviation English" },
   { type: "static", client: "Fono · Antecipação 7 dias" },
   { type: "static", client: "Voe Winglets" },
