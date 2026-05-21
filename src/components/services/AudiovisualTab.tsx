@@ -52,6 +52,11 @@ const verticalVideos: VideoItem[] = [
   { id: "V22", url: "https://youtube.com/shorts/WzudKtzzYtI" },
   { id: "V23", url: "https://youtube.com/shorts/vsvzvTmYTXs" },
   { id: "V24", url: "https://youtube.com/shorts/96eGa9Wxf08" },
+  { id: "V25", url: "https://youtube.com/shorts/knMocSKzcDM" },
+  { id: "V26", url: "https://youtube.com/shorts/7aPjmRqon0M" },
+  { id: "V27", url: "https://youtube.com/shorts/FZDM8GOr_a0" },
+  { id: "V28", url: "https://youtube.com/shorts/d1Kqn6Rii7I" },
+  { id: "V29", url: "https://youtube.com/shorts/0yON4aeeBLc" },
 ];
 
 
