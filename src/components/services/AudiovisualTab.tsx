@@ -51,7 +51,7 @@ const verticalVideos: VideoItem[] = [
   { id: "V9",  url: "https://youtube.com/shorts/YN3YznLuxpE" },   // Alívio LB
   { id: "V8",  url: "https://youtube.com/shorts/391KsDx-QKk" },   // Cookie Formiguinhas
   { id: "V6",  url: "https://youtube.com/shorts/HCGDCp3HdoQ" },   // DMI
-  { id: "V7",  url: "https://youtube.com/shorts/tnK1iUAwpV0" },
+  
   { id: "V3",  url: "https://youtube.com/shorts/uu3fx032OF4" },   // Atendimento humanizado
   { id: "V5",  url: "https://youtube.com/shorts/KI8IT1CGKNI" },
   { id: "V4",  url: "https://youtube.com/shorts/TooWjeRW9rw" },
