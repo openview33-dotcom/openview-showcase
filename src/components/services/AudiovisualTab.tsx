@@ -30,7 +30,7 @@ const horizontalVideos: VideoItem[] = [
 const verticalVideos: VideoItem[] = [
   { id: "V1", url: "https://youtube.com/shorts/rzJNPJcOCTs" },
   { id: "V2", url: "https://youtube.com/shorts/IFCVsyyH6WQ" },
-  { id: "V3", url: "https://youtube.com/shorts/NxxwapZoJI0" },
+  { id: "V3", url: "https://youtube.com/shorts/uu3fx032OF4" },
   { id: "V4", url: "https://youtube.com/shorts/TooWjeRW9rw" },
   { id: "V5", url: "https://youtube.com/shorts/KI8IT1CGKNI" },
   { id: "V6", url: "https://youtube.com/shorts/AOI0NhG5Qb0" },
