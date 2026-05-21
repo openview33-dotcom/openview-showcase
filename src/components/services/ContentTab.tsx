@@ -104,6 +104,16 @@ import CS15_04 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Ca
 import CS15_05 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_05.png";
 import CS15_06 from "@/assets/2 Carrossel/Criativo-5---Usei-nos-Atendimentos-(Carrossel)_06.png";
 
+// CS16 - Independência Imóveis · Antes e Depois Apartamento Bom Fim (8 slides)
+import CS16_01 from "@/assets/CS16/CS16.01.png";
+import CS16_02 from "@/assets/CS16/CS16.02.png";
+import CS16_03 from "@/assets/CS16/CS16.03.png";
+import CS16_04 from "@/assets/CS16/CS16.04.png";
+import CS16_05 from "@/assets/CS16/CS16.05.png";
+import CS16_06 from "@/assets/CS16/CS16.06.png";
+import CS16_07 from "@/assets/CS16/CS16.07.png";
+import CS16_08 from "@/assets/CS16/CS16.08.png";
+
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
@@ -138,6 +148,7 @@ const CS12_SLIDES = [CS12_01, CS12_02, CS12_03, CS12_04, CS12_05];
 const CS13_SLIDES = [CS13_01, CS13_02, CS13_03, CS13_04, CS13_05, CS13_06, CS13_07];
 const CS14_SLIDES = [CS14_01, CS14_02, CS14_03, CS14_04, CS14_05, CS14_06, CS14_07, CS14_08, CS14_09, CS14_10];
 const CS15_SLIDES = [CS15_01, CS15_02, CS15_03, CS15_04, CS15_05, CS15_06];
+const CS16_SLIDES = [CS16_01, CS16_02, CS16_03, CS16_04, CS16_05, CS16_06, CS16_07, CS16_08];
 
 const staticImages: Record<string, string> = {
   "TW Aviation English": imgTWAviation,
@@ -172,6 +183,7 @@ const realSlides: Record<string, string[]> = {
   CS13: CS13_SLIDES,
   CS14: CS14_SLIDES,
   CS15: CS15_SLIDES,
+  CS16: CS16_SLIDES,
 };
 
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -187,6 +199,7 @@ const carousels: Record<string, { slides: number; client: string }> = {
   CS13: { slides: 7, client: "Dasle Coberturas" },
   CS14: { slides: 10, client: "Fono Michelle Borges" },
   CS15: { slides: 6, client: "Fono Michelle Borges" },
+  CS16: { slides: 8, client: "Independência Imóveis" },
 };
 
 interface GridItem {
@@ -205,6 +218,7 @@ const gridItems: GridItem[] = [
   { type: "carousel", carouselId: "CS1", client: "Imobiliário" },
   { type: "static", client: "Fono · Comunicação Autismo" },
   { type: "static", client: "TKA Advogados" },
+  { type: "carousel", carouselId: "CS16", client: "Independência · Antes e Depois Bom Fim" },
   { type: "carousel", carouselId: "CS7", client: "TW Aviation English" },
   { type: "static", client: "Fono · Antecipação 7 dias" },
   { type: "static", client: "Voe Winglets" },
