@@ -28,26 +28,27 @@ const horizontalVideos: VideoItem[] = [
 ];
 
 const verticalVideos: VideoItem[] = [
-  // Primeira fileira (mantida): novos vídeos primeiro
-  { id: "V30", url: "https://youtube.com/shorts/h00kcW_0JIg" },
-  { id: "V31", url: "https://youtube.com/shorts/BsxIbjO6uQw" },
-  { id: "V32", url: "https://youtube.com/shorts/MOmUE5qN_3g" },
+  // Primeira fileira (mantida como estava)
   { id: "V29", url: "https://youtube.com/shorts/0yON4aeeBLc" },   // Ímãs de geladeira
+  { id: "V28", url: "https://youtube.com/shorts/d1Kqn6Rii7I" },   // Jurídico - Inventário
+  { id: "V26", url: "https://youtube.com/shorts/7aPjmRqon0M" },   // Marca pessoal
+  { id: "V25", url: "https://youtube.com/shorts/knMocSKzcDM" },   // Corte podcast
 
   // A partir da segunda fileira: embaralhado evitando clientes repetidos próximos
-  { id: "V27", url: "https://youtube.com/shorts/FZDM8GOr_a0" },   // Anúncio Inventário
-  { id: "V22", url: "https://youtube.com/shorts/WzudKtzzYtI" },   // Itália
+  { id: "V30", url: "https://youtube.com/shorts/h00kcW_0JIg" },   // Atendimento
+  { id: "V22", url: "https://youtube.com/shorts/WzudKtzzYtI" },   // Itália (compra de imóvel)
   { id: "V11", url: "https://youtube.com/shorts/WyGPvuekkM8" },   // Xerifes 01
   { id: "V18", url: "https://youtube.com/shorts/wLVA8UufPN0" },   // Alívio CB
-  { id: "V25", url: "https://youtube.com/shorts/knMocSKzcDM" },   // Corte podcast
+  { id: "V31", url: "https://youtube.com/shorts/BsxIbjO6uQw" },   // Indicação de livro
   { id: "V14", url: "https://youtube.com/shorts/ZXPDQuXPj60" },   // TKA - Inventário
   { id: "V15", url: "https://youtube.com/shorts/LS-R2XW_23E" },   // D'asle Coberturas
   { id: "V17", url: "https://youtube.com/shorts/GmFpgQ9ND5U" },   // Michelle - Conversia
   { id: "V21", url: "https://youtube.com/shorts/v-tyIVH-fEI" },   // Xerifes
   { id: "V10", url: "https://youtube.com/shorts/ylYhuW5To8Q" },   // Clínica da Linguagem - Marcos
+  { id: "V32", url: "https://youtube.com/shorts/MOmUE5qN_3g" },   // Aula Abril
   { id: "V24", url: "https://youtube.com/shorts/96eGa9Wxf08" },   // Inglês para aviação
   { id: "V12", url: "https://youtube.com/shorts/u2NEwoAmtkc" },   // Atitude Positiva
-  { id: "V28", url: "https://youtube.com/shorts/d1Kqn6Rii7I" },   // Jurídico - Inventário
+  { id: "V27", url: "https://youtube.com/shorts/FZDM8GOr_a0" },   // Anúncio Inventário
   { id: "V16", url: "https://youtube.com/shorts/VSUj9vSt2g4" },   // Tommasi - Itália
   { id: "V9",  url: "https://youtube.com/shorts/YN3YznLuxpE" },   // Alívio LB
   { id: "V13", url: "https://youtube.com/shorts/Ek3bDiCEvEk" },   // EspetoFlex
@@ -55,9 +56,8 @@ const verticalVideos: VideoItem[] = [
   { id: "V6",  url: "https://youtube.com/shorts/HCGDCp3HdoQ" },   // DMI
   { id: "V19", url: "https://youtube.com/shorts/YqHk5HF41Lk" },   // Clínica da Linguagem - Apraxia
   { id: "V8",  url: "https://youtube.com/shorts/391KsDx-QKk" },   // Cookie Formiguinhas
-  { id: "V26", url: "https://youtube.com/shorts/7aPjmRqon0M" },   // Marca pessoal
-  { id: "V3",  url: "https://youtube.com/shorts/uu3fx032OF4" },   // Atendimento humanizado
   { id: "V20", url: "https://youtube.com/shorts/KLElLlFJ8r4" },   // Reservas corporativas
+  { id: "V3",  url: "https://youtube.com/shorts/uu3fx032OF4" },   // Atendimento humanizado
   { id: "V5",  url: "https://youtube.com/shorts/KI8IT1CGKNI" },
   { id: "V4",  url: "https://youtube.com/shorts/TooWjeRW9rw" },
   { id: "V2",  url: "https://youtube.com/shorts/IFCVsyyH6WQ" },
