@@ -20,8 +20,8 @@ interface VideoItem {
 
 const horizontalVideos: VideoItem[] = [
   { id: "H3", url: "https://youtu.be/i5LiMQ13qvs" },
-  { id: "H4", url: "https://youtu.be/QGOij7iMpmQ" },
-  { id: "H5", url: "https://youtu.be/LXhCkj86GnE" },
+  { id: "H4", url: "https://youtu.be/1QNlvPAMINA", label: "Trem de Pouso | Evento" },
+  { id: "H5", url: "https://youtu.be/M0nqrtaDK80", label: "Curso | Família Atípica" },
   { id: "H6", url: "https://youtu.be/OQQMcp_48GU" },
   { id: "H7", url: "https://youtu.be/f3y-VLJyl6c" },
   { id: "H8", url: "https://youtu.be/AhNlfGYkcY4" },
