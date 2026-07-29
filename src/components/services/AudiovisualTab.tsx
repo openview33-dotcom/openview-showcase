@@ -28,11 +28,27 @@ const horizontalVideos: VideoItem[] = [
 ];
 
 const verticalVideos: VideoItem[] = [
-  // Primeira fileira (mantida como estava)
+  // Leva mais recente (topo), alternando clientes por linha e coluna
+  { id: "V33", url: "https://youtube.com/shorts/52IUBaUyaLk" },   // Vetlog - Depoimento Giovanni
+  { id: "V34", url: "https://youtube.com/shorts/cWxPuE8J4xk" },   // TKA - Servidor x INSS
+  { id: "V36", url: "https://youtube.com/shorts/0_Yx1Labf6Q" },   // Michelle Borges - Leitura compartilhada
+  { id: "V40", url: "https://youtube.com/shorts/rnct9nUc2ms" },   // Andreas Dreckmann - DMI
+
+  { id: "V42", url: "https://youtube.com/shorts/Te8082mbPCc" },   // Casa Mirim - Tamanho da casa
+  { id: "V38", url: "https://youtube.com/shorts/l2ugXE4qad4" },   // Independência - Apto Trend 24
+  { id: "V35", url: "https://youtube.com/shorts/0GE4M6L5k3E" },   // TKA - Golpe do falso advogado
+  { id: "V39", url: "https://youtube.com/shorts/_K92_y0MMSA" },   // Dia de Pet - Problema nos olhos
+
+  { id: "V37", url: "https://youtube.com/shorts/f6HndI4p3rU" },   // Michelle Borges - Trabalho com CAA
+  { id: "V41", url: "https://youtube.com/shorts/WO7vlSwujJQ" },   // Andreas - Crescer x desenvolver
+  { id: "V43", url: "https://youtube.com/shorts/Q48FAyKmIuE" },   // Casa Mirim - Essência da casa
   { id: "V29", url: "https://youtube.com/shorts/0yON4aeeBLc" },   // Ímãs de geladeira
+
   { id: "V28", url: "https://youtube.com/shorts/d1Kqn6Rii7I" },   // Jurídico - Inventário
   { id: "V26", url: "https://youtube.com/shorts/7aPjmRqon0M" },   // Marca pessoal
   { id: "V25", url: "https://youtube.com/shorts/knMocSKzcDM" },   // Corte podcast
+
+
 
   // A partir da segunda fileira: embaralhado evitando clientes repetidos próximos
   { id: "V30", url: "https://youtube.com/shorts/h00kcW_0JIg" },   // Atendimento
