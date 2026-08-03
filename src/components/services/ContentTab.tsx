@@ -174,6 +174,45 @@ import CS24_04 from "@/assets/CS24/CS24.04.png";
 import CS24_05 from "@/assets/CS24/CS24.05.png";
 import CS24_06 from "@/assets/CS24/CS24.06.png";
 
+// CS25 - Vetlog · Indicador mais importante (10 slides)
+import CS25_01 from "@/assets/CS25/CS25.01.png";
+import CS25_02 from "@/assets/CS25/CS25.02.png";
+import CS25_03 from "@/assets/CS25/CS25.03.png";
+import CS25_04 from "@/assets/CS25/CS25.04.png";
+import CS25_05 from "@/assets/CS25/CS25.05.png";
+import CS25_06 from "@/assets/CS25/CS25.06.png";
+import CS25_07 from "@/assets/CS25/CS25.07.png";
+import CS25_08 from "@/assets/CS25/CS25.08.png";
+import CS25_09 from "@/assets/CS25/CS25.09.png";
+import CS25_10 from "@/assets/CS25/CS25.10.png";
+
+// CS26 - Vetlog · Inverno e Gripe (8 slides)
+import CS26_01 from "@/assets/CS26/CS26.01.png";
+import CS26_02 from "@/assets/CS26/CS26.02.png";
+import CS26_03 from "@/assets/CS26/CS26.03.png";
+import CS26_04 from "@/assets/CS26/CS26.04.png";
+import CS26_05 from "@/assets/CS26/CS26.05.png";
+import CS26_06 from "@/assets/CS26/CS26.06.png";
+import CS26_07 from "@/assets/CS26/CS26.07.png";
+import CS26_08 from "@/assets/CS26/CS26.08.png";
+
+// CS27 - Novidade no Portfolio (6 slides)
+import CS27_01 from "@/assets/CS27/CS27.01.png";
+import CS27_02 from "@/assets/CS27/CS27.02.png";
+import CS27_03 from "@/assets/CS27/CS27.03.png";
+import CS27_04 from "@/assets/CS27/CS27.04.png";
+import CS27_05 from "@/assets/CS27/CS27.05.png";
+import CS27_06 from "@/assets/CS27/CS27.06.png";
+
+// CS28 - Podcast Attitude Positiva (7 slides)
+import CS28_01 from "@/assets/CS28/CS28.01.png";
+import CS28_02 from "@/assets/CS28/CS28.02.png";
+import CS28_03 from "@/assets/CS28/CS28.03.png";
+import CS28_04 from "@/assets/CS28/CS28.04.png";
+import CS28_05 from "@/assets/CS28/CS28.05.png";
+import CS28_06 from "@/assets/CS28/CS28.06.png";
+import CS28_07 from "@/assets/CS28/CS28.07.png";
+
 
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
@@ -197,6 +236,10 @@ import imgFonoComunicacao from "@/assets/Criativo-2---Comunicacao-Autismo-(Feed)
 import imgFonoPsicoterapia from "@/assets/Criativo-6---Psicoterapia-(Feed).png";
 import imgFonoAgenda from "@/assets/Criativo-8---Agenda-Aberta-(Feed).png";
 import imgIndepInfografico from "@/assets/independencia-infografico-financiamento.png";
+import imgVetlogDiaDosPais from "@/assets/vetlog-dia-dos-pais-feed.png";
+import imgVetlogFaturamento from "@/assets/vetlog-faturamento-feed.png";
+import imgTWTremDePouso from "@/assets/tw-infografico-trem-de-pouso.png";
+import imgSeminarioCronograma from "@/assets/seminario-cronograma-evento.png";
 import { trackPortfolioOpen, trackCarouselNav } from "@/lib/analytics";
 
 const CS1_SLIDES = [CS01_01, CS01_02, CS01_03, CS01_04, CS01_05, CS01_06];
@@ -220,6 +263,10 @@ const CS21_SLIDES = [CS21_01, CS21_02, CS21_03, CS21_04, CS21_05, CS21_06];
 const CS22_SLIDES = [CS22_01, CS22_02, CS22_03, CS22_04, CS22_05, CS22_06];
 const CS23_SLIDES = [CS23_01, CS23_02, CS23_03, CS23_04, CS23_05];
 const CS24_SLIDES = [CS24_01, CS24_02, CS24_03, CS24_04, CS24_05, CS24_06];
+const CS25_SLIDES = [CS25_01, CS25_02, CS25_03, CS25_04, CS25_05, CS25_06, CS25_07, CS25_08, CS25_09, CS25_10];
+const CS26_SLIDES = [CS26_01, CS26_02, CS26_03, CS26_04, CS26_05, CS26_06, CS26_07, CS26_08];
+const CS27_SLIDES = [CS27_01, CS27_02, CS27_03, CS27_04, CS27_05, CS27_06];
+const CS28_SLIDES = [CS28_01, CS28_02, CS28_03, CS28_04, CS28_05, CS28_06, CS28_07];
 
 const staticImages: Record<string, string> = {
   "TW Aviation English": imgTWAviation,
@@ -240,6 +287,10 @@ const staticImages: Record<string, string> = {
   "Fono · Psicoterapia": imgFonoPsicoterapia,
   "Fono · Agenda Aberta": imgFonoAgenda,
   "Independência · Infográfico Financiamento": imgIndepInfografico,
+  "Vetlog · Dia dos Pais": imgVetlogDiaDosPais,
+  "Vetlog · Faturar mais": imgVetlogFaturamento,
+  "TW Aviation · Trem de Pouso": imgTWTremDePouso,
+  "Sistemas Complexos · Programação": imgSeminarioCronograma,
 };
 
 const realSlides: Record<string, string[]> = {
@@ -264,6 +315,10 @@ const realSlides: Record<string, string[]> = {
   CS22: CS22_SLIDES,
   CS23: CS23_SLIDES,
   CS24: CS24_SLIDES,
+  CS25: CS25_SLIDES,
+  CS26: CS26_SLIDES,
+  CS27: CS27_SLIDES,
+  CS28: CS28_SLIDES,
 };
 
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -288,6 +343,10 @@ const carousels: Record<string, { slides: number; client: string }> = {
   CS22: { slides: 6, client: "Independência Imóveis" },
   CS23: { slides: 5, client: "POLO Instaladora" },
   CS24: { slides: 6, client: "POLO Instaladora" },
+  CS25: { slides: 10, client: "Vetlog" },
+  CS26: { slides: 8, client: "Vetlog" },
+  CS27: { slides: 6, client: "OpenView" },
+  CS28: { slides: 7, client: "Attitude Positiva" },
 };
 
 interface GridItem {
@@ -297,6 +356,14 @@ interface GridItem {
 }
 
 const gridItems: GridItem[] = [
+  { type: "carousel", carouselId: "CS25", client: "Vetlog · Indicador mais importante" },
+  { type: "carousel", carouselId: "CS28", client: "Attitude Positiva · Podcast" },
+  { type: "static", client: "TW Aviation · Trem de Pouso" },
+  { type: "carousel", carouselId: "CS26", client: "Vetlog · Inverno e Gripe" },
+  { type: "static", client: "Sistemas Complexos · Programação" },
+  { type: "carousel", carouselId: "CS27", client: "Novidade no Portfólio" },
+  { type: "static", client: "Vetlog · Dia dos Pais" },
+  { type: "static", client: "Vetlog · Faturar mais" },
   { type: "carousel", carouselId: "CS20", client: "Realizar · Melhor Piloto no Rádio" },
   { type: "carousel", carouselId: "CS22", client: "Independência · Financiar um Imóvel" },
   { type: "carousel", carouselId: "CS24", client: "POLO · Falha Elétrica" },
