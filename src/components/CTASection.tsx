@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { trackWhatsapp } from "@/lib/analytics";
 
 const CTASection = () => {
   return (
@@ -27,6 +28,7 @@ const CTASection = () => {
             href="https://api.whatsapp.com/send?phone=5551984476625"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsapp("secao_contato")}
             className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-body text-sm tracking-wider uppercase rounded-full hover:opacity-90 transition-opacity"
           >
             <MessageCircle className="w-5 h-5" />

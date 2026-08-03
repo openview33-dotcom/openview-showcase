@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { trackCta } from "@/lib/analytics";
 
 const metrics = [
   { value: 30, prefix: "+", suffix: "", label: "Marcas atendidas", barColor: "bg-teal", delay: 0.6 },
@@ -87,13 +88,19 @@ const HeroSection = () => {
 
             <motion.div {...fade(0.55)} className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => scrollTo("cases")}
+                onClick={() => {
+                  trackCta("Ver cases", "hero");
+                  scrollTo("cases");
+                }}
                 className="px-8 py-3.5 bg-primary text-primary-foreground font-body text-sm tracking-wider uppercase rounded-full hover:opacity-90 transition-opacity"
               >
                 Ver cases →
               </button>
               <button
-                onClick={() => scrollTo("servicos")}
+                onClick={() => {
+                  trackCta("Portfolio", "hero");
+                  scrollTo("servicos");
+                }}
                 className="px-8 py-3.5 border border-muted-foreground/30 text-foreground font-body text-sm tracking-wider uppercase rounded-full hover:border-foreground transition-colors"
               >
                 Portfólio
