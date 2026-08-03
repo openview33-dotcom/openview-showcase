@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { trackTab } from "@/lib/analytics";
 import { useState } from "react";
 import ContentTab from "./services/ContentTab";
 import AudiovisualTab from "./services/AudiovisualTab";
@@ -49,7 +50,10 @@ const ServicesSection = () => {
           {tabs.map((tab) => (
             <button
               key={tab.key}
-              onClick={() => setActive(tab.key)}
+              onClick={() => {
+                trackTab("portfolio", tab.label);
+                setActive(tab.key);
+              }}
               className={`px-6 py-3 font-body text-xs md:text-sm tracking-wider uppercase transition-all rounded-full ${
                 active === tab.key
                   ? "bg-primary text-primary-foreground"

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { trackTab, trackVideoPlay } from "@/lib/analytics";
 import { useState } from "react";
 import { Play, Quote } from "lucide-react";
 
@@ -46,7 +47,10 @@ const CasesSection = () => {
           {(["video", "texto"] as const).map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => {
+                trackTab("cases", tab === "video" ? "Depoimentos em Video" : "Depoimentos em Texto");
+                setActiveTab(tab);
+              }}
               className={`px-8 py-3 font-body text-sm tracking-wider uppercase transition-all rounded-full ${
                 activeTab === tab
                   ? "bg-primary text-primary-foreground"
@@ -61,7 +65,10 @@ const CasesSection = () => {
         {activeTab === "video" && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {videoTestimonials.map((video) => (
-              <div key={video.videoId} className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-muted cursor-pointer" onClick={() => setPlayingVideo(video.videoId)}>
+              <div key={video.videoId} className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-muted cursor-pointer" onClick={() => {
+                trackVideoPlay("cases_depoimentos", video.videoId, { video_name: video.name });
+                setPlayingVideo(video.videoId);
+              }}>
                 {playingVideo === video.videoId ? (
                   <iframe src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&loop=1`} className="absolute inset-0 w-full h-full" allow="autoplay; encrypted-media" allowFullScreen title={`Depoimento ${video.name}`} />
                 ) : (

@@ -1,4 +1,5 @@
 import { Instagram, Mail, MapPin } from "lucide-react";
+import { trackCta } from "@/lib/analytics";
 
 const FooterSection = () => {
   return (
@@ -18,11 +19,11 @@ const FooterSection = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <a href="https://www.instagram.com/openviewdigital/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-body text-sm text-white/50 hover:text-white transition-colors">
+            <a href="https://www.instagram.com/openviewdigital/" target="_blank" rel="noopener noreferrer" onClick={() => trackCta("Instagram", "footer")} className="inline-flex items-center gap-2 font-body text-sm text-white/50 hover:text-white transition-colors">
               <Instagram className="w-4 h-4" />
               @openviewdigital
             </a>
-            <a href="mailto:kimberly@openviewdigital.com.br" className="inline-flex items-center gap-2 font-body text-sm text-white/50 hover:text-white transition-colors">
+            <a href="mailto:kimberly@openviewdigital.com.br" onClick={() => trackCta("Email", "footer")} className="inline-flex items-center gap-2 font-body text-sm text-white/50 hover:text-white transition-colors">
               <Mail className="w-4 h-4" />
               kimberly@openviewdigital.com.br
             </a>

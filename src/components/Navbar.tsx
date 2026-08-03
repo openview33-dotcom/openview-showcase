@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
+import { trackCta } from "@/lib/analytics";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -32,7 +33,10 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
         </div>
         <button
-          onClick={() => scrollTo("contato")}
+          onClick={() => {
+            trackCta("Contato", "navbar");
+            scrollTo("contato");
+          }}
           className="px-6 py-2.5 bg-primary text-primary-foreground font-body text-xs tracking-wider uppercase rounded-full hover:opacity-90 transition-opacity"
         >
           Contato

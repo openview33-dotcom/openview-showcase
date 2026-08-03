@@ -135,6 +135,7 @@ import imgFonoAntecipacao4 from "@/assets/4._Criativo_Antecipacao_l_Faltam_4_Dia
 import imgFonoComunicacao from "@/assets/Criativo-2---Comunicacao-Autismo-(Feed).png";
 import imgFonoPsicoterapia from "@/assets/Criativo-6---Psicoterapia-(Feed).png";
 import imgFonoAgenda from "@/assets/Criativo-8---Agenda-Aberta-(Feed).png";
+import { trackPortfolioOpen, trackCarouselNav } from "@/lib/analytics";
 
 const CS1_SLIDES = [CS01_01, CS01_02, CS01_03, CS01_04, CS01_05, CS01_06];
 const CS2_SLIDES = [CS02_01, CS02_02, CS02_03, CS02_04, CS02_05, CS02_06];
@@ -380,8 +381,14 @@ useEffect(() => {
   return () => clearTimeout(t);
 }, [tape, commitTransition]);
   
-  const goNext = useCallback(() => navigate(1), [navigate]);
-  const goPrev = useCallback(() => navigate(-1), [navigate]);
+  const goNext = useCallback(() => {
+    trackCarouselNav(currentItem.client, currentSlide, "next");
+    navigate(1);
+  }, [navigate, currentItem, currentSlide]);
+  const goPrev = useCallback(() => {
+    trackCarouselNav(currentItem.client, currentSlide, "prev");
+    navigate(-1);
+  }, [navigate, currentItem, currentSlide]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -498,7 +505,10 @@ const ContentTab = () => {
               transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
               className="relative rounded-xl cursor-pointer group/item transition-all duration-350"
               style={{ breakInside: "avoid", marginBottom: 8 }}
-              onClick={() => setLightbox({ gridIndex: i, slideIndex: 0 })}
+              onClick={() => {
+                trackPortfolioOpen("conteudo", item.client, { slides: images.length });
+                setLightbox({ gridIndex: i, slideIndex: 0 });
+              }}
             >
               <img
                 src={coverImg}

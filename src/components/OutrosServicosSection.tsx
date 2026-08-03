@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackTab, trackWhatsapp } from "@/lib/analytics";
 
 const tabs = [
   { key: "trafego", label: "Tráfego Pago", color: "#9B6FD4" },
@@ -267,7 +268,10 @@ const OutrosServicosSection = () => {
             return (
               <button
                 key={tab.key}
-                onClick={() => setActive(tab.key)}
+                onClick={() => {
+                  trackTab("outros_servicos", tab.label);
+                  setActive(tab.key);
+                }}
                 className="relative px-5 py-2.5 font-body text-[11px] tracking-[.15em] uppercase transition-all duration-300 whitespace-nowrap flex-shrink-0 rounded-full border font-medium"
                 style={{
                   background: isActive ? tab.color : "transparent",
@@ -323,6 +327,7 @@ const OutrosServicosSection = () => {
                 href="https://wa.me/5551999999999"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsapp("outros_servicos", { tab_name: panel.title })}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.35 }}
