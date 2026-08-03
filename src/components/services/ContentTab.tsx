@@ -382,13 +382,13 @@ useEffect(() => {
 }, [tape, commitTransition]);
   
   const goNext = useCallback(() => {
-    trackCarouselNav(String(gridIndex), slideIndex, "next");
+    trackCarouselNav(currentItem.client, currentSlide, "next");
     navigate(1);
-  }, [navigate, gridIndex, slideIndex]);
+  }, [navigate, currentItem, currentSlide]);
   const goPrev = useCallback(() => {
-    trackCarouselNav(String(gridIndex), slideIndex, "prev");
+    trackCarouselNav(currentItem.client, currentSlide, "prev");
     navigate(-1);
-  }, [navigate, gridIndex, slideIndex]);
+  }, [navigate, currentItem, currentSlide]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
