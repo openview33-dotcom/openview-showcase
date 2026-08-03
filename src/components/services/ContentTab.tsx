@@ -135,6 +135,45 @@ import CS19_03 from "@/assets/CS19/CS19.03.png";
 import CS19_04 from "@/assets/CS19/CS19.04.png";
 import CS19_05 from "@/assets/CS19/CS19.05.png";
 import CS19_06 from "@/assets/CS19/CS19.06.png";
+// CS20 - Realizar Escola de Aviacao · Melhor Piloto no Radio (6 slides)
+import CS20_01 from "@/assets/CS20/CS20.01.png";
+import CS20_02 from "@/assets/CS20/CS20.02.png";
+import CS20_03 from "@/assets/CS20/CS20.03.png";
+import CS20_04 from "@/assets/CS20/CS20.04.png";
+import CS20_05 from "@/assets/CS20/CS20.05.png";
+import CS20_06 from "@/assets/CS20/CS20.06.png";
+
+// CS21 - Realizar Escola de Aviacao · Treinamento IFR (6 slides)
+import CS21_01 from "@/assets/CS21/CS21.01.png";
+import CS21_02 from "@/assets/CS21/CS21.02.png";
+import CS21_03 from "@/assets/CS21/CS21.03.png";
+import CS21_04 from "@/assets/CS21/CS21.04.png";
+import CS21_05 from "@/assets/CS21/CS21.05.png";
+import CS21_06 from "@/assets/CS21/CS21.06.png";
+
+// CS22 - Independencia Imoveis · Financiar (6 slides)
+import CS22_01 from "@/assets/CS22/CS22.01.png";
+import CS22_02 from "@/assets/CS22/CS22.02.png";
+import CS22_03 from "@/assets/CS22/CS22.03.png";
+import CS22_04 from "@/assets/CS22/CS22.04.png";
+import CS22_05 from "@/assets/CS22/CS22.05.png";
+import CS22_06 from "@/assets/CS22/CS22.06.png";
+
+// CS23 - POLO Instaladora · EPI (5 slides)
+import CS23_01 from "@/assets/CS23/CS23.01.png";
+import CS23_02 from "@/assets/CS23/CS23.02.png";
+import CS23_03 from "@/assets/CS23/CS23.03.png";
+import CS23_04 from "@/assets/CS23/CS23.04.png";
+import CS23_05 from "@/assets/CS23/CS23.05.png";
+
+// CS24 - POLO Instaladora · Falha Eletrica (6 slides)
+import CS24_01 from "@/assets/CS24/CS24.01.png";
+import CS24_02 from "@/assets/CS24/CS24.02.png";
+import CS24_03 from "@/assets/CS24/CS24.03.png";
+import CS24_04 from "@/assets/CS24/CS24.04.png";
+import CS24_05 from "@/assets/CS24/CS24.05.png";
+import CS24_06 from "@/assets/CS24/CS24.06.png";
+
 
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
@@ -157,6 +196,7 @@ import imgFonoAntecipacao4 from "@/assets/4._Criativo_Antecipacao_l_Faltam_4_Dia
 import imgFonoComunicacao from "@/assets/Criativo-2---Comunicacao-Autismo-(Feed).png";
 import imgFonoPsicoterapia from "@/assets/Criativo-6---Psicoterapia-(Feed).png";
 import imgFonoAgenda from "@/assets/Criativo-8---Agenda-Aberta-(Feed).png";
+import imgIndepInfografico from "@/assets/independencia-infografico-financiamento.png";
 import { trackPortfolioOpen, trackCarouselNav } from "@/lib/analytics";
 
 const CS1_SLIDES = [CS01_01, CS01_02, CS01_03, CS01_04, CS01_05, CS01_06];
@@ -175,6 +215,11 @@ const CS16_SLIDES = [CS16_01, CS16_02, CS16_03, CS16_04, CS16_05, CS16_06, CS16_
 const CS17_SLIDES = [CS17_01, CS17_02, CS17_03, CS17_04, CS17_05];
 const CS18_SLIDES = [CS18_01, CS18_02, CS18_03, CS18_04, CS18_05];
 const CS19_SLIDES = [CS19_01, CS19_02, CS19_03, CS19_04, CS19_05, CS19_06];
+const CS20_SLIDES = [CS20_01, CS20_02, CS20_03, CS20_04, CS20_05, CS20_06];
+const CS21_SLIDES = [CS21_01, CS21_02, CS21_03, CS21_04, CS21_05, CS21_06];
+const CS22_SLIDES = [CS22_01, CS22_02, CS22_03, CS22_04, CS22_05, CS22_06];
+const CS23_SLIDES = [CS23_01, CS23_02, CS23_03, CS23_04, CS23_05];
+const CS24_SLIDES = [CS24_01, CS24_02, CS24_03, CS24_04, CS24_05, CS24_06];
 
 const staticImages: Record<string, string> = {
   "TW Aviation English": imgTWAviation,
@@ -194,6 +239,7 @@ const staticImages: Record<string, string> = {
   "Fono · Comunicação Autismo": imgFonoComunicacao,
   "Fono · Psicoterapia": imgFonoPsicoterapia,
   "Fono · Agenda Aberta": imgFonoAgenda,
+  "Independência · Infográfico Financiamento": imgIndepInfografico,
 };
 
 const realSlides: Record<string, string[]> = {
@@ -213,6 +259,11 @@ const realSlides: Record<string, string[]> = {
   CS17: CS17_SLIDES,
   CS18: CS18_SLIDES,
   CS19: CS19_SLIDES,
+  CS20: CS20_SLIDES,
+  CS21: CS21_SLIDES,
+  CS22: CS22_SLIDES,
+  CS23: CS23_SLIDES,
+  CS24: CS24_SLIDES,
 };
 
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -232,6 +283,11 @@ const carousels: Record<string, { slides: number; client: string }> = {
   CS17: { slides: 5, client: "Andreas Dreckmann" },
   CS18: { slides: 5, client: "Dia Pet" },
   CS19: { slides: 6, client: "Dia Pet" },
+  CS20: { slides: 6, client: "Realizar Escola de Aviação" },
+  CS21: { slides: 6, client: "Realizar Escola de Aviação" },
+  CS22: { slides: 6, client: "Independência Imóveis" },
+  CS23: { slides: 5, client: "POLO Instaladora" },
+  CS24: { slides: 6, client: "POLO Instaladora" },
 };
 
 interface GridItem {
@@ -241,6 +297,12 @@ interface GridItem {
 }
 
 const gridItems: GridItem[] = [
+  { type: "carousel", carouselId: "CS20", client: "Realizar · Melhor Piloto no Rádio" },
+  { type: "carousel", carouselId: "CS22", client: "Independência · Financiar um Imóvel" },
+  { type: "carousel", carouselId: "CS24", client: "POLO · Falha Elétrica" },
+  { type: "carousel", carouselId: "CS21", client: "Realizar · Treinamento IFR" },
+  { type: "static", client: "Independência · Infográfico Financiamento" },
+  { type: "carousel", carouselId: "CS23", client: "POLO · EPI" },
   { type: "carousel", carouselId: "CS17", client: "Andreas Dreckmann · Dia dos Pais" },
   { type: "carousel", carouselId: "CS19", client: "Dia Pet · Pulga ou Carrapato" },
   { type: "carousel", carouselId: "CS18", client: "Dia Pet · Intestino" },
