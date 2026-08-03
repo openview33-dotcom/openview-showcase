@@ -114,6 +114,28 @@ import CS16_06 from "@/assets/CS16/CS16.06.png";
 import CS16_07 from "@/assets/CS16/CS16.07.png";
 import CS16_08 from "@/assets/CS16/CS16.08.png";
 
+// CS17 - Andreas Dreckmann · Dia dos Pais (5 slides)
+import CS17_01 from "@/assets/CS17/CS17.01.png";
+import CS17_02 from "@/assets/CS17/CS17.02.png";
+import CS17_03 from "@/assets/CS17/CS17.03.png";
+import CS17_04 from "@/assets/CS17/CS17.04.png";
+import CS17_05 from "@/assets/CS17/CS17.05.png";
+
+// CS18 - Dia Pet · Intestino (5 slides)
+import CS18_01 from "@/assets/CS18/CS18.01.png";
+import CS18_02 from "@/assets/CS18/CS18.02.png";
+import CS18_03 from "@/assets/CS18/CS18.03.png";
+import CS18_04 from "@/assets/CS18/CS18.04.png";
+import CS18_05 from "@/assets/CS18/CS18.05.png";
+
+// CS19 - Dia Pet · Pulga ou Carrapato (6 slides)
+import CS19_01 from "@/assets/CS19/CS19.01.png";
+import CS19_02 from "@/assets/CS19/CS19.02.png";
+import CS19_03 from "@/assets/CS19/CS19.03.png";
+import CS19_04 from "@/assets/CS19/CS19.04.png";
+import CS19_05 from "@/assets/CS19/CS19.05.png";
+import CS19_06 from "@/assets/CS19/CS19.06.png";
+
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
