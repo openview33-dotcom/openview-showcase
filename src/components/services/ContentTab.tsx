@@ -114,6 +114,28 @@ import CS16_06 from "@/assets/CS16/CS16.06.png";
 import CS16_07 from "@/assets/CS16/CS16.07.png";
 import CS16_08 from "@/assets/CS16/CS16.08.png";
 
+// CS17 - Andreas Dreckmann · Dia dos Pais (5 slides)
+import CS17_01 from "@/assets/CS17/CS17.01.png";
+import CS17_02 from "@/assets/CS17/CS17.02.png";
+import CS17_03 from "@/assets/CS17/CS17.03.png";
+import CS17_04 from "@/assets/CS17/CS17.04.png";
+import CS17_05 from "@/assets/CS17/CS17.05.png";
+
+// CS18 - Dia Pet · Intestino (5 slides)
+import CS18_01 from "@/assets/CS18/CS18.01.png";
+import CS18_02 from "@/assets/CS18/CS18.02.png";
+import CS18_03 from "@/assets/CS18/CS18.03.png";
+import CS18_04 from "@/assets/CS18/CS18.04.png";
+import CS18_05 from "@/assets/CS18/CS18.05.png";
+
+// CS19 - Dia Pet · Pulga ou Carrapato (6 slides)
+import CS19_01 from "@/assets/CS19/CS19.01.png";
+import CS19_02 from "@/assets/CS19/CS19.02.png";
+import CS19_03 from "@/assets/CS19/CS19.03.png";
+import CS19_04 from "@/assets/CS19/CS19.04.png";
+import CS19_05 from "@/assets/CS19/CS19.05.png";
+import CS19_06 from "@/assets/CS19/CS19.06.png";
+
 // Static card images
 import imgTWAviation from "@/assets/twaviationenglish_card.png";
 import imgTWAviation2 from "@/assets/twaviationenglish_post_25_03_2026_17_00_483860824194150668262.jpg";
@@ -150,6 +172,9 @@ const CS13_SLIDES = [CS13_01, CS13_02, CS13_03, CS13_04, CS13_05, CS13_06, CS13_
 const CS14_SLIDES = [CS14_01, CS14_02, CS14_03, CS14_04, CS14_05, CS14_06, CS14_07, CS14_08, CS14_09, CS14_10];
 const CS15_SLIDES = [CS15_01, CS15_02, CS15_03, CS15_04, CS15_05, CS15_06];
 const CS16_SLIDES = [CS16_01, CS16_02, CS16_03, CS16_04, CS16_05, CS16_06, CS16_07, CS16_08];
+const CS17_SLIDES = [CS17_01, CS17_02, CS17_03, CS17_04, CS17_05];
+const CS18_SLIDES = [CS18_01, CS18_02, CS18_03, CS18_04, CS18_05];
+const CS19_SLIDES = [CS19_01, CS19_02, CS19_03, CS19_04, CS19_05, CS19_06];
 
 const staticImages: Record<string, string> = {
   "TW Aviation English": imgTWAviation,
@@ -185,6 +210,9 @@ const realSlides: Record<string, string[]> = {
   CS14: CS14_SLIDES,
   CS15: CS15_SLIDES,
   CS16: CS16_SLIDES,
+  CS17: CS17_SLIDES,
+  CS18: CS18_SLIDES,
+  CS19: CS19_SLIDES,
 };
 
 const carousels: Record<string, { slides: number; client: string }> = {
@@ -201,6 +229,9 @@ const carousels: Record<string, { slides: number; client: string }> = {
   CS14: { slides: 10, client: "Fono Michelle Borges" },
   CS15: { slides: 6, client: "Fono Michelle Borges" },
   CS16: { slides: 8, client: "Independência Imóveis" },
+  CS17: { slides: 5, client: "Andreas Dreckmann" },
+  CS18: { slides: 5, client: "Dia Pet" },
+  CS19: { slides: 6, client: "Dia Pet" },
 };
 
 interface GridItem {
@@ -210,6 +241,9 @@ interface GridItem {
 }
 
 const gridItems: GridItem[] = [
+  { type: "carousel", carouselId: "CS17", client: "Andreas Dreckmann · Dia dos Pais" },
+  { type: "carousel", carouselId: "CS19", client: "Dia Pet · Pulga ou Carrapato" },
+  { type: "carousel", carouselId: "CS18", client: "Dia Pet · Intestino" },
   { type: "carousel", carouselId: "CS16", client: "Independência · Antes e Depois Bom Fim" },
   { type: "carousel", carouselId: "CS5", client: "POLO Instaladora" },
   { type: "carousel", carouselId: "CS14", client: "Fono Michelle · 7 Sinais" },
