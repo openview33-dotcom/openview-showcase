@@ -18,6 +18,9 @@
 | — Comentários | 99 |
 | — Cliques no link do perfil | 0 |
 | Base de seguidores | 157.765 (até 10/08) |
+| Novos seguidores | 1.406 (até 01/08) |
+| Deixaram de seguir | 1.063 (até 01/08) |
+| Saldo líquido | +343 |
 
 ## Demográfico
 - **Gênero:** Homens 74,70% (109.240) · Mulheres 15,01% (21.947) · Não informado 10,29% (15.050)
