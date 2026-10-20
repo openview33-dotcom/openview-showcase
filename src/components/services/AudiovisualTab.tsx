@@ -1,4 +1,9 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { Play } from "lucide-react";
+import PortfolioRail from "./PortfolioRail";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { trackVideoPlay } from "@/lib/analytics";
 
 /* ── Helpers ── */
 function toEmbedUrl(url: string): string {
@@ -83,65 +88,53 @@ const verticalVideos: VideoItem[] = [
 
 /* ── Component ── */
 const AudiovisualTab = () => {
+  const [playing, setPlaying] = useState<{ video: VideoItem; vertical: boolean } | null>(null);
+
+  const renderVideo = (video: VideoItem, vertical: boolean) => {
+    const videoId = new URL(toEmbedUrl(video.url)).pathname.split("/").pop();
+    return (
+      <Button
+        key={video.id}
+        variant="ghost"
+        className={`rail-slide rail-media relative block h-auto p-0 rounded-lg overflow-hidden group ${vertical ? "rail-slide-vertical aspect-[9/16]" : "rail-slide-wide aspect-video"}`}
+        aria-label={`Reproduzir ${video.label ?? video.id}`}
+        onClick={() => {
+          trackVideoPlay("portfolio_audiovisual", videoId ?? video.id, { video_name: video.label ?? video.id });
+          setPlaying({ video, vertical });
+        }}
+      >
+        <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt={video.label ?? video.id} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" draggable={false} />
+        <span className="rail-play absolute inset-0 m-auto w-14 h-14 rounded-full flex items-center justify-center"><Play className="!size-6 ml-1" /></span>
+      </Button>
+    );
+  };
+
   return (
     <div className="space-y-12">
-      {/* Horizontal videos */}
       <div>
-        <p className="font-body text-xs tracking-[0.25em] uppercase mb-6" style={{ color: "hsl(265 50% 63%)" }}>
-          ◆ Vídeos horizontais
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {horizontalVideos.map((v, i) => (
-            <motion.div
-              key={v.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="rounded-xl overflow-hidden"
-              style={{ aspectRatio: "16/9" }}
-            >
-              <iframe
-                src={toEmbedUrl(v.url)}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={v.label ?? v.id}
-                loading="lazy"
-              />
-            </motion.div>
-          ))}
-        </div>
+        <p className="font-body text-xs tracking-[0.25em] uppercase text-primary">◆ Vídeos horizontais</p>
+        <PortfolioRail label="Vídeos horizontais" paused={playing !== null}>
+          {horizontalVideos.map(video => renderVideo(video, false))}
+        </PortfolioRail>
       </div>
-
-      {/* Vertical videos / Shorts */}
       <div>
-        <p className="font-body text-xs tracking-[0.25em] uppercase mb-6" style={{ color: "hsl(160 60% 56%)" }}>
-          ◆ Vídeos verticais
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
-          {verticalVideos.map((v, i) => (
-            <motion.div
-              key={v.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.04 }}
-              className="w-full max-w-[320px] rounded-xl overflow-hidden"
-              style={{ aspectRatio: "9/16" }}
-            >
-              <iframe
-                src={toEmbedUrl(v.url)}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={v.id}
-                loading="lazy"
-              />
-            </motion.div>
-          ))}
-        </div>
+        <p className="font-body text-xs tracking-[0.25em] uppercase text-teal">◆ Vídeos verticais</p>
+        <PortfolioRail label="Vídeos verticais" paused={playing !== null}>
+          {verticalVideos.map(video => renderVideo(video, true))}
+        </PortfolioRail>
       </div>
+      <Dialog open={playing !== null} onOpenChange={open => { if (!open) setPlaying(null); }}>
+        <DialogContent aria-describedby={undefined} className={`video-dialog p-3 pt-12 ${playing?.vertical ? "max-w-[min(420px,92vw)]" : "max-w-[min(960px,92vw)]"}`}>
+          <DialogTitle className="sr-only">{playing?.video.label ?? playing?.video.id}</DialogTitle>
+          {playing && <iframe
+            src={`${toEmbedUrl(playing.video.url)}&autoplay=1`}
+            className={`w-full ${playing.vertical ? "aspect-[9/16] max-h-[75dvh]" : "aspect-video"}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title={`Reproduzir ${playing.video.label ?? playing.video.id}`}
+          />}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
