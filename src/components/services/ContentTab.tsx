@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import PortfolioRail from "./PortfolioRail";
+import { Button } from "@/components/ui/button";
 
 // CS01 - Imobiliário (6 slides, PNG)
 import CS01_01 from "@/assets/CS01.01.png";
@@ -653,21 +655,18 @@ const ContentTab = () => {
 
   return (
     <>
-      <div className="group/grid" style={{ columns: 3, columnGap: 8 }}>
+      <PortfolioRail label="Design & Copy" paused={lightbox !== null}>
         {gridItems.map((item, i) => {
           const images = getItemImages(item);
           const coverImg = images[0];
           const isCarousel = images.length > 1;
 
           return (
-            <motion.div
+            <Button
               key={`${item.client}-${i}`}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
-              className="relative rounded-xl cursor-pointer group/item transition-all duration-350"
-              style={{ breakInside: "avoid", marginBottom: 8 }}
+              variant="ghost"
+              aria-label={`Abrir ${item.client}`}
+              className="rail-slide rail-media relative block h-auto p-0 rounded-lg overflow-hidden group/item hover:bg-transparent"
               onClick={() => {
                 trackPortfolioOpen("conteudo", item.client, { slides: images.length });
                 setLightbox({ gridIndex: i, slideIndex: 0 });
@@ -676,8 +675,8 @@ const ContentTab = () => {
               <img
                 src={coverImg}
                 alt={item.client}
-                className="w-full rounded-xl transition-all duration-350 group-hover/grid:brightness-50 group-hover/grid:scale-[0.98] group-hover/item:brightness-100 group-hover/item:scale-[1.06]"
-                style={{ height: "auto" }}
+                className="w-full aspect-[4/5] object-contain transition-transform duration-500 group-hover/item:scale-[1.02]"
+                draggable={false}
                 loading="lazy"
               />
 
@@ -686,10 +685,10 @@ const ContentTab = () => {
                   ● {images.length}
                 </span>
               )}
-            </motion.div>
+            </Button>
           );
         })}
-      </div>
+      </PortfolioRail>
 
       <AnimatePresence>
         {lightbox && (
