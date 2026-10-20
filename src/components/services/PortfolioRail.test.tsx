@@ -1,13 +1,19 @@
 import { fireEvent, render, screen, waitFor, cleanup } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import PortfolioRail from "./PortfolioRail";
+import PortfolioRail, { RAIL_SPEED } from "./PortfolioRail";
 
-const controls = vi.hoisted(() => ({ play: vi.fn(), stop: vi.fn(), scrollNext: vi.fn(), scrollPrev: vi.fn() }));
-vi.mock("embla-carousel-auto-scroll", () => ({ default: () => controls }));
+const controls = vi.hoisted(() => ({ play: vi.fn(), stop: vi.fn(), scrollNext: vi.fn(), scrollPrev: vi.fn(), options: null as Record<string, unknown> | null }));
+vi.mock("embla-carousel-auto-scroll", () => ({
+  default: (options: Record<string, unknown>) => {
+    controls.options = options;
+    return controls;
+  },
+}));
 vi.mock("embla-carousel-react", () => ({ default: () => [() => {}, controls] }));
 
 beforeEach(() => {
   vi.clearAllMocks();
+  controls.options = null;
   vi.stubGlobal("IntersectionObserver", class {
     constructor(private callback: (entries: { isIntersecting: boolean }[]) => void) {}
     observe() { this.callback([{ isIntersecting: true }]); }
@@ -41,5 +47,11 @@ describe("Portfolio automatic and manual movement", () => {
     expect(controls.play).toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Próximo em Design & Copy" }));
     expect(controls.scrollNext).toHaveBeenCalledOnce();
+  });
+
+  it("moves faster than the default rail speed", () => {
+    render(<PortfolioRail label="Design & Copy"><div>Work</div></PortfolioRail>);
+    expect(controls.options).toMatchObject({ speed: RAIL_SPEED });
+    expect(RAIL_SPEED).toBeGreaterThanOrEqual(1.5);
   });
 });
