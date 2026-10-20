@@ -12,8 +12,10 @@ interface PortfolioRailProps {
   className?: string;
 }
 
+export const RAIL_SPEED = 1.6;
+
 export default function PortfolioRail({ label, children, paused = false, className }: PortfolioRailProps) {
-  const autoScroll = useMemo(() => AutoScroll({ speed: 0.65, startDelay: 900, playOnInit: false, stopOnInteraction: false }), []);
+  const autoScroll = useMemo(() => AutoScroll({ speed: RAIL_SPEED, startDelay: 900, playOnInit: false, stopOnInteraction: false }), []);
   const [viewportRef, api] = useEmblaCarousel({ loop: true, dragFree: true, align: "start", skipSnaps: true }, [autoScroll]);
   const root = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
