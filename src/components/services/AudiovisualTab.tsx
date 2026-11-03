@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import PortfolioRail from "./PortfolioRail";
+import { YouTubeThumb } from "./YouTubeThumb";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { trackVideoPlay } from "@/lib/analytics";
