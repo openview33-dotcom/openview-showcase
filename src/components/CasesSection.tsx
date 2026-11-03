@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { trackTab, trackVideoPlay } from "@/lib/analytics";
 import { useState } from "react";
 import { Play, Quote } from "lucide-react";
+import { YouTubeThumb } from "./services/YouTubeThumb";
 
 const videoTestimonials = [
   { name: "Márcio", videoId: "fpoIZ1X0gFw", thumb: `https://img.youtube.com/vi/fpoIZ1X0gFw/maxresdefault.jpg` },
@@ -73,7 +74,7 @@ const CasesSection = () => {
                   <iframe src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&loop=1`} className="absolute inset-0 w-full h-full" allow="autoplay; encrypted-media" allowFullScreen title={`Depoimento ${video.name}`} />
                 ) : (
                   <>
-                    <img src={video.thumb} alt={`Depoimento de ${video.name}`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    <YouTubeThumb videoId={video.videoId} alt={`Depoimento de ${video.name}`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/30 transition-colors" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">

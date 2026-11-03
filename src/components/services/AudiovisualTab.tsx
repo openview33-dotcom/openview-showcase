@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import PortfolioRail from "./PortfolioRail";
+import { YouTubeThumb } from "./YouTubeThumb";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { trackVideoPlay } from "@/lib/analytics";
@@ -103,7 +104,7 @@ const AudiovisualTab = () => {
           setPlaying({ video, vertical });
         }}
       >
-        <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt={video.label ?? video.id} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" draggable={false} />
+        <YouTubeThumb videoId={videoId} alt={video.label ?? video.id} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
         <span className="rail-play absolute inset-0 m-auto w-14 h-14 rounded-full flex items-center justify-center"><Play className="!size-6 ml-1" /></span>
       </Button>
     );
