@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { trackTab, trackVideoPlay } from "@/lib/analytics";
+import TrackedYouTube from "./services/TrackedYouTube";
 import { useState } from "react";
 import { Play, Quote } from "lucide-react";
 import { YouTubeThumb } from "./services/YouTubeThumb";
@@ -71,7 +72,7 @@ const CasesSection = () => {
                 setPlayingVideo(video.videoId);
               }}>
                 {playingVideo === video.videoId ? (
-                  <iframe src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&loop=1`} className="absolute inset-0 w-full h-full" allow="autoplay; encrypted-media" allowFullScreen title={`Depoimento ${video.name}`} />
+                  <TrackedYouTube videoId={video.videoId} section="cases_depoimentos" videoName={video.name} loop className="absolute inset-0 w-full h-full" title={`Depoimento ${video.name}`} />
                 ) : (
                   <>
                     <YouTubeThumb videoId={video.videoId} alt={`Depoimento de ${video.name}`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />

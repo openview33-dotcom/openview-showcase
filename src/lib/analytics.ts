@@ -66,6 +66,49 @@ export function captureAttribution(): Attribution {
   return attribution;
 }
 
+type Visitor = {
+  visitor_id: string;
+  session_id: string;
+  visit_number: number;
+  visitor_type: "new" | "returning";
+  first_visit_date: string;
+  days_since_first_visit: number;
+};
+
+let visitorCache: Visitor | null = null;
+const rid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+/** Visitante unico (localStorage) e sessao (sessionStorage, expira ao fechar a aba). */
+export function getVisitor(): Visitor {
+  if (visitorCache) return visitorCache;
+  let visitorId = "", count = 0, first = new Date().toISOString(), sessionId = "";
+  try {
+    visitorId = localStorage.getItem("ov_vid") || rid();
+    count = Number(localStorage.getItem("ov_visits") || "0");
+    first = localStorage.getItem("ov_first") || first;
+    sessionId = sessionStorage.getItem("ov_sid") || "";
+    if (!sessionId) {
+      sessionId = rid();
+      count += 1;
+      sessionStorage.setItem("ov_sid", sessionId);
+    }
+    localStorage.setItem("ov_vid", visitorId);
+    localStorage.setItem("ov_visits", String(count));
+    localStorage.setItem("ov_first", first);
+  } catch {
+    visitorId = visitorId || rid(); sessionId = sessionId || rid(); count = count || 1;
+  }
+  visitorCache = {
+    visitor_id: visitorId,
+    session_id: sessionId,
+    visit_number: count,
+    visitor_type: count <= 1 ? "new" : "returning",
+    first_visit_date: first.slice(0, 10),
+    days_since_first_visit: Math.floor((Date.now() - new Date(first).getTime()) / 86400000),
+  };
+  return visitorCache;
+}
+
 let attributionCache: Attribution | null = null;
 let startedAt = Date.now();
 let maxScroll = 0;
@@ -87,6 +130,7 @@ export function track(event: string, payload: Record<string, unknown> = {}) {
   window.dataLayer.push({
     event,
     ...attribution(),
+    ...getVisitor(),
     time_on_page: timeOnPage(),
     max_scroll_depth: maxScroll,
     ...payload,
