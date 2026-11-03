@@ -5,6 +5,7 @@ import { YouTubeThumb } from "./YouTubeThumb";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { trackVideoPlay } from "@/lib/analytics";
+import TrackedYouTube from "./TrackedYouTube";
 
 /* ── Helpers ── */
 function toEmbedUrl(url: string): string {
@@ -127,11 +128,11 @@ const AudiovisualTab = () => {
       <Dialog open={playing !== null} onOpenChange={open => { if (!open) setPlaying(null); }}>
         <DialogContent aria-describedby={undefined} className={`video-dialog p-3 pt-12 ${playing?.vertical ? "max-w-[min(420px,92vw)]" : "max-w-[min(960px,92vw)]"}`}>
           <DialogTitle className="sr-only">{playing?.video.label ?? playing?.video.id}</DialogTitle>
-          {playing && <iframe
-            src={`${toEmbedUrl(playing.video.url)}&autoplay=1`}
+          {playing && <TrackedYouTube
+            videoId={toEmbedUrl(playing.video.url).split("/embed/")[1]?.split("?")[0] ?? ""}
+            section="portfolio_audiovisual"
+            videoName={playing.video.label ?? playing.video.id}
             className={`w-full ${playing.vertical ? "aspect-[9/16] max-h-[75dvh]" : "aspect-video"}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
             title={`Reproduzir ${playing.video.label ?? playing.video.id}`}
           />}
         </DialogContent>
